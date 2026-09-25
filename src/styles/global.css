@@ -151,10 +151,6 @@ main{position:relative;z-index:1}
 @keyframes wglow{to{opacity:.22}}
 .wmk-shine{fill:none;stroke:rgba(244,247,244,.55);stroke-width:5;stroke-linecap:round;stroke-dasharray:7 300;stroke-dashoffset:8;opacity:0;animation:wshine 8s linear 2.6s infinite}
 @keyframes wshine{0%{stroke-dashoffset:8;opacity:0}6%{opacity:1}56%{opacity:1}62%{stroke-dashoffset:-100;opacity:0}100%{stroke-dashoffset:-100;opacity:0}}
-.wmk-dot{fill:var(--mint-2);stroke:var(--paper);stroke-width:4;opacity:0;transform-box:fill-box;transform-origin:center;animation:wdot .6s var(--spring) 1.9s forwards}
-@keyframes wdot{from{opacity:0;transform:scale(.3)}to{opacity:1;transform:none}}
-.wmk-halo{fill:none;stroke:var(--mint);stroke-width:2;opacity:0;transform-box:fill-box;transform-origin:center;animation:whalo 3.2s ease-out 2.4s infinite}
-@keyframes whalo{0%{opacity:.6;transform:scale(1)}100%{opacity:0;transform:scale(3.2)}}
 .cl{opacity:0;animation:up .8s var(--ease) forwards;animation-delay:calc(var(--k) * 160ms + 2.1s);transform:translateY(8px)}
 .cl path{fill:none;stroke:var(--line-2);stroke-width:1.5;stroke-dasharray:3 4}
 .cl circle{fill:var(--acc)}
@@ -246,7 +242,6 @@ main{position:relative;z-index:1}
 .core svg{width:104px;height:104px;filter:drop-shadow(0 0 30px rgba(92,197,150,.35))}
 .core-bg{fill:var(--paper)}
 .core-w{fill:none;stroke:var(--forest);stroke-width:12;stroke-linecap:round;stroke-linejoin:round}
-.core-spark{fill:var(--mint);transform-box:fill-box;transform-origin:center}
 .core-label{font:700 13px var(--mono);color:var(--muted)}
 .core.hit svg{animation:hit .6s var(--spring)}
 @keyframes hit{40%{transform:scale(1.12)}}
@@ -597,7 +592,7 @@ main{position:relative;z-index:1}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-delay:0s!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .reveal,.load,.line .in,.cl{opacity:1;transform:none}
-  .wmk-shine,.wmk-halo{display:none}
+  .wmk-shine{display:none}
   .story{height:auto}
   .story-pin{position:relative;height:auto;padding-block:60px}
 }

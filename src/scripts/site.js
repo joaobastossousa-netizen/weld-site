@@ -73,13 +73,13 @@ if (!REDUCED) $$("[data-drift]").forEach(el => gsap.to(el, { y: +el.dataset.drif
 /* ---------- máquina: mensagens entram no W e saem resolvidas ---------- */
 const machine = $(".machine");
 if (machine) {
-  const msgs = $$(".msg", machine), outs = $$(".out", machine), core = $(".core", machine), spark = $(".core-spark", machine);
+  const msgs = $$(".msg", machine), outs = $$(".out", machine), core = $(".core", machine);
   if (REDUCED) gsap.set([...msgs, ...outs], { opacity: 1 });
   else {
     gsap.set(msgs, { opacity: 0, x: -24 }); gsap.set(outs, { opacity: 0, x: -24 });
     const toCore = el => { const a = el.getBoundingClientRect(), b = core.getBoundingClientRect(); return b.left + b.width / 2 - (a.left + a.width / 2); };
     const toCoreY = el => { const a = el.getBoundingClientRect(), b = core.getBoundingClientRect(); return b.top + b.height / 3 - (a.top + a.height / 2); };
-    const hit = () => { core.classList.remove("hit"); void core.offsetWidth; core.classList.add("hit"); gsap.fromTo(spark, { scale: 1 }, { scale: 2.4, duration: .25, yoyo: true, repeat: 1 }); };
+    const hit = () => { core.classList.remove("hit"); void core.offsetWidth; core.classList.add("hit"); };
     const tl = gsap.timeline({ repeat: -1, repeatDelay: .4, paused: true });
     msgs.forEach((m, i) => {
       tl.to(m, { opacity: 1, x: 0, duration: .5, ease: "power3.out" })
