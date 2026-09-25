@@ -9,6 +9,61 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
 
+/* ---------- fundo: fios verdes finos com um sinal de luz a passar ---------- */
+(function wires() {
+  const cv = $("#wires");
+  if (!cv) return;
+  const ctx = cv.getContext("2d");
+  let w, h, dpr, t = 0, running = true, threads = [];
+  const rnd = (a, b) => a + Math.random() * (b - a);
+  function layout() {
+    dpr = Math.min(2, devicePixelRatio || 1);
+    w = innerWidth; h = innerHeight;
+    cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    const n = w < 700 ? 4 : 6;
+    threads = Array.from({ length: n }, (_, i) => ({
+      y: (i + 0.5) / n, a1: rnd(18, 46), f1: rnd(0.0012, 0.0026), s1: rnd(0.004, 0.009), p: rnd(0, 6.28),
+      a2: rnd(6, 18), f2: rnd(0.004, 0.007), s2: rnd(0.006, 0.012), par: rnd(0.05, 0.18),
+      pulse: rnd(-0.6, 0), speed: rnd(0.0012, 0.0022), alpha: rnd(0.16, 0.28),
+    }));
+  }
+  const yAt = (th, x, base) => base + Math.sin(x * th.f1 + t * th.s1 + th.p) * th.a1 + Math.sin(x * th.f2 - t * th.s2) * th.a2;
+  function frame() {
+    if (!running) return;
+    t += 1;
+    ctx.clearRect(0, 0, w, h);
+    const sy = scrollY;
+    for (const th of threads) {
+      const span = h + 240;
+      let base = ((th.y * span - sy * th.par) % span + span) % span - 120;
+      // fio
+      const g = ctx.createLinearGradient(0, 0, w, 0);
+      g.addColorStop(0, "rgba(43,138,97,0)"); g.addColorStop(0.2, `rgba(43,138,97,${th.alpha})`);
+      g.addColorStop(0.8, `rgba(43,138,97,${th.alpha})`); g.addColorStop(1, "rgba(43,138,97,0)");
+      ctx.beginPath();
+      for (let x = -20; x <= w + 20; x += 16) { const y = yAt(th, x, base); x === -20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+      ctx.strokeStyle = g; ctx.lineWidth = 1.2; ctx.stroke();
+      // sinal
+      th.pulse += th.speed;
+      if (th.pulse > 1.3) th.pulse = rnd(-0.8, -0.1);
+      if (th.pulse > 0 && th.pulse < 1.15) {
+        const hx = th.pulse * (w + 200) - 100, len = 160;
+        ctx.beginPath();
+        for (let x = hx - len; x <= hx; x += 8) { const y = yAt(th, x, base); x === hx - len ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
+        const pg = ctx.createLinearGradient(hx - len, 0, hx, 0);
+        pg.addColorStop(0, "rgba(92,197,150,0)"); pg.addColorStop(1, "rgba(92,197,150,.75)");
+        ctx.strokeStyle = pg; ctx.lineWidth = 2; ctx.lineCap = "round"; ctx.stroke();
+        ctx.beginPath(); ctx.arc(hx, yAt(th, hx, base), 2.6, 0, 6.28); ctx.fillStyle = "rgba(92,197,150,.9)"; ctx.fill();
+      }
+    }
+    requestAnimationFrame(frame);
+  }
+  layout();
+  addEventListener("resize", layout);
+  document.addEventListener("visibilitychange", () => { running = !document.hidden; if (running) requestAnimationFrame(frame); });
+  if (REDUCED) { t = 200; running = true; frame(); running = false; } else requestAnimationFrame(frame);
+})();
+
 /* ---------- navegação ---------- */
 const nav = $("#nav");
 const sentinel = document.createElement("div");

@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Brief from "../components/Brief.astro";
+import Ways from "../components/Ways.astro";
 import { contact, site } from "../content";
 ---
 <Base title="Contacto · Weld" description={contact.lead}>
@@ -25,4 +26,5 @@ import { contact, site } from "../content";
     </div>
     <div class="load" style="--d:3"><Brief /></div>
   </section>
+  <Ways />
 </Base>

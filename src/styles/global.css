@@ -604,3 +604,28 @@ main{position:relative;z-index:1}
 .agency-teaser .d-wire{width:2px;height:36px}
 .agency-teaser .d-wire i{left:0;top:-40%;width:100%;height:40%;animation-name:travelv}
 @keyframes travelv{to{top:110%}}
+
+/* fundo: fios verdes em movimento (site.js) */
+#wires{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+
+/* duas formas de trabalhar */
+.ways{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.way{position:relative;display:flex;flex-direction:column;gap:16px;padding:32px;border-radius:var(--r);background:var(--card);box-shadow:inset 0 0 0 1px var(--line),var(--shadow);overflow:hidden;transition:box-shadow .5s var(--ease),transform .6s var(--ease),opacity .9s var(--ease)}
+.way::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:linear-gradient(90deg,var(--mint),var(--mint-3))}
+.way-agencia::before{background:linear-gradient(90deg,var(--forest),var(--forest-2))}
+.way:hover{transform:translateY(-4px);box-shadow:inset 0 0 0 1px var(--line),var(--shadow-lift)}
+.way-label{display:flex;gap:12px;align-items:center;margin:0;font:600 14px var(--mono);color:var(--text)}
+.way-label span{color:var(--faint);font-weight:500}
+.way-flow{display:flex;align-items:center;flex-wrap:wrap;row-gap:10px;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.way-flow .d-node{padding:10px 14px;font-size:13px;border-radius:10px}
+.way-flow .d-node i{font-size:18px}
+.way-flow .d-node svg{width:16px;height:16px}
+.way-flow .d-wire{width:34px}
+.way h3{margin:4px 0 0;font:700 clamp(22px,2.2vw,28px)/1.2 var(--mono);letter-spacing:-.03em}
+.way-text{margin:0;color:var(--muted)}
+.way-points{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.way-points li{display:flex;gap:10px;align-items:baseline;font-size:15.5px}
+.way-points i{color:var(--acc);font-size:13px}
+.way .btn{align-self:flex-start;margin-top:auto}
+.ways-wrap.compact .ways{grid-template-columns:1fr}
+@media (max-width:900px){.ways{grid-template-columns:minmax(0,1fr)}.way{padding:26px 22px}}

@@ -55,7 +55,7 @@ export const home = {
   line1: "Mensagens respondidas.",
   line2: "Clientes",
   rotate: ["marcados.", "atendidos.", "qualificados."],
-  lead: "Assistentes de IA no WhatsApp e no Instagram, automações e sites. Para agências revenderem com o nome delas, ou para negócios contratarem diretamente.",
+  lead: "Assistentes de IA, automações e sites feitos à medida. Trabalhamos diretamente com empresas e, por trás, para os clientes de agências de marketing.",
   floats: [
     { icon: "ph-lightning", title: "Responde em segundos", text: "A qualquer hora, fins de semana incluídos" },
     { icon: "ph-user-switch", title: "Passa a uma pessoa", text: "Quando o pedido foge ao normal" },
@@ -69,6 +69,33 @@ export const home = {
     ],
     outputs: ["Consulta marcada · sáb 10:00", "Preço enviado e lead guardado", "Proposta pedida à equipa"],
   },
+};
+
+export const ways = {
+  idx: "Como trabalhamos",
+  title: "Duas formas de trabalhar com a Weld.",
+  items: [
+    {
+      key: "direto",
+      label: "Diretamente com a Weld",
+      flow: ["O teu negócio", "Weld"],
+      title: "Contratas-nos a nós.",
+      text: "Percebemos o que o teu negócio precisa, construímos à medida e ficamos por perto depois da entrega.",
+      points: ["Proposta fechada e por escrito", "Feito para o teu negócio, nada genérico", "Acompanhamento mensal, se quiseres"],
+      cta: "Pedir proposta",
+      href: "/contacto",
+    },
+    {
+      key: "agencia",
+      label: "Através da tua agência",
+      flow: ["Agência", "Weld", "Cliente da agência"],
+      title: "Vendes com a tua marca. Nós construímos.",
+      text: "Trabalhamos para os clientes da tua agência, por trás e com o nome da agência. Tu ficas com a relação e com a margem.",
+      points: ["Marca branca: o cliente vê a tua agência", "Sem contratar ninguém", "Revenda, projeto fechado ou percentagem"],
+      cta: "Ser agência parceira",
+      href: "/agencias",
+    },
+  ],
 };
 
 export const integrations = {

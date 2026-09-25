@@ -1,0 +1,42 @@
+---
+// As duas formas de trabalhar com a Weld: diretamente, ou por trás de uma agência.
+import { ways } from "../content";
+interface Props { compact?: boolean; idx?: string }
+const { compact = false, idx } = Astro.props;
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+const ICON: Record<string, string> = { "O teu negócio": "ph-storefront", "Agência": "ph-megaphone", "Cliente da agência": "ph-users-three" };
+---
+<section class={`ways-wrap wrap ${compact ? "compact" : "section"}`} id="como-trabalhamos">
+  {!compact && (
+    <div class="sec-head">
+      <p class="idx reveal">{idx ?? ways.idx}</p>
+      <h2 class="h2 reveal">{ways.title}</h2>
+    </div>
+  )}
+  <div class="ways">
+    {ways.items.map((w, i) => (
+      <article class={`way reveal way-${w.key}`} style={`--i:${i}`}>
+        <p class="way-label"><span>{String(i + 1).padStart(2, "0")}</span>{w.label}</p>
+        <div class="way-flow" aria-hidden="true">
+          {w.flow.map((n, k) => (
+            <>
+              {k > 0 && <span class="d-wire"><i style={`animation-delay:${k * 0.4}s`}></i></span>}
+              <span class={`d-node${n === "Weld" ? " weld" : ""}`}>
+                {n === "Weld" ? <svg viewBox="0 0 100 100"><path d={W} /></svg> : <i class={`ph-duotone ${ICON[n]}`}></i>}
+                {n}
+              </span>
+            </>
+          ))}
+        </div>
+        <h3>{w.title}</h3>
+        {!compact && <p class="way-text">{w.text}</p>}
+        {!compact && (
+          <ul class="way-points">
+            {w.points.map((p) => <li><i class="ph-bold ph-check"></i>{p}</li>)}
+          </ul>
+        )}
+        <a href={w.href} class={`btn ${i === 0 ? "btn-mint" : "btn-ghost"} ${compact ? "btn-sm" : ""}`}>{w.cta}<i class="ph ph-arrow-right"></i></a>
+      </article>
+    ))}
+  </div>
+</section>

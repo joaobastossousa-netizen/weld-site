@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import WeldMark from "../components/WeldMark.astro";
+import Ways from "../components/Ways.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { home, integrations, story, services, demos, agencies, compare, stats, process, faq, site } from "../content";
@@ -35,6 +36,9 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
     </div>
   </section>
 
+  <!-- DUAS FORMAS -->
+  <Ways idx="01 / Como trabalhamos" />
+
   <!-- FERRAMENTAS -->
   <section class="wrap tools" aria-label={integrations.title}>
     <p class="tools-title">{integrations.title}</p>
@@ -46,7 +50,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- SERVIÇOS -->
   <section class="section wrap" id="servicos">
     <div class="sec-head">
-      <p class="idx reveal">01 / Serviços</p>
+      <p class="idx reveal">02 / Serviços</p>
       <h2 class="h2 reveal">O que construímos.</h2>
     </div>
     <div class="svc-list">
@@ -65,7 +69,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- MÁQUINA -->
   <section class="section wrap">
     <div class="sec-head">
-      <p class="idx reveal">02 / Como funciona</p>
+      <p class="idx reveal">03 / Como funciona</p>
       <h2 class="h2 reveal">Entra uma mensagem. Sai um cliente.</h2>
     </div>
     <div class="machine reveal" aria-label="Mensagens de clientes transformadas em marcações e pedidos">
@@ -124,7 +128,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- O QUE MUDA -->
   <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">03 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">04 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
     <div class="compare">
       <div class="cmp cmp-no reveal">
         <p class="cmp-h"><i class="ph ph-x-circle"></i>Sem assistente</p>
@@ -147,7 +151,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- DEMOS -->
   <section class="section wrap" id="demos">
     <div class="sec-head">
-      <p class="idx reveal">04 / Demos</p>
+      <p class="idx reveal">05 / Demos</p>
       <h2 class="h2 reveal">{demos.title}</h2>
       <p class="lead reveal">{demos.lead}</p>
     </div>
@@ -185,7 +189,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <section class="section wrap">
     <div class="agency-teaser dark reveal">
       <div>
-        <p class="idx">05 / {agencies.kicker}</p>
+        <p class="idx">06 / {agencies.kicker}</p>
         <h2 class="h2">{agencies.title}</h2>
         <p class="lead">{agencies.lead}</p>
         <a href="/agencias" class="btn btn-mint magnetic">Como funciona para agências<i class="ph ph-arrow-right"></i></a>
@@ -198,7 +202,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- PROCESSO -->
   <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">06 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">07 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
     <ol class="steps">
       <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
       {process.steps.map((s, i) => (
