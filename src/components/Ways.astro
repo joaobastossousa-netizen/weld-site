@@ -16,6 +16,7 @@ const ICON: Record<string, string> = { "O teu negócio": "ph-storefront", "Agên
   <div class="ways">
     {ways.items.map((w, i) => (
       <article class={`way reveal way-${w.key}`} style={`--i:${i}`}>
+        {!compact && <div class="way-photo img-reveal"><img src={`/img/way-${w.key}.jpg`} alt="" width="1000" height="560" loading="lazy" data-zoom /></div>}
         <p class="way-label"><span>{String(i + 1).padStart(2, "0")}</span>{w.label}</p>
         <div class="way-flow" aria-hidden="true">
           {w.flow.map((n, k) => (

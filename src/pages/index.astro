@@ -1,10 +1,9 @@
 ---
 import Base from "../layouts/Base.astro";
-import WeldMark from "../components/WeldMark.astro";
 import Ways from "../components/Ways.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
-import { home, integrations, story, services, demos, agencies, compare, stats, process, faq, site } from "../content";
+import { sectors, home, integrations, story, services, demos, agencies, compare, stats, process, faq, site } from "../content";
 const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 ---
 <Base title="Weld · Assistentes de IA para agências e negócios" description={home.lead}>
@@ -31,13 +30,57 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
             <a href="/servicos"><i class="ph-duotone ph-storefront"></i><span><b>Tenho um negócio</b><small>Contratar diretamente</small></span><i class="ph ph-arrow-up-right"></i></a>
           </div>
         </div>
-        <WeldMark callouts class="hero-mark load" />
+        <div class="hero-photo load" style="--d:3">
+          <div class="hp-frame img-reveal"><img src="/img/hero.jpg" alt="Dono de um negócio a ver uma mensagem no telemóvel" width="1400" height="1600" class="hp-img" data-zoom /></div>
+          <div class="hp-card hp-msg" data-drift="-70">
+            <img src="/logos/whatsapp-color.svg" alt="" width="30" height="30" />
+            <span><small>Nova mensagem · 23:14</small><b>Olá! Têm vaga amanhã?</b></span>
+          </div>
+          <div class="hp-card hp-reply" data-drift="-140">
+            <span class="hp-av"><svg viewBox="0 0 100 100"><path d="M12 20 L32 78 L50 40 L68 78 L88 20" /></svg></span>
+            <span><small>Assistente · agora</small><b>Tenho às 10h e às 15h30. Qual prefere?</b></span>
+          </div>
+          <div class="hp-card hp-booked" data-drift="-40">
+            <span class="hp-tick"><i class="ph-bold ph-check"></i></span>
+            <span><small>Agenda</small><b>Marcação confirmada · 10:00</b></span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- DUAS FORMAS -->
   <Ways idx="01 / Como trabalhamos" />
+
+  <!-- SETORES: galeria horizontal presa ao scroll -->
+  <section class="sectors" id="setores">
+    <div class="sectors-pin">
+      <div class="wrap sectors-head">
+        <p class="idx">02 / {sectors.idx}</p>
+        <h2 class="h2">{sectors.title}</h2>
+        <p class="lead">{sectors.lead}</p>
+      </div>
+      <div class="sectors-track">
+        {sectors.items.map((it, i) => (
+          <article class="sector" style={`--i:${i}`}>
+            <img src={`/img/${it.img}`} alt={it.name} width="900" height="1150" loading="lazy" class="sector-img" />
+            <span class="sector-tag">{it.tag}</span>
+            <div class="sector-chat" aria-hidden="true">
+              <span class="sc-b me">{it.chat[0]}</span>
+              <span class="sc-b bot">{it.chat[1]}</span>
+            </div>
+            <h3>{it.name}</h3>
+          </article>
+        ))}
+        <article class="sector sector-end">
+          <svg class="se-w" viewBox="0 0 100 100" aria-hidden="true"><path d="M12 20 L32 78 L50 40 L68 78 L88 20" /></svg>
+          <h3>O teu setor não está aqui?</h3>
+          <p>Se os teus clientes escrevem, dá para automatizar. Conta-nos como trabalhas.</p>
+          <a href="/contacto" class="btn">Falar connosco<i class="ph ph-arrow-right"></i></a>
+        </article>
+      </div>
+    </div>
+  </section>
 
   <!-- FERRAMENTAS -->
   <section class="wrap tools" aria-label={integrations.title}>
@@ -50,12 +93,12 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- SERVIÇOS -->
   <section class="section wrap" id="servicos">
     <div class="sec-head">
-      <p class="idx reveal">02 / Serviços</p>
+      <p class="idx reveal">03 / Serviços</p>
       <h2 class="h2 reveal">O que construímos.</h2>
     </div>
     <div class="svc-list">
       {services.map((s, i) => (
-        <a href={`/servicos/${s.slug}`} class="svc-row reveal" style={`--i:${i}`}>
+        <a href={`/servicos/${s.slug}`} class="svc-row reveal" style={`--i:${i}`} data-img={`/img/svc-${s.slug.split("-")[0]}.jpg`}>
           <span class="svc-num">{String(i + 1).padStart(2, "0")}</span>
           <span class="svc-icon"><i class={`ph-duotone ${s.icon}`}></i></span>
           <span class="svc-row-txt"><h3>{s.name}</h3><p>{s.card}</p></span>
@@ -63,13 +106,14 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
         </a>
       ))}
     </div>
+    <div class="svc-preview" aria-hidden="true"><img alt="" /></div>
   </section>
 
   <div class="dark band">
   <!-- MÁQUINA -->
   <section class="section wrap">
     <div class="sec-head">
-      <p class="idx reveal">03 / Como funciona</p>
+      <p class="idx reveal">04 / Como funciona</p>
       <h2 class="h2 reveal">Entra uma mensagem. Sai um cliente.</h2>
     </div>
     <div class="machine reveal" aria-label="Mensagens de clientes transformadas em marcações e pedidos">
@@ -128,7 +172,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- O QUE MUDA -->
   <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">04 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">05 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
     <div class="compare">
       <div class="cmp cmp-no reveal">
         <p class="cmp-h"><i class="ph ph-x-circle"></i>Sem assistente</p>
@@ -151,7 +195,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- DEMOS -->
   <section class="section wrap" id="demos">
     <div class="sec-head">
-      <p class="idx reveal">05 / Demos</p>
+      <p class="idx reveal">06 / Demos</p>
       <h2 class="h2 reveal">{demos.title}</h2>
       <p class="lead reveal">{demos.lead}</p>
     </div>
@@ -189,20 +233,23 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <section class="section wrap">
     <div class="agency-teaser dark reveal">
       <div>
-        <p class="idx">06 / {agencies.kicker}</p>
+        <p class="idx">07 / {agencies.kicker}</p>
         <h2 class="h2">{agencies.title}</h2>
         <p class="lead">{agencies.lead}</p>
         <a href="/agencias" class="btn btn-mint magnetic">Como funciona para agências<i class="ph ph-arrow-right"></i></a>
       </div>
-      <div class="diagram big" aria-hidden="true">
-        {agencies.flow.map((n, i) => <>{i > 0 && <span class="d-wire"><i></i></span>}<span class={`d-node${n === "Weld" ? " weld" : ""}`}>{n === "Weld" ? <svg viewBox="0 0 100 100"><path d={W} /></svg> : <i class={`ph-duotone ${i === 0 ? "ph-megaphone" : "ph-storefront"}`}></i>}{n}</span></>)}
+      <div class="agency-photo">
+        <div class="img-reveal ap-frame"><img src="/img/agencias.jpg" alt="Equipa de uma agência a trabalhar" width="1200" height="900" loading="lazy" data-zoom /></div>
+        <div class="diagram ap-diagram" aria-hidden="true" data-drift="-50">
+          {agencies.flow.map((n, i) => <>{i > 0 && <span class="d-wire"><i></i></span>}<span class={`d-node${n === "Weld" ? " weld" : ""}`}>{n === "Weld" ? <svg viewBox="0 0 100 100"><path d={W} /></svg> : <i class={`ph-duotone ${i === 0 ? "ph-megaphone" : "ph-storefront"}`}></i>}{n}</span></>)}
+        </div>
       </div>
     </div>
   </section>
 
   <!-- PROCESSO -->
   <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">07 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">08 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
     <ol class="steps">
       <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
       {process.steps.map((s, i) => (

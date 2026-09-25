@@ -71,6 +71,19 @@ export const home = {
   },
 };
 
+export const sectors = {
+  idx: "Para quem trabalhamos",
+  title: "Negócios que vivem de mensagens.",
+  lead: "Onde os clientes perguntam, marcam e encomendam por mensagem, um assistente faz a diferença.",
+  items: [
+    { img: "setor-clinica.jpg", name: "Clínicas", tag: "Marcações e lembretes", chat: ["Têm vaga para uma limpeza?", "Sexta às 9h30 ou às 16h. Qual prefere?"] },
+    { img: "setor-oficina.jpg", name: "Oficinas e peças", tag: "Pedidos ao balcão", chat: ["Têm pastilhas para um Golf VII?", "Temos. Passei o pedido ao balcão."] },
+    { img: "setor-ginasio.jpg", name: "Ginásios", tag: "Aulas experimentais", chat: ["Posso experimentar uma aula?", "Claro! Quinta às 19h há vaga."] },
+    { img: "setor-restaurante.jpg", name: "Restaurantes", tag: "Reservas", chat: ["Mesa para 4 no sábado?", "Às 20h30 temos. Fica reservada."] },
+    { img: "setor-imobiliaria.jpg", name: "Imobiliárias", tag: "Leads e visitas", chat: ["O T2 da Boavista está livre?", "Está. Quer visitar amanhã às 18h?"] },
+  ],
+};
+
 export const ways = {
   idx: "Como trabalhamos",
   title: "Duas formas de trabalhar com a Weld.",

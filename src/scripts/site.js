@@ -50,7 +50,7 @@ const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
       pts.push([x, H - 30]);
       const d = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
       mk("path", { d, class: "seam-ghost" });
-      const glow = mk("path", { d, class: "seam-glow", filter: "url(#seam-blur)" });
+      const glow = mk("path", { d, class: "seam-glow" });
       const live = mk("path", { d, class: "seam-live" });
       const len = live.getTotalLength();
       [glow, live].forEach(p => { p.style.strokeDasharray = len; p.style.strokeDashoffset = len; });
@@ -75,6 +75,8 @@ const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
     vel += (Math.abs(scrollY - lastY) - vel) * 0.15; lastY = scrollY;
     tracks.forEach((t, i) => {
       const want = lenForY(t.lut, target);
+      if (Math.abs(want - cur[i]) < 0.5 && vel < 0.05 && t.drawn) return;   // parado: não redesenha
+      t.drawn = true;
       cur[i] += (want - cur[i]) * (REDUCED ? 1 : 0.12);
       const off = t.len - cur[i];
       t.live.style.strokeDashoffset = off; t.glow.style.strokeDashoffset = off;
@@ -199,6 +201,45 @@ $$(".count").forEach(el => {
   el.textContent = "0" + rest;
   ScrollTrigger.create({ trigger: el, start: "top 85%", once: true, onEnter: () => gsap.to(o, { v: n, duration: 1.6, ease: "power3.out", onUpdate: () => (el.textContent = Math.round(o.v) + rest) }) });
 });
+
+/* ---------- fotos: máscara a abrir, zoom lento, galeria horizontal ---------- */
+// vigia o elemento pai: uma foto toda tapada pela máscara conta como invisível para o browser
+const maskIO = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { $$(".img-reveal", e.target).forEach(m => m.classList.add("in")); maskIO.unobserve(e.target); } }), { threshold: .15 });
+$$(".img-reveal").forEach(el => (REDUCED ? el.classList.add("in") : maskIO.observe(el.parentElement)));
+if (!REDUCED) $$("[data-zoom]").forEach(img => gsap.fromTo(img, { scale: 1.18 }, { scale: 1, ease: "none", scrollTrigger: { trigger: img.closest(".img-reveal") || img, start: "top bottom", end: "bottom top", scrub: true } }));
+
+const sectorsEl = $(".sectors");
+if (sectorsEl) {
+  const track = $(".sectors-track", sectorsEl), cards = $$(".sector", sectorsEl);
+  const wide = matchMedia("(min-width: 901px)").matches;
+  if (wide && !REDUCED) {
+    const dist = () => Math.max(0, track.scrollWidth - innerWidth);
+    const tween = gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: sectorsEl, start: "top top", end: () => "+=" + dist() * 1.35, pin: ".sectors-pin", scrub: .8, invalidateOnRefresh: true } });
+    cards.forEach(card => {
+      const im = $(".sector-img", card);
+      if (im) gsap.fromTo(im, { xPercent: 6 }, { xPercent: -6, ease: "none", scrollTrigger: { trigger: card, containerAnimation: tween, start: "left right", end: "right left", scrub: true } });
+      ScrollTrigger.create({ trigger: card, containerAnimation: tween, start: "left 75%", onEnter: () => card.classList.add("in"), onLeaveBack: () => card.classList.remove("in") });
+    });
+  } else {
+    const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add("in")), { threshold: .5 });
+    cards.forEach(c => io.observe(c));
+  }
+}
+
+/* serviços: foto que segue o cursor */
+const prev = $(".svc-preview");
+if (prev && FINE && !REDUCED) {
+  const pimg = $("img", prev);
+  const qx = gsap.quickTo(prev, "x", { duration: .5, ease: "power3.out" }), qy = gsap.quickTo(prev, "y", { duration: .5, ease: "power3.out" });
+  let lastX = 0;
+  gsap.set(prev, { xPercent: -50, yPercent: -50, scale: .7 });
+  addEventListener("scroll", () => { if (prev.classList.contains("on")) { prev.classList.remove("on"); gsap.to(prev, { scale: .7, duration: .3 }); } }, { passive: true });
+  $$(".svc-row[data-img]").forEach(row => {
+    row.addEventListener("pointerenter", () => { if (pimg.getAttribute("src") !== row.dataset.img) pimg.src = row.dataset.img; prev.classList.add("on"); gsap.to(prev, { scale: 1, duration: .45, ease: "back.out(1.6)" }); });
+    row.addEventListener("pointerleave", () => { prev.classList.remove("on"); gsap.to(prev, { scale: .7, duration: .3 }); });
+    row.addEventListener("pointermove", e => { qx(e.clientX + 170); qy(e.clientY); gsap.to(prev, { rotation: Math.max(-8, Math.min(8, (e.clientX - lastX) * .6)), duration: .4 }); lastX = e.clientX; });
+  });
+}
 
 /* ---------- linha do processo ---------- */
 $$(".steps").forEach(st => {
