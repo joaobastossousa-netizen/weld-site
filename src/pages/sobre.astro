@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import CtaBand from "../components/CtaBand.astro";
+import WeldMark from "../components/WeldMark.astro";
 import { about, team, process } from "../content";
 const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 ---
@@ -12,9 +13,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       <h1 class="h1 load" style="--d:2">{about.title}</h1>
       <p class="lead load" style="--d:3">{about.lead}</p>
     </div>
-    <div class="weld-mark load" style="--d:3" aria-hidden="true">
-      <svg viewBox="0 0 100 100"><path class="wm-a" d="M12 20 L32 78 L50 40" /><path class="wm-b" d="M50 40 L68 78 L88 20" /><circle class="wm-spark" cx="50" cy="40" r="4" /></svg>
-    </div>
+    <WeldMark class="load" />
   </section>
 
   <section class="section wrap">

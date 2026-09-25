@@ -1,6 +1,6 @@
 ---
 import Base from "../layouts/Base.astro";
-import Phone from "../components/Phone.astro";
+import WeldMark from "../components/WeldMark.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { home, integrations, story, services, demos, agencies, compare, stats, process, faq, site } from "../content";
@@ -8,71 +8,64 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 ---
 <Base title="Weld · Assistentes de IA para agências e negócios" description={home.lead}>
   <!-- HERO -->
-  <section class="hero wrap">
-    <div class="hero-copy">
-      <p class="kicker load" style="--d:0"><span class="dot"></span>{home.kicker}</p>
-      <h1 class="h1">
+  <section class="hero">
+    <div class="wrap">
+      <div class="hero-top load" style="--d:0">
+        <p class="kicker"><span class="dot"></span>{home.kicker}</p>
+        <p class="hero-meta"><span>Para agências</span><span>Para negócios</span></p>
+      </div>
+      <h1 class="h1 hero-h1">
         <span class="line"><span class="in" style="--d:1">{home.line1}</span></span>
         <span class="line"><span class="in" style="--d:2">{home.line2} <span class="rotator" aria-live="polite">{home.rotate.map((w, i) => <span class={`rot${i === 0 ? " on" : ""}`}>{w}</span>)}</span></span></span>
       </h1>
-      <p class="lead load" style="--d:4">{home.lead}</p>
-      <div class="hero-ctas load" style="--d:5">
-        <a href="/contacto" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
-        <a href="/demos" class="btn btn-ghost"><i class="ph ph-play-circle"></i>Ver as demos</a>
-      </div>
-      <div class="hero-paths load" style="--d:6">
-        <a href="/agencias"><i class="ph-duotone ph-megaphone"></i><span><b>Sou uma agência</b><small>Revender com o meu nome</small></span><i class="ph ph-arrow-up-right"></i></a>
-        <a href="/servicos"><i class="ph-duotone ph-storefront"></i><span><b>Tenho um negócio</b><small>Contratar diretamente</small></span><i class="ph ph-arrow-up-right"></i></a>
-      </div>
-    </div>
-    <div class="hero-visual load" style="--d:3">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <Phone chat="clinica" class="hero-phone" />
-      {home.floats.map((f, i) => (
-        <div class={`float-card fc${i}`} data-drift={i ? -40 : -80}>
-          <span class="fc-icon"><i class={`ph-duotone ${f.icon}`}></i></span>
-          <span><b>{f.title}</b><small>{f.text}</small></span>
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <p class="lead load" style="--d:4">{home.lead}</p>
+          <div class="hero-ctas load" style="--d:5">
+            <a href="/contacto" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
+            <a href="/demos" class="btn btn-ghost"><i class="ph ph-play-circle"></i>Ver as demos</a>
+          </div>
+          <div class="hero-paths load" style="--d:6">
+            <a href="/agencias"><i class="ph-duotone ph-megaphone"></i><span><b>Sou uma agência</b><small>Revender com o meu nome</small></span><i class="ph ph-arrow-up-right"></i></a>
+            <a href="/servicos"><i class="ph-duotone ph-storefront"></i><span><b>Tenho um negócio</b><small>Contratar diretamente</small></span><i class="ph ph-arrow-up-right"></i></a>
+          </div>
         </div>
-      ))}
-      <div class="float-card fc2" data-drift="-60"><span class="fc-dot"></span><span><b>Nova marcação</b><small>Rita · sábado 10:00</small></span></div>
+        <WeldMark callouts class="hero-mark load" />
+      </div>
     </div>
   </section>
 
   <!-- FERRAMENTAS -->
-  <section class="tools" aria-label={integrations.title}>
+  <section class="wrap tools" aria-label={integrations.title}>
     <p class="tools-title">{integrations.title}</p>
-    <div class="marquee"><div class="marquee-track">
-      {[...integrations.items, ...integrations.items].map(([slug, name]) => <span class="tool"><span class="tool-ring"><img src={`/logos/${slug}.svg`} alt="" width="26" height="26" loading="lazy" /></span><span>{name}</span></span>)}
-    </div></div>
-  </section>
-
-  <!-- FRASE -->
-  <section class="statement wrap">
-    <p class="words" data-words>{home.statement.join(" ")}</p>
+    <ul class="tool-grid">
+      {integrations.items.slice(0, 8).map(([slug, name], i) => <li class="tool reveal" style={`--i:${i}`}><img src={`/logos/${slug}.svg`} alt="" width="22" height="22" loading="lazy" /><span>{name}</span></li>)}
+    </ul>
   </section>
 
   <!-- SERVIÇOS -->
   <section class="section wrap" id="servicos">
     <div class="sec-head">
-      <p class="kicker-sm reveal">Serviços</p>
+      <p class="idx reveal">01 / Serviços</p>
       <h2 class="h2 reveal">O que construímos.</h2>
     </div>
-    <div class="bento">
+    <div class="svc-list">
       {services.map((s, i) => (
-        <a href={`/servicos/${s.slug}`} class={`svc card-fx reveal ${i === 0 ? "svc-big" : ""}`} style={`--i:${i}`}>
+        <a href={`/servicos/${s.slug}`} class="svc-row reveal" style={`--i:${i}`}>
+          <span class="svc-num">{String(i + 1).padStart(2, "0")}</span>
           <span class="svc-icon"><i class={`ph-duotone ${s.icon}`}></i></span>
-          <h3>{s.name}</h3>
-          <p>{s.card}</p>
-          <span class="more">Saber mais <i class="ph ph-arrow-right"></i></span>
-          {i === 0 && <div class="svc-art" aria-hidden="true"><span class="b me">Têm vaga amanhã?</span><span class="b bot">Tenho às 10:00 e às 15:30.</span><span class="b ok">✓ Marcado</span></div>}
+          <span class="svc-row-txt"><h3>{s.name}</h3><p>{s.card}</p></span>
+          <span class="svc-go"><i class="ph ph-arrow-up-right"></i></span>
         </a>
       ))}
     </div>
   </section>
 
+  <div class="dark band">
   <!-- MÁQUINA -->
   <section class="section wrap">
-    <div class="sec-head center">
+    <div class="sec-head">
+      <p class="idx reveal">02 / Como funciona</p>
       <h2 class="h2 reveal">Entra uma mensagem. Sai um cliente.</h2>
     </div>
     <div class="machine reveal" aria-label="Mensagens de clientes transformadas em marcações e pedidos">
@@ -127,10 +120,11 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       </div>
     </div>
   </section>
+  </div>
 
   <!-- O QUE MUDA -->
   <section class="section wrap">
-    <div class="sec-head center"><h2 class="h2 reveal">{compare.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">03 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
     <div class="compare">
       <div class="cmp cmp-no reveal">
         <p class="cmp-h"><i class="ph ph-x-circle"></i>Sem assistente</p>
@@ -153,7 +147,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- DEMOS -->
   <section class="section wrap" id="demos">
     <div class="sec-head">
-      <p class="kicker-sm reveal">Demos</p>
+      <p class="idx reveal">04 / Demos</p>
       <h2 class="h2 reveal">{demos.title}</h2>
       <p class="lead reveal">{demos.lead}</p>
     </div>
@@ -189,9 +183,9 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- AGÊNCIAS -->
   <section class="section wrap">
-    <div class="agency-teaser reveal">
+    <div class="agency-teaser dark reveal">
       <div>
-        <p class="kicker-sm">{agencies.kicker}</p>
+        <p class="idx">05 / {agencies.kicker}</p>
         <h2 class="h2">{agencies.title}</h2>
         <p class="lead">{agencies.lead}</p>
         <a href="/agencias" class="btn btn-mint magnetic">Como funciona para agências<i class="ph ph-arrow-right"></i></a>
@@ -204,7 +198,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- PROCESSO -->
   <section class="section wrap">
-    <div class="sec-head"><h2 class="h2 reveal">{process.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">06 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
     <ol class="steps">
       <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
       {process.steps.map((s, i) => (

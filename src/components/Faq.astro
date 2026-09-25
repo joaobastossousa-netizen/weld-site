@@ -3,7 +3,7 @@ interface Props { items: string[][]; title?: string }
 const { items, title = "Perguntas frequentes." } = Astro.props;
 ---
 <section class="section wrap narrow">
-  <h2 class="h2 reveal">{title}</h2>
+  <div class="sec-head"><p class="idx reveal">Perguntas</p><h2 class="h2 reveal">{title}</h2></div>
   <div class="faq reveal">
     {items.map(([q, a]) => (
       <details>

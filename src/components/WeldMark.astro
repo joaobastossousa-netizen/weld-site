@@ -1,0 +1,46 @@
+---
+// O W da Weld desenhado a traço limpo. Com `callouts`, vira um esquema: entrada, solda, saída.
+interface Props { callouts?: boolean; class?: string }
+const { callouts = false, class: cls = "" } = Astro.props;
+const P = "M108 120 L188 352 L260 200 L332 352 L412 120";
+---
+<figure class={`wmk ${callouts ? "wmk-full" : ""} ${cls}`} aria-hidden="true">
+  <svg viewBox="0 0 520 440">
+    <defs>
+      <linearGradient id="wmk-g" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#1B3E30" />
+        <stop offset=".55" stop-color="#0A2119" />
+        <stop offset="1" stop-color="#2B8A61" />
+      </linearGradient>
+      <filter id="wmk-blur" x="-20%" y="-20%" width="140%" height="140%"><feGaussianBlur stdDeviation="16" /></filter>
+    </defs>
+    <path d={P} class="wmk-glow" filter="url(#wmk-blur)" />
+    <path d={P} class="wmk-line" pathLength="1" />
+    <path d={P} class="wmk-shine" pathLength="100" />
+    <circle cx="260" cy="200" r="10" class="wmk-halo" />
+    <circle cx="260" cy="200" r="9" class="wmk-dot" />
+    {callouts && (
+      <g class="wmk-notes">
+        <g class="cl" style="--k:0">
+          <path d="M108 96 V50" /><circle cx="108" cy="96" r="3" />
+          <text x="108" y="16" class="cl-t">Entrada</text>
+          <text x="108" y="36" class="cl-s">WhatsApp · Instagram</text>
+        </g>
+        <g class="cl" style="--k:1">
+          <path d="M260 180 V132" /><circle cx="260" cy="180" r="3" />
+          <text x="260" y="98" class="cl-t">Solda</text>
+          <text x="260" y="118" class="cl-s">o assistente responde</text>
+        </g>
+        <g class="cl" style="--k:2">
+          <path d="M412 96 V50" /><circle cx="412" cy="96" r="3" />
+          <text x="412" y="16" class="cl-t">Saída</text>
+          <text x="412" y="36" class="cl-s">marcações · pedidos</text>
+        </g>
+        <g class="cl" style="--k:3">
+          <path d="M108 396 H412 M108 388 V404 M412 388 V404" />
+          <text x="260" y="430" class="cl-s">um assistente, todos os canais</text>
+        </g>
+      </g>
+    )}
+  </svg>
+</figure>

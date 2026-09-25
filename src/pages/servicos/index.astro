@@ -11,16 +11,16 @@ import { services, deals } from "../../content";
     <p class="lead load" style="--d:3">Podem começar por um serviço e juntar outros quando fizer sentido. A maioria começa pelo assistente de IA.</p>
   </section>
 
-  <section class="wrap svc-list">
+  <section class="wrap"><div class="svc-list page">
     {services.map((s, i) => (
-      <a href={`/servicos/${s.slug}`} class="svc-row card-fx reveal" style={`--i:${i}`}>
+      <a href={`/servicos/${s.slug}`} class="svc-row reveal" style={`--i:${i}`}>
         <span class="svc-num">{String(i + 1).padStart(2, "0")}</span>
         <span class="svc-icon"><i class={`ph-duotone ${s.icon}`}></i></span>
         <span class="svc-row-txt"><h2>{s.name}</h2><p>{s.card}</p></span>
         <span class="svc-go"><i class="ph ph-arrow-up-right"></i></span>
       </a>
     ))}
-  </section>
+  </div></section>
 
   <section class="section wrap">
     <div class="sec-head"><h2 class="h2 reveal">{deals.title}</h2><p class="lead reveal">{deals.lead}</p></div>

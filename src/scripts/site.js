@@ -9,82 +9,6 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
 
-/* ---------- faíscas: partículas que desenham o W e soltam faíscas na solda ---------- */
-(function sparks() {
-  const cv = $("#sparks");
-  if (!cv) return;
-  const ctx = cv.getContext("2d");
-  const W_PTS = [[12, 20], [32, 78], [50, 40], [68, 78], [88, 20]];
-  let w, h, dpr, size, cx, cy, pts = [], flow = [], burst = [], scrollY0 = 0, mx = -9999, my = -9999, t = 0, running = true;
-  const segs = [];
-  for (let i = 0; i < W_PTS.length - 1; i++) segs.push([W_PTS[i], W_PTS[i + 1]]);
-  const lens = segs.map(([a, b]) => Math.hypot(b[0] - a[0], b[1] - a[1]));
-  const total = lens.reduce((a, b) => a + b, 0);
-  const along = u => { let d = u * total; for (let i = 0; i < segs.length; i++) { if (d <= lens[i]) { const [a, b] = segs[i], k = d / lens[i]; return [a[0] + (b[0] - a[0]) * k, a[1] + (b[1] - a[1]) * k]; } d -= lens[i]; } return W_PTS[W_PTS.length - 1]; };
-  const gauss = () => (Math.random() + Math.random() + Math.random() - 1.5) / 1.5;
-  const toScreen = ([x, y]) => [cx + (x - 50) / 100 * size, cy + (y - 50) / 100 * size];
-  function layout() {
-    dpr = Math.min(2, devicePixelRatio || 1);
-    w = innerWidth; h = innerHeight;
-    cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const mobile = w < 900;
-    size = mobile ? Math.min(w * 1.1, 520) : Math.min(h * .95, w * .5, 820);
-    cx = mobile ? w * .5 : w * .8; cy = h * (mobile ? .42 : .5);
-    const n = mobile ? 1300 : 2800;
-    pts = Array.from({ length: n }, () => ({ u: Math.random(), o: gauss() * 3.6, o2: gauss() * 3.6, ph: Math.random() * 6.28, sp: .4 + Math.random() * .9, r: .7 + Math.random() * 1.5, a: .25 + Math.random() * .6, mint: Math.random() < .55 }));
-    flow = Array.from({ length: mobile ? 26 : 46 }, () => ({ u: Math.random(), v: .0009 + Math.random() * .0016 }));
-  }
-  function spark() {
-    const [x, y] = toScreen([50, 40]);
-    for (let i = 0; i < 26; i++) { const a = -Math.PI / 2 + gauss() * 1.4, s = 1.5 + Math.random() * 4.5; burst.push({ x, y, vx: Math.cos(a) * s, vy: Math.sin(a) * s, life: 1 }); }
-  }
-  function frame() {
-    if (!running) return;
-    t += 1;
-    ctx.clearRect(0, 0, w, h);
-    const sy = (scrollY - scrollY0) * -.12;
-    const fade = Math.max(.35, 1 - scrollY / (h * 2.2));
-    // brilho suave por baixo, para o W se ler de longe
-    ctx.save(); ctx.translate(0, sy); ctx.lineCap = ctx.lineJoin = "round";
-    ctx.beginPath(); W_PTS.forEach((q, i) => { const [x, y] = toScreen(q); i ? ctx.lineTo(x, y) : ctx.moveTo(x, y); });
-    ctx.strokeStyle = `rgba(92,197,150,${.07 * fade})`; ctx.lineWidth = size * .09; ctx.shadowColor = "rgba(92,197,150,.5)"; ctx.shadowBlur = 40; ctx.stroke(); ctx.restore();
-    ctx.globalCompositeOperation = "lighter";
-    for (const p of pts) {
-      const [bx, by] = along(p.u);
-      let [x, y] = toScreen([bx + p.o + Math.sin(t * .01 * p.sp + p.ph) * 1.2, by + p.o2 + Math.cos(t * .012 * p.sp + p.ph) * 1.2]);
-      y += sy;
-      const dx = x - mx, dy = y - my, dist = Math.hypot(dx, dy);
-      if (dist < 90) { x += dx / dist * (90 - dist) * .35; y += dy / dist * (90 - dist) * .35; }
-      const tw = .6 + .4 * Math.sin(t * .03 * p.sp + p.ph);
-      ctx.fillStyle = p.mint ? `rgba(120,220,170,${p.a * tw * fade})` : `rgba(235,245,238,${p.a * tw * .7 * fade})`;
-      ctx.fillRect(x, y, p.r, p.r);
-    }
-    for (const f of flow) {
-      f.u = (f.u + f.v) % 1;
-      const [x, y] = toScreen(along(f.u));
-      const g = ctx.createRadialGradient(x, y + sy, 0, x, y + sy, 7);
-      g.addColorStop(0, `rgba(170,255,210,${.9 * fade})`); g.addColorStop(1, "rgba(92,197,150,0)");
-      ctx.fillStyle = g; ctx.beginPath(); ctx.arc(x, y + sy, 7, 0, 6.28); ctx.fill();
-    }
-    if (t % 150 === 0) spark();
-    for (let i = burst.length - 1; i >= 0; i--) {
-      const b = burst[i];
-      b.x += b.vx; b.y += b.vy; b.vy += .12; b.vx *= .985; b.life -= .018;
-      if (b.life <= 0) { burst.splice(i, 1); continue; }
-      ctx.fillStyle = `rgba(${200 + 55 * b.life | 0},255,${190 + 40 * b.life | 0},${b.life * fade})`;
-      ctx.fillRect(b.x, b.y + sy, 2, 2);
-    }
-    ctx.globalCompositeOperation = "source-over";
-    requestAnimationFrame(frame);
-  }
-  layout();
-  addEventListener("resize", layout);
-  if (FINE) addEventListener("pointermove", e => { mx = e.clientX; my = e.clientY; });
-  document.addEventListener("visibilitychange", () => { running = !document.hidden; if (running) requestAnimationFrame(frame); });
-  if (REDUCED) { running = false; t = 60; running = true; frame(); running = false; }
-  else requestAnimationFrame(frame);
-})();
-
 /* ---------- navegação ---------- */
 const nav = $("#nav");
 const sentinel = document.createElement("div");
@@ -97,13 +21,6 @@ menuBtn?.addEventListener("click", () => {
   menuBtn.setAttribute("aria-expanded", String(open));
   document.body.style.overflow = open ? "hidden" : "";
 });
-
-/* botão flutuante aparece depois do topo, e nunca na página de contacto */
-const floatCta = $(".float-cta");
-if (floatCta && !location.pathname.startsWith("/contacto")) {
-  const first = $("main > section");
-  new IntersectionObserver(([e]) => floatCta.classList.toggle("show", !e.isIntersecting), { threshold: .1 }).observe(first);
-}
 
 /* ---------- entradas ---------- */
 const revealIO = new IntersectionObserver(es => es.forEach(e => {
@@ -121,14 +38,6 @@ if (!REDUCED && rots.length > 1) setInterval(() => {
   rotI = (rotI + 1) % rots.length;
   rots[rotI].classList.add("on");
 }, 2400);
-
-/* frase que se acende palavra a palavra */
-$$("[data-words]").forEach(el => {
-  el.innerHTML = el.textContent.trim().split(/\s+/).map(w => `<span class="w">${w}</span>`).join(" ");
-  const ws = $$(".w", el);
-  if (REDUCED) { ws.forEach(w => (w.style.opacity = 1)); return; }
-  gsap.to(ws, { opacity: 1, stagger: .1, ease: "none", scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: .6 } });
-});
 
 /* ---------- telemóveis com conversa em loop ---------- */
 $$(".phone[data-chat]").forEach(ph => {

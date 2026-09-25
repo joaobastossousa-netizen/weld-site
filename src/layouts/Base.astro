@@ -18,7 +18,7 @@ const { title, description } = Astro.props;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL(Astro.url.pathname, site.url)} />
-    <meta name="theme-color" content="#071A13" />
+    <meta name="theme-color" content="#F4F7F4" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -26,14 +26,11 @@ const { title, description } = Astro.props;
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
   </head>
   <body>
-    <canvas id="sparks" aria-hidden="true"></canvas>
-    <div class="grain" aria-hidden="true"></div>
     <Header />
     <main>
       <slot />
     </main>
     <Footer />
-    <a href="/contacto" class="float-cta" aria-label={site.cta}><i class="ph-fill ph-chat-circle-dots"></i><span>{site.cta}</span></a>
     <script>import "../scripts/site.js";</script>
   </body>
 </html>
