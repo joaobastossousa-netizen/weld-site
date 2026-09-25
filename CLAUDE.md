@@ -7,6 +7,6 @@ Astro site for Weld, a Porto AI automation studio run by João Sousa (founder, f
 - Brand: forest #0A2119, forest mid #1B3E30, paper #F4F7F4, mint #3FA47A (accent only, never large backgrounds). IBM Plex Mono for headings, Inter for body.
 - Never add real client names or logos without written permission. Public demos in `public/demos/` use invented brands (Oriva Dental, Pistão Peças, Pulso) and are labelled as examples.
 - Prices are not shown on the site; only the partnership models (projeto fechado, mensalidade, revenda, percentagem).
-- Deploys automatically on Vercel from the main branch.
+- Deploys automatically on Vercel from the main branch. Domain: https://weldstudio.pt (registered at Dominios.pt, nameservers pointed to Vercel DNS, so DNS records are managed with `vercel dns`). weld-site.vercel.app still works.
 - Look: light workshop theme (paper background, forest ink, hairline rules, numbered section heads `.idx`), with `.dark` bands. The W is a clean line mark (`src/components/WeldMark.astro`), no particle effects. Keep it clearly distinct from rlagency.pt (no dark navy, no particle shapes, no round logo bubbles, no floating chat button).
 - Motion uses GSAP (npm) in `src/scripts/site.js`; always respect prefers-reduced-motion.

@@ -7,7 +7,7 @@
 
 export const site = {
   name: "Weld",
-  url: "https://weld-site.vercel.app",
+  url: "https://weldstudio.pt",
   email: "joaobastossousa@gmail.com",
   instagram: "https://www.instagram.com/weld.studio/",
   instagramHandle: "@weld.studio",
