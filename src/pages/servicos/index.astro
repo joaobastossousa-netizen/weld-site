@@ -1,0 +1,39 @@
+---
+import Base from "../../layouts/Base.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { services, deals } from "../../content";
+---
+<Base title="Serviços · Weld" description="Assistentes de IA, automações, sites e software à medida para agências e negócios.">
+  <section class="page-hero wrap">
+    <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><span>Serviços</span></nav>
+    <p class="kicker load" style="--d:1"><span class="dot"></span>Serviços</p>
+    <h1 class="h1 load" style="--d:2">Tudo o que liga a vossa empresa aos clientes.</h1>
+    <p class="lead load" style="--d:3">Podem começar por um serviço e juntar outros quando fizer sentido. A maioria começa pelo assistente de IA.</p>
+  </section>
+
+  <section class="wrap svc-list">
+    {services.map((s, i) => (
+      <a href={`/servicos/${s.slug}`} class="svc-row card-fx reveal" style={`--i:${i}`}>
+        <span class="svc-num">{String(i + 1).padStart(2, "0")}</span>
+        <span class="svc-icon"><i class={`ph-duotone ${s.icon}`}></i></span>
+        <span class="svc-row-txt"><h2>{s.name}</h2><p>{s.card}</p></span>
+        <span class="svc-go"><i class="ph ph-arrow-up-right"></i></span>
+      </a>
+    ))}
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{deals.title}</h2><p class="lead reveal">{deals.lead}</p></div>
+    <div class="deals">
+      {deals.items.map((d, i) => (
+        <article class="deal card-fx reveal" style={`--i:${i}`}>
+          <span class="deal-icon"><i class={`ph-duotone ${d.icon}`}></i></span>
+          <span class="deal-for">{d.for}</span>
+          <h3>{d.name}</h3>
+          <p>{d.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+  <CtaBand />
+</Base>

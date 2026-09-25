@@ -1,0 +1,73 @@
+---
+import Base from "../layouts/Base.astro";
+import Faq from "../components/Faq.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { agencies, deals, demos, faq } from "../content";
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+---
+<Base title="Para agências · Weld" description={agencies.lead}>
+  <section class="page-hero wrap">
+    <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><span>Para agências</span></nav>
+    <p class="kicker load" style="--d:1"><span class="dot"></span>{agencies.kicker}</p>
+    <h1 class="h1 load" style="--d:2">{agencies.title}</h1>
+    <p class="lead load" style="--d:3">{agencies.lead}</p>
+    <div class="diagram big load" style="--d:4" aria-hidden="true">
+      {agencies.flow.map((n, i) => <>{i > 0 && <span class="d-wire"><i></i></span>}<span class={`d-node${n === "Weld" ? " weld" : ""}`}>{n === "Weld" ? <svg viewBox="0 0 100 100"><path d={W} /></svg> : <i class={`ph-duotone ${i === 0 ? "ph-megaphone" : "ph-storefront"}`}></i>}{n}</span></>)}
+    </div>
+    <div class="hero-ctas load" style="--d:5">
+      <a href="/contacto" class="btn btn-mint magnetic">Propor uma parceria<i class="ph ph-arrow-right"></i></a>
+      <a href="/demos" class="btn btn-ghost"><i class="ph ph-play-circle"></i>Ver as demos</a>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="features">
+      {agencies.points.map(([icon, t, p], i) => (
+        <article class="feature card-fx reveal" style={`--i:${i}`}>
+          <span class="svc-icon"><i class={`ph-duotone ${icon}`}></i></span>
+          <h3>{t}</h3>
+          <p>{p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">Como funciona a parceria.</h2></div>
+    <ol class="timeline">
+      {agencies.steps.map(([t, p], i) => (
+        <li class="tl reveal" style={`--i:${i}`}><span class="tl-n">{String(i + 1).padStart(2, "0")}</span><div><h3>{t}</h3><p>{p}</p></div></li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{deals.title}</h2><p class="lead reveal">{deals.lead}</p></div>
+    <div class="deals">
+      {deals.items.map((d, i) => (
+        <article class={`deal card-fx reveal ${d.for !== "Negócios e agências" ? "hl" : ""}`} style={`--i:${i}`}>
+          <span class="deal-icon"><i class={`ph-duotone ${d.icon}`}></i></span>
+          <span class="deal-for">{d.for}</span>
+          <h3>{d.name}</h3>
+          <p>{d.text}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">Demos que já levámos a agências.</h2><p class="lead reveal">Versões com marcas de exemplo. Para a vossa agência, fazemos com o nome do vosso cliente.</p></div>
+    <div class="demo-cards">
+      {demos.items.map((d, i) => (
+        <a href={`/demos/${d.slug}/index.html`} target="_blank" rel="noopener" class="demo-card reveal" style={`--i:${i};--c:${d.color}`}>
+          <img src={`/videos/${d.slug}.jpg`} alt={`Ecrã da demo ${d.brand}`} loading="lazy" />
+          <span class="demo-card-txt"><b>{d.brand}</b><small>{d.sector}</small></span>
+          <i class="ph ph-arrow-up-right"></i>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <Faq items={faq.items.slice(0, 3)} />
+  <CtaBand title="Têm um cliente que recebe muitas mensagens?" text="Mandem-nos o site e o Instagram dele. Fazemos a demo." />
+</Base>

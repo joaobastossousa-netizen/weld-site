@@ -1,0 +1,28 @@
+---
+import Base from "../layouts/Base.astro";
+import Brief from "../components/Brief.astro";
+import { contact, site } from "../content";
+---
+<Base title="Contacto · Weld" description={contact.lead}>
+  <section class="page-hero wrap contact-page">
+    <div class="contact-info">
+      <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><span>Contacto</span></nav>
+      <p class="kicker load" style="--d:1"><span class="dot"></span>Contacto</p>
+      <h1 class="h1 load" style="--d:2" set:html={contact.title.replace(/(\S+-\S+)/g, '<span class="nw">$1</span>')} />
+      <p class="lead load" style="--d:3">{contact.lead}</p>
+      <div class="direct load" style="--d:4">
+        <button class="copy" type="button" id="copy-email" data-email={site.email}><i class="ph ph-envelope-simple"></i><span id="copy-label">{site.email}</span><small>copiar</small></button>
+        <div class="direct-row">
+          <a href={site.linkedin} target="_blank" rel="noopener" class="direct-link"><i class="ph-fill ph-linkedin-logo"></i>LinkedIn</a>
+          <a href={site.instagram} target="_blank" rel="noopener" class="direct-link"><i class="ph ph-instagram-logo"></i>Instagram</a>
+        </div>
+      </div>
+      <ol class="next load" style="--d:5">
+        <li><i class="ph-duotone ph-paper-plane-tilt"></i><span><b>Envias o pedido</b><small>O email abre já escrito.</small></span></li>
+        <li><i class="ph-duotone ph-coffee"></i><span><b>Marcamos 20 minutos</b><small>Café no Porto ou chamada.</small></span></li>
+        <li><i class="ph-duotone ph-file-text"></i><span><b>Recebes a proposta</b><small>Âmbito, prazo e valor por escrito.</small></span></li>
+      </ol>
+    </div>
+    <div class="load" style="--d:3"><Brief /></div>
+  </section>
+</Base>

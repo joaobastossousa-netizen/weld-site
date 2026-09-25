@@ -1,0 +1,78 @@
+---
+import Base from "../../layouts/Base.astro";
+import Phone from "../../components/Phone.astro";
+import Faq from "../../components/Faq.astro";
+import CtaBand from "../../components/CtaBand.astro";
+import { services, process, site } from "../../content";
+
+export function getStaticPaths() {
+  return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
+}
+const { s } = Astro.props;
+const others = services.filter((o) => o.slug !== s.slug);
+---
+<Base title={`${s.name} · Weld`} description={s.lead}>
+  <section class="page-hero split wrap">
+    <div>
+      <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><a href="/servicos">Serviços</a><i class="ph ph-caret-right"></i><span>{s.name}</span></nav>
+      <p class="kicker load" style="--d:1"><span class="dot"></span>{s.name}</p>
+      <h1 class="h1 load" style="--d:2">{s.title}</h1>
+      <p class="lead load" style="--d:3">{s.lead}</p>
+      <div class="hero-ctas load" style="--d:4">
+        <a href="/contacto" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
+        <a href="/demos" class="btn btn-ghost"><i class="ph ph-play-circle"></i>Ver as demos</a>
+      </div>
+    </div>
+    <div class="hero-visual load" style="--d:3">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <Phone chat={s.chat as any} class="hero-phone" />
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">O que faz.</h2></div>
+    <div class="features">
+      {s.what.map(([icon, t, p], i) => (
+        <article class="feature card-fx reveal" style={`--i:${i}`}>
+          <span class="svc-icon"><i class={`ph-duotone ${icon}`}></i></span>
+          <h3>{t}</h3>
+          <p>{p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="for-panel reveal">
+      <h2 class="h2">Para quem é.</h2>
+      <div class="chips">{s.for.map((f, i) => <span class="chip-lg" style={`--i:${i}`}>{f}</span>)}</div>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{process.title}</h2></div>
+    <ol class="steps">
+      <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
+      {process.steps.map((p, i) => (
+        <li class="step reveal" style={`--i:${i}`}><span class="step-n"><i class={`ph-bold ${p.icon}`}></i></span><span class="step-k">{String(i + 1).padStart(2, "0")}</span><h3>{p.name}</h3><p>{p.text}</p></li>
+      ))}
+    </ol>
+  </section>
+
+  <Faq items={s.faq} />
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">Outros serviços.</h2></div>
+    <div class="others">
+      {others.map((o, i) => (
+        <a href={`/servicos/${o.slug}`} class="svc card-fx reveal" style={`--i:${i}`}>
+          <span class="svc-icon"><i class={`ph-duotone ${o.icon}`}></i></span>
+          <h3>{o.name}</h3>
+          <p>{o.card}</p>
+          <span class="more">Saber mais <i class="ph ph-arrow-right"></i></span>
+        </a>
+      ))}
+    </div>
+  </section>
+  <CtaBand />
+</Base>

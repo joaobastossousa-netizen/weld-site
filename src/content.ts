@@ -5,12 +5,24 @@
    Nunca pôr nomes ou logótipos de clientes reais sem autorização escrita.
 ------------------------------------------------------------------- */
 
-export const contacts = {
+export const site = {
+  name: "Weld",
+  url: "https://weld-site.vercel.app",
   email: "joaobastossousa@gmail.com",
   instagram: "https://www.instagram.com/weld.studio/",
   instagramHandle: "@weld.studio",
+  linkedin: "https://www.linkedin.com/in/jo%C3%A3o-bastos-de-sousa-8188723b6/",
   city: "Porto",
+  cta: "Pedir proposta",
 };
+
+export const nav = [
+  { label: "Serviços", href: "/servicos", children: true },
+  { label: "Para agências", href: "/agencias" },
+  { label: "Demos", href: "/demos" },
+  { label: "Sobre", href: "/sobre" },
+  { label: "Contacto", href: "/contacto" },
+];
 
 export const team = [
   {
@@ -31,28 +43,36 @@ export const team = [
   },
 ];
 
-export const hero = {
+/* conversas usadas nos telemóveis animados: [quem, texto]. "me" = cliente, "bot" = assistente, "ok" = resultado */
+export const chats = {
+  clinica: { name: "A tua clínica", status: "online", lines: [["me", "Olá! Têm vaga para sábado de manhã?"], ["bot", "Olá! Sábado tenho às 10:00 e às 11:30. Qual prefere?"], ["me", "10h, por favor. Sou a Rita."], ["bot", "Está marcado, Rita! Sábado às 10:00. Na véspera envio um lembrete."], ["ok", "Marcação enviada para a agenda"]] },
+  pecas: { name: "A tua loja", status: "online", lines: [["me", "Têm pastilhas para um Golf VII de 2016?"], ["bot", "Temos. É o 1.6 TDI? Frente ou trás?"], ["me", "1.6 TDI, frente."], ["bot", "Perfeito. Passei o pedido ao balcão, que confirma o preço já a seguir."], ["ok", "Pedido criado no balcão"]] },
+  leads: { name: "A tua empresa", status: "online", lines: [["me", "Boa tarde, quanto custa um site para o meu restaurante?"], ["bot", "Depende do que precisa. Tem reservas online? Quantas páginas imagina?"], ["me", "Reservas sim, umas 4 páginas."], ["bot", "Obrigado! Um colega liga-lhe amanhã de manhã com uma proposta."], ["ok", "Lead qualificado no CRM"]] },
+};
+
+export const home = {
   kicker: "Estúdio de automação com IA no Porto",
   line1: "Mensagens respondidas.",
   line2: "Clientes",
   rotate: ["marcados.", "atendidos.", "qualificados."],
-  lead: "Assistentes de IA no WhatsApp e no Instagram, que respondem, dão preços e marcam a qualquer hora. Para agências revenderem e para negócios usarem.",
-  agency: "Sou uma agência",
-  business: "Tenho um negócio",
-};
-
-/* animação do topo: mensagens entram, a Weld solda, resultados saem */
-export const flow = {
-  inputs: [
-    { icon: "whatsapp-color", text: "Têm vaga sábado?" },
-    { icon: "instagram-color", text: "Quanto custa?" },
-    { icon: "gmail-color", text: "Pedido de orçamento" },
+  lead: "Assistentes de IA no WhatsApp e no Instagram, automações e sites. Para agências revenderem com o nome delas, ou para negócios contratarem diretamente.",
+  floats: [
+    { icon: "ph-lightning", title: "Responde em segundos", text: "A qualquer hora, fins de semana incluídos" },
+    { icon: "ph-user-switch", title: "Passa a uma pessoa", text: "Quando o pedido foge ao normal" },
   ],
-  outputs: ["Consulta marcada · sáb 10:00", "Preço enviado e lead guardado", "Proposta pedida à equipa"],
+  statement: ["Quem escreve às 23h", "não quer resposta amanhã.", "Quer resposta agora,", "e uma marcação feita."],
+  flow: {
+    inputs: [
+      { icon: "whatsapp-color", text: "Têm vaga sábado?" },
+      { icon: "instagram-color", text: "Quanto custa?" },
+      { icon: "gmail-color", text: "Pedido de orçamento" },
+    ],
+    outputs: ["Consulta marcada · sáb 10:00", "Preço enviado e lead guardado", "Proposta pedida à equipa"],
+  },
 };
 
 export const integrations = {
-  title: "Liga-se ao que já usam",
+  title: "Liga-se às ferramentas que já usam",
   items: [
     ["whatsapp", "WhatsApp"], ["instagram", "Instagram"], ["messenger", "Messenger"], ["googlecalendar", "Google Calendar"],
     ["gmail", "Gmail"], ["googlesheets", "Google Sheets"], ["notion", "Notion"], ["shopify", "Shopify"],
@@ -60,7 +80,6 @@ export const integrations = {
   ],
 };
 
-/* secção que avança com o scroll */
 export const story = {
   title: "O que acontece quando alguém escreve.",
   steps: [
@@ -70,56 +89,128 @@ export const story = {
   ],
 };
 
+/* serviços: cada um tem a sua página em /servicos/<slug> */
+export const services = [
+  {
+    slug: "assistentes-de-ia", icon: "ph-chats-circle", name: "Assistentes de IA", short: "WhatsApp, Instagram e site",
+    card: "Respondem, dão preços e marcam a qualquer hora. Passam a uma pessoa quando é preciso.",
+    title: "Um assistente que responde enquanto a equipa dorme.",
+    lead: "Conhece os vossos preços, horários e serviços. Responde no WhatsApp, no Instagram e no site, marca, e passa a uma pessoa quando o pedido foge ao normal.",
+    chat: "clinica",
+    what: [
+      ["ph-calendar-check", "Marca e lembra", "Vê as vagas reais da agenda, marca e envia lembrete na véspera."],
+      ["ph-currency-eur", "Dá preços certos", "Só os valores que nos derem. Nunca inventa."],
+      ["ph-funnel", "Qualifica pedidos", "Pergunta o que falta antes de passar à equipa."],
+      ["ph-user-switch", "Sabe parar", "Reclamações, urgências e casos estranhos vão logo para uma pessoa."],
+    ],
+    for: ["Clínicas e consultórios", "Restaurantes", "Oficinas e lojas", "Ginásios e estúdios", "Imobiliárias", "Serviços ao domicílio"],
+    faq: [
+      ["Usa a API oficial do WhatsApp?", "Sim. Ligamos pela WhatsApp Business Platform da Meta, com o número do negócio."],
+      ["A equipa continua a ver as conversas?", "Sim. Pode entrar em qualquer conversa a meio, e o assistente para de responder."],
+      ["Quanto tempo leva a pôr a funcionar?", "Um assistente simples fica pronto em poucos dias."],
+    ],
+  },
+  {
+    slug: "automacoes", icon: "ph-flow-arrow", name: "Automações", short: "Menos trabalho repetido",
+    card: "Ligam formulários, agenda, CRM e email. O que hoje se copia à mão passa a acontecer sozinho.",
+    title: "O que se faz sempre igual passa a fazer-se sozinho.",
+    lead: "Descobrimos as tarefas que comem horas todas as semanas e ligamos as ferramentas que já usam para que aconteçam sem ninguém.",
+    chat: "leads",
+    what: [
+      ["ph-arrows-left-right", "Liga ferramentas", "Formulários, folhas de cálculo, CRM, agenda e email a falarem entre si."],
+      ["ph-envelope-simple", "Respostas e follow-ups", "Rascunhos e seguimentos prontos, revistos antes de sair."],
+      ["ph-chart-line-up", "Relatórios automáticos", "Os números da semana chegam sozinhos, sem montar folhas à mão."],
+      ["ph-bell-ringing", "Avisos à equipa", "Quando entra um pedido importante, a pessoa certa sabe logo."],
+    ],
+    for: ["Agências de marketing", "Equipas comerciais", "Clínicas", "Imobiliárias", "Lojas online", "Escritórios"],
+    faq: [
+      ["Que ferramentas usam?", "As que já têm, sempre que possível. Quando falta alguma peça, usamos n8n ou Make."],
+      ["E se uma automação falhar?", "Fica registado e avisamos. Na mensalidade, tratamos nós disso."],
+      ["Precisamos de mudar de programas?", "Normalmente não. A ideia é ligar o que já existe."],
+    ],
+  },
+  {
+    slug: "sites", icon: "ph-browser", name: "Sites e landing pages", short: "Rápidos e feitos para converter",
+    card: "Rápidos, claros e feitos para trazer contactos. Com o assistente lá dentro, se quiserem.",
+    title: "Sites que explicam em 5 segundos e trazem contactos.",
+    lead: "Sites institucionais e landing pages rápidos, bonitos no telemóvel e feitos para uma coisa: que quem entra perceba o que fazem e fale convosco.",
+    chat: "leads",
+    what: [
+      ["ph-lightning", "Rápidos", "Carregam num instante, também no telemóvel."],
+      ["ph-target", "Feitos para converter", "Cada página tem um objetivo claro e um botão para lá chegar."],
+      ["ph-chats-circle", "Com assistente", "O assistente de IA pode viver no site e responder a quem entra."],
+      ["ph-magnifying-glass", "Prontos para o Google", "Estrutura, velocidade e textos pensados para aparecer."],
+    ],
+    for: ["Pequenos negócios", "Profissionais independentes", "Lançamentos", "Campanhas de agências", "Restaurantes", "Clínicas"],
+    faq: [
+      ["Podemos editar os textos?", "Sim. Fica tudo organizado para mudar textos sem mexer no resto."],
+      ["Tratam do domínio e do alojamento?", "Tratamos, e explicamos cada passo."],
+      ["Fazem só landing pages?", "Fazemos as duas coisas: páginas únicas para campanhas e sites completos."],
+    ],
+  },
+  {
+    slug: "software-a-medida", icon: "ph-code-block", name: "Software à medida", short: "Quando nada serve",
+    card: "Painéis internos, integrações e pequenos produtos, quando nada do que existe serve.",
+    title: "Quando nenhuma ferramenta serve, fazemos a vossa.",
+    lead: "Painéis internos, integrações entre sistemas e pequenos produtos digitais, feitos à medida do vosso processo e não o contrário.",
+    chat: "pecas",
+    what: [
+      ["ph-squares-four", "Painéis internos", "Tudo o que a equipa precisa de ver num só ecrã."],
+      ["ph-plugs-connected", "Integrações", "Sistemas que não falavam passam a falar."],
+      ["ph-rocket-launch", "Produtos e MVPs", "Da ideia a uma primeira versão que se pode mostrar."],
+      ["ph-shield-check", "Feito para durar", "Código limpo, documentado e vosso."],
+    ],
+    for: ["Empresas com processos próprios", "Startups", "Agências", "Equipas de operações", "Lojas com stock", "Serviços"],
+    faq: [
+      ["O código fica nosso?", "Sim. Entregamos tudo, com instruções para continuar."],
+      ["Como se define o preço?", "Depois de uma conversa de descoberta, com âmbito e prazo por escrito."],
+      ["Dão manutenção?", "Sim, numa mensalidade opcional."],
+    ],
+  },
+];
+
 export const demos = {
-  title: "Experimenta as demos.",
-  lead: "Três negócios de exemplo, três assistentes a funcionar. Abre, escreve como se fosses cliente e vê o que acontece.",
+  title: "Demos a funcionar.",
+  lead: "Três negócios de exemplo, três assistentes. Abre, escreve como se fosses cliente e vê o que acontece.",
   note: "Marcas de exemplo. Os cenários são reais, os nomes não.",
   items: [
-    { slug: "clinica", brand: "Oriva Dental", sector: "Clínica dentária", color: "#1FB5A8", ink: "#0F2E3D", what: "Marca consultas em duas clínicas e lembra o paciente na véspera. Urgências vão logo para a receção." },
-    { slug: "pecas", brand: "Pistão Peças", sector: "Loja de peças auto", color: "#E8792B", ink: "#0A1628", what: "Pede o carro, o ano e o motor, e entrega o pedido ao balcão já preenchido. Nunca inventa stock." },
-    { slug: "ginasio", brand: "Pulso", sector: "Ginásio", color: "#FF5A36", ink: "#111111", what: "Responde a quem chega pelos reels, explica as aulas e marca os 3 dias grátis." },
+    { slug: "clinica", brand: "Oriva Dental", sector: "Clínica dentária", color: "#1FB5A8", ink: "#0F2E3D", what: "Marca consultas em duas clínicas e lembra o paciente na véspera. Urgências vão logo para a receção.", tags: ["Marcações", "Lembretes", "Urgências para a receção"] },
+    { slug: "pecas", brand: "Pistão Peças", sector: "Loja de peças auto", color: "#E8792B", ink: "#0A1628", what: "Pede o carro, o ano e o motor, e entrega o pedido ao balcão já preenchido. Nunca inventa stock.", tags: ["Pedidos ao balcão", "Oficinas", "Duas lojas"] },
+    { slug: "ginasio", brand: "Pulso", sector: "Ginásio", color: "#FF5A36", ink: "#111111", what: "Responde a quem chega pelos reels, explica as aulas e marca os 3 dias grátis.", tags: ["Instagram", "Aulas", "Experiência grátis"] },
   ],
 };
 
-export const paths = {
-  title: "Duas formas de trabalhar connosco.",
-  agency: {
-    tab: "Para agências",
-    title: "Vocês vendem. Nós construímos.",
-    lead: "Já têm os clientes e a confiança. Juntamos a parte técnica para venderem automação sem contratar ninguém.",
-    points: [
-      "White label: o cliente vê a vossa marca, não a nossa.",
-      "Vocês ficam com a relação com o cliente e com a margem.",
-      "Tratamos da construção, da entrega e da manutenção.",
-      "Fazemos a demo para o vosso cliente antes de venderem.",
-    ],
-    diagram: ["Agência", "Weld", "Cliente da agência"],
-    cta: "Propor uma parceria",
-  },
-  business: {
-    tab: "Para negócios",
-    title: "Contratem-nos diretamente.",
-    lead: "Sem equipa técnica? Nós somos a vossa. Do assistente que responde às DMs ao site que traz contactos.",
-    points: [
-      "Assistentes que respondem, dão preços e marcam por vocês.",
-      "Automações que acabam com o copiar e colar.",
-      "Sites rápidos, claros e feitos para trazer contactos.",
-      "Âmbito, prazo e valor por escrito antes de começar.",
-    ],
-    diagram: ["O vosso negócio", "Weld"],
-    cta: "Pedir proposta",
-  },
-};
-
-export const services = {
-  title: "O que construímos.",
-  items: [
-    { icon: "ph-chats-circle", name: "Assistentes de IA", text: "Respondem, dão preços e marcam no WhatsApp, no Instagram ou no site. Passam a uma pessoa quando é preciso." },
-    { icon: "ph-flow-arrow", name: "Automações", text: "Ligam formulários, agenda, CRM e email. O que hoje se copia à mão passa a acontecer sozinho." },
-    { icon: "ph-browser", name: "Sites e landing pages", text: "Rápidos, claros e feitos para converter. Com o assistente lá dentro, se quiserem." },
-    { icon: "ph-code-block", name: "Software à medida", text: "Painéis internos, integrações e pequenos produtos, quando nada do que existe serve." },
+export const agencies = {
+  kicker: "Para agências de marketing",
+  title: "Vocês vendem. Nós construímos.",
+  lead: "Já têm os clientes e a confiança. Juntamos a parte técnica para venderem assistentes de IA e automações com o vosso nome, sem contratar ninguém.",
+  flow: ["Agência", "Weld", "Cliente da agência"],
+  points: [
+    ["ph-mask-happy", "White label", "O cliente vê a vossa marca. Nós ficamos nos bastidores, a não ser que queiram outra coisa."],
+    ["ph-handshake", "A relação é vossa", "Vocês falam com o cliente e ficam com a margem. Nós respondemos a vocês."],
+    ["ph-presentation-chart", "Demo antes da venda", "Fazemos uma demo com o nome e os dados do vosso cliente para levarem à reunião."],
+    ["ph-wrench", "Entrega e manutenção", "Construímos, ligamos ao WhatsApp e ficamos a manter, mês a mês."],
+  ],
+  steps: [
+    ["Escolhem um cliente", "Mandam-nos o site e o Instagram de um cliente que recebe muitas mensagens."],
+    ["Fazemos a demo", "Em poucos dias têm uma demo a funcionar com o nome dele."],
+    ["Vocês vendem", "Mostram a demo na reunião e fecham, com o vosso preço."],
+    ["Nós entregamos", "Configuramos, testamos com a equipa do cliente e ligamos tudo."],
   ],
 };
+
+export const compare = {
+  title: "O que muda quando trabalham connosco.",
+  without: ["Mensagens por responder à noite e ao fim de semana", "Clientes que desistem antes de alguém atender", "A equipa a copiar dados à mão", "Agências a dizer que não a pedidos de IA"],
+  with: ["Resposta em segundos, a qualquer hora", "Marcações e pedidos feitos sem ninguém ao telefone", "Ferramentas ligadas e dados no sítio certo", "Agências a vender automação com o nome delas"],
+};
+
+export const stats = [
+  ["24/7", "O assistente não fecha"],
+  ["3", "Demos prontas a experimentar"],
+  ["20 min", "Primeira conversa, sem compromisso"],
+  ["1", "Ponto de contacto em todos os projetos"],
+];
 
 export const process = {
   title: "Do primeiro contacto à entrega.",
@@ -139,6 +230,18 @@ export const deals = {
     { icon: "ph-arrows-clockwise", name: "Mensalidade", text: "Manutenção, melhorias e acompanhamento, mês a mês, sem fidelização longa.", for: "Negócios e agências" },
     { icon: "ph-storefront", name: "Revenda para agências", text: "Um preço fixo por cliente. A agência define o preço final e fica com a margem.", for: "Agências" },
     { icon: "ph-percent", name: "Percentagem", text: "Em vez de preço fixo, uma percentagem do que o projeto gera ou do contrato da agência. Risco partilhado.", for: "Parcerias" },
+  ],
+};
+
+export const about = {
+  kicker: "Sobre a Weld",
+  title: "Soldar é juntar duas peças numa só.",
+  lead: "É o que fazemos: pegamos em mensagens soltas, ferramentas que não falam entre si e trabalho repetido, e juntamos tudo num fluxo que funciona sozinho.",
+  values: [
+    ["ph-eye", "Mostrar antes de vender", "Fazemos a demo primeiro. Ninguém devia comprar automação às cegas."],
+    ["ph-chat-text", "Falar como gente", "Sem jargão. Explicamos o que fazemos em frases normais."],
+    ["ph-lock-key", "Só o que é oficial", "APIs oficiais, dados guardados com cuidado, nada de truques."],
+    ["ph-hand-waving", "Um ponto de contacto", "Sabem sempre com quem falar."],
   ],
 };
 

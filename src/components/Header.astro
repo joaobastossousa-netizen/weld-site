@@ -1,0 +1,46 @@
+---
+import { nav, services, site } from "../content";
+const path = Astro.url.pathname.replace(/\/$/, "") || "/";
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+---
+<header class="nav" id="nav">
+  <div class="wrap nav-in">
+    <a href="/" class="brand" aria-label="Weld, início">
+      <svg viewBox="0 0 100 100" class="brand-icon" aria-hidden="true"><rect width="100" height="100" rx="22" class="brand-bg" /><path class="brand-w" d={W} /></svg>
+      <span>weld</span>
+    </a>
+    <nav aria-label="Principal" class="nav-main">
+      <ul class="nav-links">
+        {nav.map((n) => (
+          <li class={n.children ? "has-menu" : ""}>
+            <a href={n.href} aria-current={path.startsWith(n.href) ? "page" : undefined}>{n.label}{n.children && <i class="ph ph-caret-down"></i>}</a>
+            {n.children && (
+              <div class="mega" role="menu">
+                {services.map((s) => (
+                  <a href={`/servicos/${s.slug}`} class="mega-item" role="menuitem">
+                    <span class="mega-icon"><i class={`ph-duotone ${s.icon}`}></i></span>
+                    <span><b>{s.name}</b><small>{s.short}</small></span>
+                  </a>
+                ))}
+                <a href="/servicos" class="mega-all">Todos os serviços <i class="ph ph-arrow-right"></i></a>
+              </div>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+    <div class="nav-right">
+      <a href="/contacto" class="btn btn-mint btn-sm magnetic">{site.cta}</a>
+      <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobile-menu">
+    <div class="wrap">
+      <a href="/">Início</a>
+      <p class="mm-label">Serviços</p>
+      {services.map((s) => <a href={`/servicos/${s.slug}`} class="mm-sub"><i class={`ph-duotone ${s.icon}`}></i>{s.name}</a>)}
+      {nav.filter((n) => !n.children).map((n) => <a href={n.href}>{n.label}</a>)}
+      <a href="/contacto" class="btn btn-mint">{site.cta}</a>
+    </div>
+  </div>
+</header>

@@ -1,0 +1,19 @@
+---
+import { site } from "../content";
+interface Props { title?: string; text?: string }
+const { title = "Vamos pôr isto a funcionar?", text = "Uma conversa de 20 minutos chega para perceber se faz sentido." } = Astro.props;
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+---
+<section class="wrap cta-wrap">
+  <div class="cta-band reveal">
+    <svg class="cta-w" viewBox="0 0 100 100" aria-hidden="true"><path d={W} /></svg>
+    <div>
+      <h2 class="h2">{title}</h2>
+      <p class="lead">{text}</p>
+    </div>
+    <div class="cta-actions">
+      <a href="/contacto" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
+      <a href="/demos" class="btn btn-ghost">Ver as demos</a>
+    </div>
+  </div>
+</section>

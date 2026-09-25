@@ -1,0 +1,60 @@
+---
+import Base from "../layouts/Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { about, team, process } from "../content";
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+---
+<Base title="Sobre · Weld" description={about.lead}>
+  <section class="page-hero split wrap">
+    <div>
+      <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><span>Sobre</span></nav>
+      <p class="kicker load" style="--d:1"><span class="dot"></span>{about.kicker}</p>
+      <h1 class="h1 load" style="--d:2">{about.title}</h1>
+      <p class="lead load" style="--d:3">{about.lead}</p>
+    </div>
+    <div class="weld-mark load" style="--d:3" aria-hidden="true">
+      <svg viewBox="0 0 100 100"><path class="wm-a" d="M12 20 L32 78 L50 40" /><path class="wm-b" d="M50 40 L68 78 L88 20" /><circle class="wm-spark" cx="50" cy="40" r="4" /></svg>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="features">
+      {about.values.map(([icon, t, p], i) => (
+        <article class="feature card-fx reveal" style={`--i:${i}`}>
+          <span class="svc-icon"><i class={`ph-duotone ${icon}`}></i></span>
+          <h3>{t}</h3>
+          <p>{p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap" id="equipa">
+    <div class="sec-head"><h2 class="h2 reveal">Duas pessoas. Um ponto de contacto.</h2><p class="lead reveal">Tudo chega primeiro ao João. Depois dividimos o trabalho, ou fazemos a dois quando o projeto pede.</p></div>
+    <div class="team">
+      {team.map((m, i) => (
+        <article class="member card-fx reveal" style={`--i:${i}`}>
+          <span class="avatar" aria-hidden="true">{m.initials}</span>
+          <h3>{m.name}</h3>
+          <p class="role">{m.role}</p>
+          <p class="bio">{m.text}</p>
+          <div class="member-links">
+            {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener"><i class="ph-fill ph-linkedin-logo"></i>LinkedIn</a>}
+            {m.email && <a href={`mailto:${m.email}`}><i class="ph ph-envelope-simple"></i>Email</a>}
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{process.title}</h2></div>
+    <ol class="steps">
+      <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
+      {process.steps.map((p, i) => (
+        <li class="step reveal" style={`--i:${i}`}><span class="step-n"><i class={`ph-bold ${p.icon}`}></i></span><span class="step-k">{String(i + 1).padStart(2, "0")}</span><h3>{p.name}</h3><p>{p.text}</p></li>
+      ))}
+    </ol>
+  </section>
+  <CtaBand />
+</Base>

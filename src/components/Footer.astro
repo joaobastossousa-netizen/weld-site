@@ -1,0 +1,16 @@
+---
+import { site, services, nav } from "../content";
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+---
+<footer class="footer">
+  <div class="wrap foot-grid">
+    <div class="foot-brand">
+      <a href="/" class="brand"><svg viewBox="0 0 100 100" class="brand-icon" aria-hidden="true"><rect width="100" height="100" rx="22" class="brand-bg" /><path d={W} class="brand-w still" /></svg><span>weld</span></a>
+      <p>Assistentes de IA, automações e sites para agências e negócios. {site.city}.</p>
+    </div>
+    <div><p class="foot-h">Serviços</p>{services.map((s) => <a href={`/servicos/${s.slug}`}>{s.name}</a>)}</div>
+    <div><p class="foot-h">Weld</p>{nav.filter((n) => !n.children).map((n) => <a href={n.href}>{n.label}</a>)}</div>
+    <div><p class="foot-h">Contacto</p><a href={`mailto:${site.email}`}>{site.email}</a><a href={site.linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={site.instagram} target="_blank" rel="noopener">Instagram {site.instagramHandle}</a></div>
+  </div>
+  <div class="wrap foot-bottom"><span>© 2026 Weld</span><span>Feito no Porto, com IA e café.</span></div>
+</footer>

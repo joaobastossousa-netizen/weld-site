@@ -1,0 +1,13 @@
+---
+import { chats } from "../content";
+interface Props { chat: keyof typeof chats; class?: string }
+const { chat, class: cls = "" } = Astro.props;
+const c = chats[chat];
+---
+<div class={`phone ${cls}`} data-chat={JSON.stringify(c.lines)} aria-label="Exemplo de conversa com o assistente">
+  <div class="phone-screen">
+    <span class="phone-island" aria-hidden="true"></span>
+    <div class="phone-head"><span class="phone-av" aria-hidden="true"></span><div><b>{c.name}</b><small>{c.status}</small></div></div>
+    <div class="phone-body" aria-live="polite"></div>
+  </div>
+</div>

@@ -1,0 +1,29 @@
+---
+import { contact, site } from "../content";
+---
+<form class="brief" id="brief" data-email={site.email} novalidate>
+  <ol class="brief-steps" aria-hidden="true"><li class="on">1</li><li>2</li><li>3</li></ol>
+  <fieldset class="brief-step on" data-step="1">
+    <legend>Quem és?</legend>
+    <div class="opts">{contact.who.map((w) => <button type="button" class="opt big" data-field="who" data-value={w}><i class={`ph-duotone ${w === "Agência" ? "ph-megaphone" : "ph-storefront"}`}></i>{w}</button>)}</div>
+  </fieldset>
+  <fieldset class="brief-step" data-step="2">
+    <legend>O que precisas?</legend>
+    <div class="opts">{contact.needs.map((n) => <button type="button" class="opt" data-field="need" data-value={n}>{n}</button>)}</div>
+    <button type="button" class="back" data-back>Voltar</button>
+  </fieldset>
+  <fieldset class="brief-step" data-step="3">
+    <legend>Só mais isto.</legend>
+    <label for="f-name">Nome</label>
+    <input id="f-name" name="name" autocomplete="name" required />
+    <label for="f-company">Empresa ou agência</label>
+    <input id="f-company" name="company" autocomplete="organization" />
+    <label for="f-msg">Em duas linhas, o que querem resolver?</label>
+    <textarea id="f-msg" name="msg" rows="3"></textarea>
+    <p class="err" id="f-err" hidden>Falta o nome.</p>
+    <div class="brief-actions">
+      <button type="button" class="back" data-back>Voltar</button>
+      <button type="submit" class="btn btn-mint">Abrir email pronto<i class="ph ph-arrow-right"></i></button>
+    </div>
+  </fieldset>
+</form>
