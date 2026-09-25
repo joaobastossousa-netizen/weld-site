@@ -131,7 +131,7 @@ if (showcase) {
     items.forEach((b, k) => { b.classList.toggle("on", k === i); b.setAttribute("aria-selected", String(k === i)); });
     descs.forEach((d, k) => d.classList.toggle("on", k === i));
     videos.forEach((v, k) => { v.classList.toggle("on", k === i); if (k === i) { v.preload = "auto"; v.currentTime = 0; if (vis || user) v.play().catch(() => {}); } else v.pause(); });
-    url.textContent = `weld-site.vercel.app/demos/${descs[i].dataset.slug}`;
+    url.textContent = `weldstudio.pt/demos/${descs[i].dataset.slug}`;
     const bar = $(".demo-bar i", items[i]); bar.style.animation = "none"; void bar.offsetWidth; bar.style.animation = "";
   };
   videos.forEach((v, k) => { v.addEventListener("loadedmetadata", () => items[k].style.setProperty("--dur", `${v.duration}s`)); v.addEventListener("ended", () => show((k + 1) % videos.length)); });

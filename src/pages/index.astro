@@ -164,7 +164,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       </div>
       <div class="demo-stage">
         <div class="browser">
-          <div class="browser-bar"><i></i><i></i><i></i><span class="demo-url">weld-site.vercel.app/demos/{demos.items[0].slug}</span></div>
+          <div class="browser-bar"><i></i><i></i><i></i><span class="demo-url">weldstudio.pt/demos/{demos.items[0].slug}</span></div>
           <div class="browser-view">
             {demos.items.map((d, i) => <video class={`demo-video${i === 0 ? " on" : ""}`} src={`/videos/${d.slug}.mp4`} poster={`/videos/${d.slug}.jpg`} muted playsinline preload={i === 0 ? "auto" : "none"} aria-label={`Vídeo da demo ${d.brand}`}></video>)}
           </div>

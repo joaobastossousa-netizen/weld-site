@@ -15,7 +15,7 @@ import { demos } from "../content";
     {demos.items.map((d, i) => (
       <article class={`demo-row reveal ${i % 2 ? "flip" : ""}`} style={`--c:${d.color}`}>
         <div class="browser">
-          <div class="browser-bar"><i></i><i></i><i></i><span>weld-site.vercel.app/demos/{d.slug}</span></div>
+          <div class="browser-bar"><i></i><i></i><i></i><span>weldstudio.pt/demos/{d.slug}</span></div>
           <div class="browser-view"><video class="demo-video on autoplay-in-view" src={`/videos/${d.slug}.mp4`} poster={`/videos/${d.slug}.jpg`} muted playsinline loop preload="none" aria-label={`Vídeo da demo ${d.brand}`}></video></div>
         </div>
         <div class="demo-row-txt">
