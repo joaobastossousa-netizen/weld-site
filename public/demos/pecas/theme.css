@@ -1,0 +1,52 @@
+/* Turbopeças: escuro, técnico, rápido. Azul da marca, letra itálica como no logótipo, cantos mais secos. */
+:root{
+  color-scheme:dark;
+  --bg:#08111F; --bg-2:#0C1A2E; --card:#0F1F38; --card-2:#152A4A;
+  --line:rgba(140,180,255,.10); --line-2:rgba(140,180,255,.2);
+  --text:#EEF3FB; --muted:#9DB0CA; --faint:#6E84A3;
+  --accent:#E8792B; --accent-text:#F4A66E; --btn:#E8792B; --btn-ink:#FFFFFF;
+  --glow:rgba(232,121,43,.55);
+  --phone-frame:linear-gradient(145deg,#2C3E5C,#0E192C 40%,#1D2C47);
+  --screen:#0B1729; --chat-head:rgba(15,31,56,.96); --bubble-bot:#1A2F52; --bubble-bot-ink:#EAF1FF;
+  --bubble-me:#E8792B; --bubble-me-ink:#FFFFFF; --input-bg:#12264A; --input-line:#23416C;
+  --ok:#34D399; --ok-soft:rgba(52,211,153,.12); --warn:#FBBF24; --warn-soft:rgba(251,191,36,.12);
+  --font:"Exo 2","Helvetica Neue",Arial,sans-serif; --display-style:italic; --display-weight:800; --display-track:-.02em;
+  --r:14px; --r-sm:10px; --r-btn:8px;
+  --shadow-card:inset 0 1px 0 rgba(255,255,255,.05),0 0 0 1px var(--line),0 24px 50px -30px rgba(0,0,0,.8);
+  --shadow-lift:inset 0 1px 0 rgba(255,255,255,.07),0 0 0 1px rgba(232,121,43,.45),0 30px 60px -30px rgba(232,121,43,.5);
+  --shadow-phone:0 60px 120px -40px rgba(0,0,0,.9),0 30px 160px -40px rgba(232,121,43,.6);
+  --spot:rgba(232,121,43,.18);
+}
+body{background:
+  linear-gradient(rgba(140,180,255,.035) 1px,transparent 1px) 0 0/56px 56px,
+  linear-gradient(90deg,rgba(140,180,255,.035) 1px,transparent 1px) 0 0/56px 56px,
+  radial-gradient(1200px 600px at 50% -10%,rgba(232,121,43,.22),transparent 60%),var(--bg)}
+
+/* botões em paralelogramo, como as riscas do logótipo */
+.btn{transform:skewX(-12deg);box-shadow:0 12px 30px -12px var(--glow)}
+.btn > *,.btn{font-style:italic;letter-spacing:.01em}
+.btn:hover{transform:skewX(-12deg) translateY(-2px)}
+.btn:active{transform:skewX(-12deg) scale(.97)}
+.btn::after{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(100deg,transparent 30%,rgba(255,255,255,.35) 50%,transparent 70%);background-size:250% 100%;background-position:100% 0;transition:background-position .8s var(--ease)}
+.btn:hover::after{background-position:-50% 0}
+
+/* riscas de velocidade no topo */
+.streak{position:absolute;height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,var(--accent),#FFD0A8);box-shadow:0 0 12px var(--accent);opacity:.8;animation:zoom var(--d,3.2s) linear infinite;animation-delay:var(--delay,0s);width:var(--w,220px);left:-30%}
+@keyframes zoom{0%{transform:translateX(0);opacity:0}10%{opacity:.9}100%{transform:translateX(160vw);opacity:0}}
+.hero-center .hero-logo{width:min(440px,80vw)}
+.hero-center > .decor{left:calc(50% - 50vw);right:auto;width:100vw;bottom:-40px}
+.hero-center .hero-logo svg text[fill="currentColor"]{fill:var(--text)}
+
+.marquee{margin-top:72px;border-color:var(--line)}
+.marquee-track span{color:var(--faint);font-size:24px}
+.marquee-track span::after{content:"";display:inline-block;width:18px;height:6px;margin-left:56px;background:var(--accent);transform:skewX(-20deg);vertical-align:middle;opacity:.7}
+
+.cell,.need,.side-card,.panel{background:linear-gradient(180deg,#12264A,#0D1C35)}
+.cell:hover{box-shadow:var(--shadow-lift)}
+.step .num{font-style:italic;font-size:15px;padding:4px 10px;border-radius:6px;background:rgba(232,121,43,.14);align-self:flex-start}
+.flow-dot{border-radius:12px;transform:skewX(-8deg)}
+.pill{border-radius:8px}
+.pill.on{box-shadow:0 0 18px -4px var(--glow)}
+.avatar{border-radius:12px}
+.cta-mark{filter:drop-shadow(0 0 24px rgba(232,121,43,.6))}
+.nav-logo svg text[fill="currentColor"]{fill:var(--text)}

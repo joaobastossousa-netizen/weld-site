@@ -1,12 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
-import { contacts, team, hero, paths, services, demos, process, deals, faq, contact } from "../content";
+import { contacts, team, hero, flow, integrations, story, demos, paths, services, process, deals, faq, contact } from "../content";
 
 const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
-const words = hero.title.split(" ");
 const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+const icon = (name: string) => `<img src="/logos/${name}.svg" alt="" width="20" height="20" loading="lazy" />`;
 ---
-<Base title="Weld · Automação com IA para agências e negócios" description={hero.lead}>
+<Base title="Weld · Assistentes de IA para agências e negócios" description={hero.lead}>
+  <div class="grain" aria-hidden="true"></div>
+
   <header class="nav" id="nav">
     <div class="wrap nav-in">
       <a href="#topo" class="brand" aria-label="Weld, início">
@@ -15,41 +17,135 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
       </a>
       <nav aria-label="Principal">
         <ul class="nav-links">
-          <li><a href="#caminhos">Como trabalhar connosco</a></li>
-          <li><a href="#servicos">Serviços</a></li>
           <li><a href="#demos">Demos</a></li>
+          <li><a href="#caminhos">Para agências</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#negocio">Modelos</a></li>
           <li><a href="#equipa">Equipa</a></li>
         </ul>
       </nav>
-      <a href="#contacto" class="btn btn-dark btn-sm">Falar connosco</a>
+      <a href="#contacto" class="btn btn-dark btn-sm magnetic">Falar connosco</a>
     </div>
   </header>
 
   <main id="topo">
     <!-- HERO -->
-    <section class="hero wrap">
-      <div class="hero-copy">
-        <p class="kicker load" style="--d:0"><span class="dot"></span>{hero.kicker}</p>
-        <h1 class="h1">
-          {words.map((w, i) => <span class="word"><span style={`--d:${i + 1}`}>{w}</span></span>)}
-        </h1>
-        <p class="lead load" style="--d:7">{hero.lead}</p>
-        <div class="hero-ctas load" style="--d:8">
-          <a href="#caminhos" class="btn btn-dark" data-path="agency">{hero.agency}<Fragment set:html={arrow} /></a>
-          <a href="#caminhos" class="btn btn-line" data-path="business">{hero.business}<Fragment set:html={arrow} /></a>
+    <section class="hero">
+      <div class="blob b1" aria-hidden="true"></div>
+      <div class="blob b2" aria-hidden="true"></div>
+      <div class="wrap hero-in">
+        <div class="hero-copy">
+          <p class="kicker load" style="--d:0"><span class="dot"></span>{hero.kicker}</p>
+          <h1 class="h1">
+            <span class="line"><span class="in" style="--d:1">{hero.line1}</span></span>
+            <span class="line"><span class="in" style="--d:2">{hero.line2} <span class="rotator" id="rotator" aria-live="polite">{hero.rotate.map((w, i) => <span class={`rot${i === 0 ? " on" : ""}`}>{w}</span>)}</span></span></span>
+          </h1>
+          <p class="lead load" style="--d:4">{hero.lead}</p>
+          <div class="hero-ctas load" style="--d:5">
+            <a href="#demos" class="btn btn-dark magnetic">Ver as demos<Fragment set:html={arrow} /></a>
+            <a href="#caminhos" class="btn btn-line" data-path="agency">{hero.agency}</a>
+            <a href="#caminhos" class="btn btn-line" data-path="business">{hero.business}</a>
+          </div>
+        </div>
+
+        <!-- mensagens entram, o W solda, resultados saem -->
+        <div class="machine load" style="--d:3" aria-label="Mensagens de clientes transformadas em marcações e pedidos">
+          <div class="lane lane-in">
+            {flow.inputs.map((m, i) => <div class="msg" data-i={i}><Fragment set:html={icon(m.icon)} /><span>{m.text}</span></div>)}
+          </div>
+          <div class="core">
+            <svg viewBox="0 0 100 100" aria-hidden="true"><rect width="100" height="100" rx="26" class="core-bg" /><path d={W} class="core-w" /><circle cx="50" cy="40" r="5" class="core-spark" /></svg>
+            <span class="core-label">weld</span>
+          </div>
+          <div class="lane lane-out">
+            {flow.outputs.map((o, i) => <div class="out" data-i={i}><span class="tick" aria-hidden="true"></span><span>{o}</span></div>)}
+          </div>
+          <svg class="wires" viewBox="0 0 600 360" preserveAspectRatio="none" aria-hidden="true">
+            <path d="M190 70 C 250 70, 250 180, 300 180" /><path d="M190 180 L 300 180" /><path d="M190 290 C 250 290, 250 180, 300 180" />
+            <path d="M300 180 C 350 180, 350 70, 410 70" /><path d="M300 180 L 410 180" /><path d="M300 180 C 350 180, 350 290, 410 290" />
+          </svg>
         </div>
       </div>
 
-      <div class="hero-panel load" style="--d:4" aria-label="Exemplos de conversas com um assistente">
-        <svg class="panel-w" viewBox="0 0 100 100" aria-hidden="true"><path d={W} /><circle class="spark" cx="50" cy="40" r="4.5" /></svg>
-        <div class="chat">
-          <div class="chat-head">
-            <span class="chat-avatar" aria-hidden="true"></span>
-            <div><b id="chat-name">Clínica dentária</b><small>online · responde em segundos</small></div>
+      <div class="logos" aria-label={integrations.title}>
+        <p class="logos-title">{integrations.title}</p>
+        <div class="marquee"><div class="marquee-track">
+          {[...integrations.items, ...integrations.items].map(([slug, name]) => <span class="logo"><img src={`/logos/${slug}.svg`} alt={name} width="22" height="22" loading="lazy" /><span>{name}</span></span>)}
+        </div></div>
+      </div>
+    </section>
+
+    <!-- HISTÓRIA COM SCROLL -->
+    <section class="story" id="historia">
+      <div class="story-pin">
+        <div class="wrap story-in">
+          <div class="story-copy">
+            <h2 class="h2 reveal">{story.title}</h2>
+            <ol class="story-steps">
+              {story.steps.map((s, i) => (
+                <li class={`s-step${i === 0 ? " on" : ""}`} data-step={i}>
+                  <span class="s-time">{s.time}</span>
+                  <div><h3>{s.title}</h3><p>{s.text}</p></div>
+                </li>
+              ))}
+            </ol>
           </div>
-          <div class="chat-body" id="chat-body" aria-live="polite"></div>
-          <div class="chat-foot">
-            {demos.items.map((d, i) => <button class={`chat-tab${i === 0 ? " on" : ""}`} type="button" data-demo={i}>{d.sector}</button>)}
+          <div class="stage" aria-hidden="true">
+            <div class="stage-phone">
+              <div class="sp-head"><span class="sp-av"></span><div><b>A tua loja</b><small id="sp-status">fechada · 23:14</small></div></div>
+              <div class="sp-body">
+                <div class="sb me s1">Olá! Têm vaga para sábado de manhã?</div>
+                <div class="sb bot s2">Olá! Sábado tenho às 10:00 e às 11:30. Qual prefere?</div>
+                <div class="sb me s2b">10h, por favor. Sou a Rita.</div>
+                <div class="sb bot s2c">Está marcado, Rita! Sábado às 10:00.</div>
+              </div>
+            </div>
+            <div class="stage-panel">
+              <div class="spn-head"><b>Painel</b><span class="live">Ao vivo</span></div>
+              <div class="spn-row old"><b>09:30</b><span>Marta · Revisão</span></div>
+              <div class="spn-row new s3"><b>10:00</b><span>Rita · Nova marcação</span><em>nova</em></div>
+              <div class="spn-row old"><b>14:30</b><span>Nuno · Orçamento</span></div>
+            </div>
+            <div class="stage-moon s1" id="moon"><i class="ph-fill ph-moon-stars"></i>Loja fechada</div>
+            <div class="stage-toast s3">Nova marcação feita pelo assistente</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- DEMOS -->
+    <section class="section wrap" id="demos">
+      <div class="head">
+        <h2 class="h2 reveal">{demos.title}</h2>
+        <p class="lead reveal">{demos.lead}</p>
+      </div>
+      <div class="showcase reveal">
+        <div class="demo-list" role="tablist" aria-label="Demos">
+          {demos.items.map((d, i) => (
+            <button class={`demo-item${i === 0 ? " on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-demo={i} style={`--c:${d.color};--ink:${d.ink}`}>
+              <span class="demo-mark">{d.brand.charAt(0)}</span>
+              <span class="demo-txt"><b>{d.brand}</b><small>{d.sector}</small></span>
+              <span class="demo-bar"><i></i></span>
+            </button>
+          ))}
+          <p class="demo-note">{demos.note}</p>
+        </div>
+        <div class="demo-stage">
+          <div class="browser">
+            <div class="browser-bar"><i></i><i></i><i></i><span id="demo-url">weld-site.vercel.app/demos/{demos.items[0].slug}</span></div>
+            <div class="browser-view">
+              {demos.items.map((d, i) => (
+                <video class={`demo-video${i === 0 ? " on" : ""}`} data-demo={i} src={`/videos/${d.slug}.mp4`} poster={`/videos/${d.slug}.jpg`} muted playsinline loop preload={i === 0 ? "auto" : "none"} aria-label={`Vídeo da demo ${d.brand}`}></video>
+              ))}
+            </div>
+          </div>
+          <div class="demo-info">
+            {demos.items.map((d, i) => (
+              <div class={`demo-desc${i === 0 ? " on" : ""}`} data-demo={i}>
+                <p>{d.what}</p>
+                <a class="btn btn-dark magnetic" href={`/demos/${d.slug}/index.html`} target="_blank" rel="noopener">Experimentar esta demo<Fragment set:html={arrow} /></a>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -69,9 +165,12 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
           return (
             <div class={`path${k === "agency" ? " on" : ""}`} role="tabpanel" id={`panel-${k}`} aria-labelledby={`tab-${k}`} data-panel={k}>
               <div class="path-copy">
+                <div class="diagram" aria-hidden="true">
+                  {p.diagram.map((n, i) => <>{i > 0 && <span class="d-wire"><i></i></span>}<span class={`d-node${n === "Weld" ? " weld" : ""}`}>{n === "Weld" ? <svg viewBox="0 0 100 100"><path d={W} /></svg> : null}{n}</span></>)}
+                </div>
                 <h3 class="h3">{p.title}</h3>
                 <p class="lead">{p.lead}</p>
-                <a href="#contacto" class="btn btn-dark" data-who={k === "agency" ? "Agência" : "Negócio"}>{p.cta}<Fragment set:html={arrow} /></a>
+                <a href="#contacto" class="btn btn-dark magnetic" data-who={k === "agency" ? "Agência" : "Negócio"}>{p.cta}<Fragment set:html={arrow} /></a>
               </div>
               <ul class="checks">
                 {p.points.map((pt, i) => <li style={`--i:${i}`}><span class="check" aria-hidden="true"></span>{pt}</li>)}
@@ -85,37 +184,12 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
     <!-- SERVIÇOS -->
     <section class="section wrap" id="servicos">
       <h2 class="h2 reveal">{services.title}</h2>
-      <div class="bento">
+      <div class="svc-grid">
         {services.items.map((s, i) => (
-          <article class={`svc svc-${s.size} reveal`} style={`--i:${i}`}>
-            <span class="tag">{s.tag}</span>
-            <h3 class="h3">{s.name}</h3>
+          <article class="svc card-fx reveal" style={`--i:${i}`}>
+            <span class="svc-icon"><i class={`ph-duotone ${s.icon}`}></i></span>
+            <h3>{s.name}</h3>
             <p>{s.text}</p>
-            <div class={`svc-art art-${i}`} aria-hidden="true">
-              {i === 0 && <><span class="b b1">Têm vaga amanhã?</span><span class="b b2">Tenho às 10:00 e às 15:30.</span></>}
-              {i === 1 && <><span class="node">Formulário</span><span class="wire"></span><span class="node">CRM</span><span class="wire"></span><span class="node">Email</span></>}
-              {i === 2 && <><span class="bar"></span><span class="bar short"></span><span class="block"></span></>}
-              {i === 3 && <><span class="code">const pedido = weld(cliente)</span><span class="code dim">// pronto em dias</span></>}
-            </div>
-          </article>
-        ))}
-      </div>
-    </section>
-
-    <!-- DEMOS -->
-    <section class="section wrap" id="demos">
-      <h2 class="h2 reveal">{demos.title}</h2>
-      <p class="lead reveal">{demos.lead}</p>
-      <div class="demos">
-        {demos.items.map((d, i) => (
-          <article class="demo reveal" style={`--i:${i}`}>
-            <p class="demo-sector">{d.sector}</p>
-            <p class="demo-what">{d.what}</p>
-            <div class="demo-chat" aria-hidden="true">
-              <span class="b me">{d.me}</span>
-              <span class="b bot">{d.bot}</span>
-            </div>
-            <span class="chip">{d.chip}</span>
           </article>
         ))}
       </div>
@@ -125,10 +199,11 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
     <section class="section wrap" id="processo">
       <h2 class="h2 reveal">{process.title}</h2>
       <ol class="steps" id="steps">
-        <span class="steps-line" aria-hidden="true"><span class="steps-fill" id="steps-fill"></span></span>
+        <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
         {process.steps.map((s, i) => (
           <li class="step reveal" style={`--i:${i}`}>
-            <span class="step-n">{String(i + 1).padStart(2, "0")}</span>
+            <span class="step-n"><i class={`ph-bold ${s.icon}`}></i></span>
+            <span class="step-k">{String(i + 1).padStart(2, "0")}</span>
             <h3>{s.name}</h3>
             <p>{s.text}</p>
           </li>
@@ -136,15 +211,16 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
       </ol>
     </section>
 
-    <!-- NEGÓCIO -->
+    <!-- MODELOS DE NEGÓCIO -->
     <section class="section wrap" id="negocio">
-      <div class="deals-head">
+      <div class="head">
         <h2 class="h2 reveal">{deals.title}</h2>
         <p class="lead reveal">{deals.lead}</p>
       </div>
       <div class="deals">
         {deals.items.map((d, i) => (
-          <article class="deal reveal" style={`--i:${i}`}>
+          <article class="deal card-fx reveal" style={`--i:${i}`}>
+            <span class="deal-icon"><i class={`ph-duotone ${d.icon}`}></i></span>
             <span class="deal-for">{d.for}</span>
             <h3>{d.name}</h3>
             <p>{d.text}</p>
@@ -169,8 +245,8 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
                 <p class="role">{m.role}</p>
                 <p class="bio">{m.text}</p>
                 <div class="member-links">
-                  {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener">LinkedIn<Fragment set:html={arrow} /></a>}
-                  {m.email && <a href={`mailto:${m.email}`}>Email<Fragment set:html={arrow} /></a>}
+                  {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener"><i class="ph-fill ph-linkedin-logo"></i>LinkedIn</a>}
+                  {m.email && <a href={`mailto:${m.email}`}><i class="ph ph-envelope-simple"></i>Email</a>}
                 </div>
               </div>
             </article>
@@ -200,9 +276,11 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
           <h2 class="h2">{contact.title}</h2>
           <p class="lead">{contact.lead}</p>
           <div class="direct">
-            <button class="copy" type="button" id="copy-email" data-email={contacts.email}><span id="copy-label">{contacts.email}</span><small>copiar</small></button>
-            <a href={team[0].linkedin} target="_blank" rel="noopener" class="direct-link">LinkedIn<Fragment set:html={arrow} /></a>
-            <a href={contacts.instagram} target="_blank" rel="noopener" class="direct-link">Instagram<Fragment set:html={arrow} /></a>
+            <button class="copy" type="button" id="copy-email" data-email={contacts.email}><i class="ph ph-envelope-simple"></i><span id="copy-label">{contacts.email}</span><small>copiar</small></button>
+            <div class="direct-row">
+              <a href={team[0].linkedin} target="_blank" rel="noopener" class="direct-link"><i class="ph-fill ph-linkedin-logo"></i>LinkedIn</a>
+              <a href={contacts.instagram} target="_blank" rel="noopener" class="direct-link"><i class="ph ph-instagram-logo"></i>Instagram</a>
+            </div>
           </div>
         </div>
 
@@ -210,7 +288,7 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
           <ol class="brief-steps" aria-hidden="true"><li class="on">1</li><li>2</li><li>3</li></ol>
           <fieldset class="brief-step on" data-step="1">
             <legend>Quem és?</legend>
-            <div class="opts">{contact.who.map((w) => <button type="button" class="opt" data-field="who" data-value={w}>{w}</button>)}</div>
+            <div class="opts">{contact.who.map((w) => <button type="button" class="opt big" data-field="who" data-value={w}><i class={`ph-duotone ${w === "Agência" ? "ph-megaphone" : "ph-storefront"}`}></i>{w}</button>)}</div>
           </fieldset>
           <fieldset class="brief-step" data-step="2">
             <legend>O que precisas?</legend>
@@ -238,7 +316,7 @@ const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l
 
   <footer class="footer wrap">
     <span class="brand small"><svg viewBox="0 0 100 100" class="brand-icon" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#0A2119" /><path d={W} fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" /></svg>weld</span>
-    <span>Automação com IA · {contacts.city}</span>
+    <span>Assistentes de IA e automação · {contacts.city}</span>
     <span class="foot-links"><a href={`mailto:${contacts.email}`}>{contacts.email}</a><a href={team[0].linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={contacts.instagram} target="_blank" rel="noopener">{contacts.instagramHandle}</a></span>
   </footer>
 

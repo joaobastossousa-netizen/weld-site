@@ -30,10 +30,17 @@ Abre http://localhost:4321.
 | `src/styles/global.css` | Cores, letras, espaços e animações |
 | `src/scripts/site.js` | Conversa animada, separadores, formulário e botão de copiar email |
 | `public/favicon.svg` | Ícone do separador |
+| `public/demos/` | As 3 demos públicas (Oriva Dental, Pistão Peças, Pulso), com marcas inventadas |
+| `public/videos/` | Vídeos curtos das demos que passam no site |
+| `public/logos/` | Logótipos das ferramentas (Simple Icons) |
 
 ## Regras da marca
 
 - Cores: forest `#0A2119`, forest mid `#1B3E30`, paper `#F4F7F4`, mint `#3FA47A` só em detalhes.
 - Letras: IBM Plex Mono (títulos) e Inter (texto).
 - Tom: direto, casual e sem linguagem de empresa. **Nunca usar travessões (—).**
-- Nunca pôr no site nomes de clientes reais sem autorização escrita deles.
+- Nunca pôr no site nomes ou logótipos de clientes reais sem autorização escrita deles. As demos públicas usam marcas inventadas.
+
+## Demos
+
+As demos em `public/demos/` são geradas a partir do molde em `~/Desktop/demos-agencias/_molde/` (script `anon.py`, que troca os nomes reais por marcas inventadas). Os vídeos são gravados com `gravar.mjs` do mesmo molde.
