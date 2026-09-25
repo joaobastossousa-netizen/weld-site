@@ -1,0 +1,246 @@
+---
+import Base from "../layouts/Base.astro";
+import { contacts, team, hero, paths, services, demos, process, deals, faq, contact } from "../content";
+
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+const words = hero.title.split(" ");
+const arrow = `<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8h10M9 4l4 4-4 4" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+---
+<Base title="Weld · Automação com IA para agências e negócios" description={hero.lead}>
+  <header class="nav" id="nav">
+    <div class="wrap nav-in">
+      <a href="#topo" class="brand" aria-label="Weld, início">
+        <svg viewBox="0 0 100 100" class="brand-icon" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#0A2119" /><path class="brand-w" d={W} /></svg>
+        <span>weld</span>
+      </a>
+      <nav aria-label="Principal">
+        <ul class="nav-links">
+          <li><a href="#caminhos">Como trabalhar connosco</a></li>
+          <li><a href="#servicos">Serviços</a></li>
+          <li><a href="#demos">Demos</a></li>
+          <li><a href="#equipa">Equipa</a></li>
+        </ul>
+      </nav>
+      <a href="#contacto" class="btn btn-dark btn-sm">Falar connosco</a>
+    </div>
+  </header>
+
+  <main id="topo">
+    <!-- HERO -->
+    <section class="hero wrap">
+      <div class="hero-copy">
+        <p class="kicker load" style="--d:0"><span class="dot"></span>{hero.kicker}</p>
+        <h1 class="h1">
+          {words.map((w, i) => <span class="word"><span style={`--d:${i + 1}`}>{w}</span></span>)}
+        </h1>
+        <p class="lead load" style="--d:7">{hero.lead}</p>
+        <div class="hero-ctas load" style="--d:8">
+          <a href="#caminhos" class="btn btn-dark" data-path="agency">{hero.agency}<Fragment set:html={arrow} /></a>
+          <a href="#caminhos" class="btn btn-line" data-path="business">{hero.business}<Fragment set:html={arrow} /></a>
+        </div>
+      </div>
+
+      <div class="hero-panel load" style="--d:4" aria-label="Exemplos de conversas com um assistente">
+        <svg class="panel-w" viewBox="0 0 100 100" aria-hidden="true"><path d={W} /><circle class="spark" cx="50" cy="40" r="4.5" /></svg>
+        <div class="chat">
+          <div class="chat-head">
+            <span class="chat-avatar" aria-hidden="true"></span>
+            <div><b id="chat-name">Clínica dentária</b><small>online · responde em segundos</small></div>
+          </div>
+          <div class="chat-body" id="chat-body" aria-live="polite"></div>
+          <div class="chat-foot">
+            {demos.items.map((d, i) => <button class={`chat-tab${i === 0 ? " on" : ""}`} type="button" data-demo={i}>{d.sector}</button>)}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAMINHOS -->
+    <section class="section wrap" id="caminhos">
+      <h2 class="h2 reveal">{paths.title}</h2>
+      <div class="switch reveal" role="tablist" aria-label="Escolhe o teu caso">
+        <span class="switch-pill" aria-hidden="true"></span>
+        <button role="tab" id="tab-agency" aria-controls="panel-agency" aria-selected="true" data-tab="agency">{paths.agency.tab}</button>
+        <button role="tab" id="tab-business" aria-controls="panel-business" aria-selected="false" data-tab="business">{paths.business.tab}</button>
+      </div>
+      <div class="paths reveal">
+        {(["agency", "business"] as const).map((k) => {
+          const p = paths[k];
+          return (
+            <div class={`path${k === "agency" ? " on" : ""}`} role="tabpanel" id={`panel-${k}`} aria-labelledby={`tab-${k}`} data-panel={k}>
+              <div class="path-copy">
+                <h3 class="h3">{p.title}</h3>
+                <p class="lead">{p.lead}</p>
+                <a href="#contacto" class="btn btn-dark" data-who={k === "agency" ? "Agência" : "Negócio"}>{p.cta}<Fragment set:html={arrow} /></a>
+              </div>
+              <ul class="checks">
+                {p.points.map((pt, i) => <li style={`--i:${i}`}><span class="check" aria-hidden="true"></span>{pt}</li>)}
+              </ul>
+            </div>
+          );
+        })}
+      </div>
+    </section>
+
+    <!-- SERVIÇOS -->
+    <section class="section wrap" id="servicos">
+      <h2 class="h2 reveal">{services.title}</h2>
+      <div class="bento">
+        {services.items.map((s, i) => (
+          <article class={`svc svc-${s.size} reveal`} style={`--i:${i}`}>
+            <span class="tag">{s.tag}</span>
+            <h3 class="h3">{s.name}</h3>
+            <p>{s.text}</p>
+            <div class={`svc-art art-${i}`} aria-hidden="true">
+              {i === 0 && <><span class="b b1">Têm vaga amanhã?</span><span class="b b2">Tenho às 10:00 e às 15:30.</span></>}
+              {i === 1 && <><span class="node">Formulário</span><span class="wire"></span><span class="node">CRM</span><span class="wire"></span><span class="node">Email</span></>}
+              {i === 2 && <><span class="bar"></span><span class="bar short"></span><span class="block"></span></>}
+              {i === 3 && <><span class="code">const pedido = weld(cliente)</span><span class="code dim">// pronto em dias</span></>}
+            </div>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- DEMOS -->
+    <section class="section wrap" id="demos">
+      <h2 class="h2 reveal">{demos.title}</h2>
+      <p class="lead reveal">{demos.lead}</p>
+      <div class="demos">
+        {demos.items.map((d, i) => (
+          <article class="demo reveal" style={`--i:${i}`}>
+            <p class="demo-sector">{d.sector}</p>
+            <p class="demo-what">{d.what}</p>
+            <div class="demo-chat" aria-hidden="true">
+              <span class="b me">{d.me}</span>
+              <span class="b bot">{d.bot}</span>
+            </div>
+            <span class="chip">{d.chip}</span>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- PROCESSO -->
+    <section class="section wrap" id="processo">
+      <h2 class="h2 reveal">{process.title}</h2>
+      <ol class="steps" id="steps">
+        <span class="steps-line" aria-hidden="true"><span class="steps-fill" id="steps-fill"></span></span>
+        {process.steps.map((s, i) => (
+          <li class="step reveal" style={`--i:${i}`}>
+            <span class="step-n">{String(i + 1).padStart(2, "0")}</span>
+            <h3>{s.name}</h3>
+            <p>{s.text}</p>
+          </li>
+        ))}
+      </ol>
+    </section>
+
+    <!-- NEGÓCIO -->
+    <section class="section wrap" id="negocio">
+      <div class="deals-head">
+        <h2 class="h2 reveal">{deals.title}</h2>
+        <p class="lead reveal">{deals.lead}</p>
+      </div>
+      <div class="deals">
+        {deals.items.map((d, i) => (
+          <article class="deal reveal" style={`--i:${i}`}>
+            <span class="deal-for">{d.for}</span>
+            <h3>{d.name}</h3>
+            <p>{d.text}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <!-- EQUIPA -->
+    <section class="section wrap" id="equipa">
+      <div class="team-panel reveal">
+        <div class="team-copy">
+          <h2 class="h2">Duas pessoas.<br />Um ponto de contacto.</h2>
+          <p class="lead">Tudo chega primeiro ao João. Depois dividimos o trabalho, ou fazemos a dois quando o projeto pede.</p>
+        </div>
+        <div class="team">
+          {team.map((m) => (
+            <article class="member">
+              <span class="avatar" aria-hidden="true">{m.initials}</span>
+              <div>
+                <h3>{m.name}</h3>
+                <p class="role">{m.role}</p>
+                <p class="bio">{m.text}</p>
+                <div class="member-links">
+                  {m.linkedin && <a href={m.linkedin} target="_blank" rel="noopener">LinkedIn<Fragment set:html={arrow} /></a>}
+                  {m.email && <a href={`mailto:${m.email}`}>Email<Fragment set:html={arrow} /></a>}
+                </div>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section class="section wrap narrow" id="faq">
+      <h2 class="h2 reveal">{faq.title}</h2>
+      <div class="faq reveal">
+        {faq.items.map(([q, a]) => (
+          <details>
+            <summary>{q}<span class="plus" aria-hidden="true"></span></summary>
+            <p>{a}</p>
+          </details>
+        ))}
+      </div>
+    </section>
+
+    <!-- CONTACTO -->
+    <section class="section wrap" id="contacto">
+      <div class="contact reveal">
+        <svg class="contact-w" viewBox="0 0 100 100" aria-hidden="true"><path d={W} /></svg>
+        <div class="contact-copy">
+          <h2 class="h2">{contact.title}</h2>
+          <p class="lead">{contact.lead}</p>
+          <div class="direct">
+            <button class="copy" type="button" id="copy-email" data-email={contacts.email}><span id="copy-label">{contacts.email}</span><small>copiar</small></button>
+            <a href={team[0].linkedin} target="_blank" rel="noopener" class="direct-link">LinkedIn<Fragment set:html={arrow} /></a>
+            <a href={contacts.instagram} target="_blank" rel="noopener" class="direct-link">Instagram<Fragment set:html={arrow} /></a>
+          </div>
+        </div>
+
+        <form class="brief" id="brief" data-email={contacts.email} novalidate>
+          <ol class="brief-steps" aria-hidden="true"><li class="on">1</li><li>2</li><li>3</li></ol>
+          <fieldset class="brief-step on" data-step="1">
+            <legend>Quem és?</legend>
+            <div class="opts">{contact.who.map((w) => <button type="button" class="opt" data-field="who" data-value={w}>{w}</button>)}</div>
+          </fieldset>
+          <fieldset class="brief-step" data-step="2">
+            <legend>O que precisas?</legend>
+            <div class="opts">{contact.needs.map((n) => <button type="button" class="opt" data-field="need" data-value={n}>{n}</button>)}</div>
+            <button type="button" class="back" data-back>Voltar</button>
+          </fieldset>
+          <fieldset class="brief-step" data-step="3">
+            <legend>Só mais isto.</legend>
+            <label for="f-name">Nome</label>
+            <input id="f-name" name="name" autocomplete="name" required />
+            <label for="f-company">Empresa ou agência</label>
+            <input id="f-company" name="company" autocomplete="organization" />
+            <label for="f-msg">Em duas linhas, o que querem resolver?</label>
+            <textarea id="f-msg" name="msg" rows="3"></textarea>
+            <p class="err" id="f-err" hidden>Falta o nome.</p>
+            <div class="brief-actions">
+              <button type="button" class="back" data-back>Voltar</button>
+              <button type="submit" class="btn btn-mint">Abrir email pronto<Fragment set:html={arrow} /></button>
+            </div>
+          </fieldset>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer wrap">
+    <span class="brand small"><svg viewBox="0 0 100 100" class="brand-icon" aria-hidden="true"><rect width="100" height="100" rx="22" fill="#0A2119" /><path d={W} fill="none" stroke="#fff" stroke-width="13" stroke-linecap="round" stroke-linejoin="round" /></svg>weld</span>
+    <span>Automação com IA · {contacts.city}</span>
+    <span class="foot-links"><a href={`mailto:${contacts.email}`}>{contacts.email}</a><a href={team[0].linkedin} target="_blank" rel="noopener">LinkedIn</a><a href={contacts.instagram} target="_blank" rel="noopener">{contacts.instagramHandle}</a></span>
+  </footer>
+
+  <script is:inline define:vars={{ demoData: demos.items }}>window.WELD_DEMOS = demoData;</script>
+</Base>
