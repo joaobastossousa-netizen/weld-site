@@ -9,59 +9,90 @@ const $ = (s, el = document) => el.querySelector(s);
 const $$ = (s, el = document) => [...el.querySelectorAll(s)];
 const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
 
-/* ---------- fundo: fios verdes finos com um sinal de luz a passar ---------- */
-(function wires() {
-  const cv = $("#wires");
-  if (!cv) return;
-  const ctx = cv.getContext("2d");
-  let w, h, dpr, t = 0, running = true, threads = [];
-  const rnd = (a, b) => a + Math.random() * (b - a);
-  function layout() {
-    dpr = Math.min(2, devicePixelRatio || 1);
-    w = innerWidth; h = innerHeight;
-    cv.width = w * dpr; cv.height = h * dpr; ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    const n = w < 700 ? 4 : 6;
-    threads = Array.from({ length: n }, (_, i) => ({
-      y: (i + 0.5) / n, a1: rnd(18, 46), f1: rnd(0.0012, 0.0026), s1: rnd(0.004, 0.009), p: rnd(0, 6.28),
-      a2: rnd(6, 18), f2: rnd(0.004, 0.007), s2: rnd(0.006, 0.012), par: rnd(0.05, 0.18),
-      pulse: rnd(-0.6, 0), speed: rnd(0.0012, 0.0022), alpha: rnd(0.16, 0.28),
-    }));
+/* ---------- costura de solda: pistas nas margens que se desenham com o scroll ---------- */
+(function seam() {
+  const svg = $("#seam");
+  if (!svg) return;
+  const NS = "http://www.w3.org/2000/svg";
+  const mk = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
+  let tracks = [], H = 0, cur = [], vel = 0, lastY = scrollY;
+
+  function build() {
+    svg.innerHTML = "";
+    const W = document.documentElement.clientWidth;
+    H = document.documentElement.scrollHeight;
+    svg.setAttribute("width", W); svg.setAttribute("height", H); svg.setAttribute("viewBox", `0 0 ${W} ${H}`);
+    const defs = mk("defs", {});
+    const g = mk("linearGradient", { id: "seam-g", x1: 0, y1: 0, x2: 0, y2: 1 }, defs);
+    mk("stop", { offset: 0, "stop-color": "#2B8A61" }, g); mk("stop", { offset: 1, "stop-color": "#5CC596" }, g);
+    const f = mk("filter", { id: "seam-blur", x: "-50%", y: "-50%", width: "200%", height: "200%" }, defs);
+    mk("feGaussianBlur", { stdDeviation: 4 }, f);
+    const rg = mk("radialGradient", { id: "seam-head" }, defs);
+    mk("stop", { offset: 0, "stop-color": "#EFFFF6" }, rg); mk("stop", { offset: .35, "stop-color": "#8FE0B8" }, rg); mk("stop", { offset: 1, "stop-color": "rgba(92,197,150,0)" }, rg);
+
+    const gut = (W - 1200) / 2;
+    const mobile = W < 900;
+    const lx = gut > 70 ? gut - 40 : (mobile ? 7 : 10);
+    const bounds = $$("main > section, main > div.band, main > .ways-wrap, .footer").map(el => el.getBoundingClientRect().top + scrollY).filter(y => y > 120).sort((a, b) => a - b);
+    const sides = mobile ? [[lx, 1]] : [[lx, 1], [W - lx, -1]];
+    tracks = sides.map(([x0, dir], si) => {
+      const pts = [[x0, 90]], nodes = [];
+      let x = x0;
+      bounds.forEach((y, i) => {
+        const yy = si === 0 ? y : y + 140;              // a pista da direita dobra noutro sítio
+        if (yy > H - 60) return;
+        const out = x === x0;
+        const nx = out ? x0 + dir * 22 : x0;
+        pts.push([x, yy - 22]); pts.push([nx, yy]);
+        nodes.push([nx, yy]);
+        x = nx;
+      });
+      pts.push([x, H - 30]);
+      const d = pts.map((p, i) => (i ? "L" : "M") + p[0].toFixed(1) + " " + p[1].toFixed(1)).join(" ");
+      mk("path", { d, class: "seam-ghost" });
+      const glow = mk("path", { d, class: "seam-glow", filter: "url(#seam-blur)" });
+      const live = mk("path", { d, class: "seam-live" });
+      const len = live.getTotalLength();
+      [glow, live].forEach(p => { p.style.strokeDasharray = len; p.style.strokeDashoffset = len; });
+      const nodeEls = nodes.map(([nx, ny]) => ({ y: ny, el: mk("rect", { x: nx - 4, y: ny - 4, width: 8, height: 8, class: "seam-node", transform: `rotate(45 ${nx} ${ny})` }) }));
+      const halo = mk("circle", { r: 16, fill: "url(#seam-head)", class: "seam-halo" });
+      const head = mk("circle", { r: 3.2, class: "seam-head" });
+      // tabela comprimento -> y, para achar onde a solda deve estar
+      const lut = [];
+      for (let l = 0; l <= len; l += 12) lut.push([l, live.getPointAtLength(l).y]);
+      lut.push([len, live.getPointAtLength(len).y]);
+      return { live, glow, len, lut, nodeEls, head, halo };
+    });
+    cur = tracks.map(() => 0);
   }
-  const yAt = (th, x, base) => base + Math.sin(x * th.f1 + t * th.s1 + th.p) * th.a1 + Math.sin(x * th.f2 - t * th.s2) * th.a2;
+  const lenForY = (lut, y) => {
+    if (y <= lut[0][1]) return 0;
+    for (let i = 1; i < lut.length; i++) if (lut[i][1] >= y) { const [l0, y0] = lut[i - 1], [l1, y1] = lut[i]; return l0 + (l1 - l0) * ((y - y0) / Math.max(1e-3, y1 - y0)); }
+    return lut[lut.length - 1][0];
+  };
   function frame() {
-    if (!running) return;
-    t += 1;
-    ctx.clearRect(0, 0, w, h);
-    const sy = scrollY;
-    for (const th of threads) {
-      const span = h + 240;
-      let base = ((th.y * span - sy * th.par) % span + span) % span - 120;
-      // fio
-      const g = ctx.createLinearGradient(0, 0, w, 0);
-      g.addColorStop(0, "rgba(43,138,97,0)"); g.addColorStop(0.2, `rgba(43,138,97,${th.alpha})`);
-      g.addColorStop(0.8, `rgba(43,138,97,${th.alpha})`); g.addColorStop(1, "rgba(43,138,97,0)");
-      ctx.beginPath();
-      for (let x = -20; x <= w + 20; x += 16) { const y = yAt(th, x, base); x === -20 ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
-      ctx.strokeStyle = g; ctx.lineWidth = 1.2; ctx.stroke();
-      // sinal
-      th.pulse += th.speed;
-      if (th.pulse > 1.3) th.pulse = rnd(-0.8, -0.1);
-      if (th.pulse > 0 && th.pulse < 1.15) {
-        const hx = th.pulse * (w + 200) - 100, len = 160;
-        ctx.beginPath();
-        for (let x = hx - len; x <= hx; x += 8) { const y = yAt(th, x, base); x === hx - len ? ctx.moveTo(x, y) : ctx.lineTo(x, y); }
-        const pg = ctx.createLinearGradient(hx - len, 0, hx, 0);
-        pg.addColorStop(0, "rgba(92,197,150,0)"); pg.addColorStop(1, "rgba(92,197,150,.75)");
-        ctx.strokeStyle = pg; ctx.lineWidth = 2; ctx.lineCap = "round"; ctx.stroke();
-        ctx.beginPath(); ctx.arc(hx, yAt(th, hx, base), 2.6, 0, 6.28); ctx.fillStyle = "rgba(92,197,150,.9)"; ctx.fill();
-      }
-    }
+    const target = scrollY + innerHeight * 0.62;
+    vel += (Math.abs(scrollY - lastY) - vel) * 0.15; lastY = scrollY;
+    tracks.forEach((t, i) => {
+      const want = lenForY(t.lut, target);
+      cur[i] += (want - cur[i]) * (REDUCED ? 1 : 0.12);
+      const off = t.len - cur[i];
+      t.live.style.strokeDashoffset = off; t.glow.style.strokeDashoffset = off;
+      const pt = t.live.getPointAtLength(Math.max(0, cur[i]));
+      const boost = Math.min(1, vel / 30);
+      t.head.setAttribute("cx", pt.x); t.head.setAttribute("cy", pt.y);
+      t.halo.setAttribute("cx", pt.x); t.halo.setAttribute("cy", pt.y);
+      t.halo.setAttribute("r", 14 + boost * 22);
+      t.halo.style.opacity = 0.55 + boost * 0.45;
+      t.nodeEls.forEach(n => n.el.classList.toggle("on", n.y <= pt.y + 1));
+    });
     requestAnimationFrame(frame);
   }
-  layout();
-  addEventListener("resize", layout);
-  document.addEventListener("visibilitychange", () => { running = !document.hidden; if (running) requestAnimationFrame(frame); });
-  if (REDUCED) { t = 200; running = true; frame(); running = false; } else requestAnimationFrame(frame);
+  build();
+  addEventListener("resize", () => build());
+  addEventListener("load", () => build());
+  setTimeout(build, 1500);
+  requestAnimationFrame(frame);
 })();
 
 /* ---------- navegação ---------- */

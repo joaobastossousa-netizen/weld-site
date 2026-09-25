@@ -605,8 +605,16 @@ main{position:relative;z-index:1}
 .agency-teaser .d-wire i{left:0;top:-40%;width:100%;height:40%;animation-name:travelv}
 @keyframes travelv{to{top:110%}}
 
-/* fundo: fios verdes em movimento (site.js) */
-#wires{position:fixed;inset:0;width:100vw;height:100vh;z-index:0;pointer-events:none}
+/* costura de solda nas margens (site.js): desenha-se com o scroll */
+body{position:relative}
+#seam{position:absolute;left:0;top:0;z-index:2;pointer-events:none;overflow:visible}
+.seam-ghost{fill:none;stroke:rgba(63,164,122,.22);stroke-width:1.5;stroke-linejoin:round}
+.seam-live{fill:none;stroke:url(#seam-g);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.seam-glow{fill:none;stroke:#5CC596;stroke-width:6;opacity:.35;stroke-linejoin:round}
+.seam-node{fill:var(--bg);stroke:rgba(63,164,122,.45);stroke-width:1.5;transition:fill .4s,stroke .4s}
+.seam-node.on{fill:#5CC596;stroke:#2B8A61}
+.seam-head{fill:#EFFFF6;stroke:#5CC596;stroke-width:1.5}
+.seam-halo{mix-blend-mode:normal}
 
 /* duas formas de trabalhar */
 .ways{display:grid;grid-template-columns:1fr 1fr;gap:16px}
