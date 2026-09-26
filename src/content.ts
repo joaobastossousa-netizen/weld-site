@@ -84,8 +84,8 @@ export const examples = {
 
 export const sectors = {
   idx: "Para quem trabalhamos",
-  title: "Negócios que vivem de mensagens.",
-  lead: "Onde os clientes perguntam, marcam e encomendam por mensagem, um assistente faz a diferença.",
+  title: "Em cada negócio, trabalho que se faz sozinho.",
+  lead: "Mensagens, pagamentos, reservas, encomendas, leads: escolhemos o que mais tempo vos rouba e tratamos disso.",
   items: [
     { img: "setor-clinica.jpg", name: "Clínicas", tag: "Assistente de IA", events: [["ph-chats-circle", "Consulta marcada pelo WhatsApp"], ["ph-bell-ringing", "Lembrete enviado na véspera"]] },
     { img: "setor-oficina.jpg", name: "Oficinas e peças", tag: "Automação", events: [["ph-package", "Pedido registado no balcão"], ["ph-arrows-clockwise", "Stock atualizado sozinho"]] },
