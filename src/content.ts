@@ -54,6 +54,20 @@ export const chats = {
 
 export const home = {
   kicker: "Estúdio de automação com IA no Porto",
+  // capa: título grande e direto, em 3 linhas (a última a verde)
+  hero: ["Trabalho à mão", "é dinheiro", "a fugir."],
+  heroLead: "Pomos IA e automação a fazer o trabalho repetitivo do teu negócio. Responder, marcar, faturar, registar. Tu ficas com o que dá dinheiro.",
+  // registo ao vivo (exemplo) na capa: [ícone, serviço, o que aconteceu]
+  log: [
+    ["ph-whatsapp-logo", "Assistente", "Mensagem respondida no WhatsApp"],
+    ["ph-calendar-check", "Assistente", "Marcação feita para sábado às 10h"],
+    ["ph-file-text", "Automação", "Fatura lançada no Excel"],
+    ["ph-browser", "Site", "Pedido de orçamento de Ana Costa"],
+    ["ph-envelope-simple", "Automação", "Email de seguimento enviado"],
+    ["ph-package", "Software", "Encomenda #2481 passou a pronta"],
+    ["ph-instagram-logo", "Assistente", "Preço explicado no Instagram às 23:40"],
+    ["ph-bell-ringing", "Automação", "Equipa avisada: cliente importante"],
+  ],
   line1: "Menos trabalho à mão.",
   line2: "Mais",
   rotate: ["clientes.", "tempo.", "vendas."],

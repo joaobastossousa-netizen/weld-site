@@ -9,42 +9,28 @@ import { sectors, home, integrations, story, services, demos, agencies, compare,
 const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 ---
 <Base title="Weld · Assistentes de IA para agências e negócios" description={home.lead}>
-  <!-- HERO -->
-  <section class="hero">
-    <div class="wrap">
-      <div class="hero-top load" style="--d:0">
-        <p class="kicker"><span class="dot"></span>{home.kicker}</p>
-        <p class="hero-meta"><span>Para agências</span><span>Para negócios</span></p>
-      </div>
-      <h1 class="h1 hero-h1">
-        <span class="line"><span class="in" style="--d:1">{home.line1}</span></span>
-        <span class="line"><span class="in" style="--d:2">{home.line2} <span class="rotator" aria-live="polite">{home.rotate.map((w, i) => <span class={`rot${i === 0 ? " on" : ""}`}>{w}</span>)}</span></span></span>
-      </h1>
-      <div class="hero-grid">
-        <div class="hero-copy">
-          <p class="lead load" style="--d:4">{home.lead}</p>
-          <div class="hero-ctas load" style="--d:5">
-            <a href="/contacto" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
-            <a href="/contacto?demo" class="btn btn-ghost"><i class="ph ph-gift"></i>Pedir demo grátis</a>
+  <!-- HERO: bloco escuro de ecrã inteiro, título enorme, registo ao vivo -->
+  <section class="hx wrap">
+    <div class="hx-box dark">
+      <img src="/img/capa.jpg" alt="" width="2000" height="1333" class="hx-bg" data-zoom />
+      <div class="hx-in">
+        <p class="kicker load" style="--d:0"><span class="dot"></span>{home.kicker}</p>
+        <h1 class="hx-h1">
+          {home.hero.map((l, i) => <span class="line"><span class={`in${i === home.hero.length - 1 ? " hx-hot" : ""}`} style={`--d:${i + 1}`}>{l}</span></span>)}
+        </h1>
+        <div class="hx-foot">
+          <div class="hx-copy">
+            <p class="hx-lead load" style="--d:4">{home.heroLead}</p>
+            <div class="hero-ctas load" style="--d:5">
+              <a href="/pedido" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
+              <a href="/contacto?demo" class="btn btn-ghost"><i class="ph ph-gift"></i>Demo grátis</a>
+            </div>
+            <p class="hx-for load" style="--d:6"><a href="/servicos">Para negócios</a><span>·</span><a href="/agencias">Para agências, em marca branca</a></p>
           </div>
-          <div class="hero-paths load" style="--d:6">
-            <a href="/agencias"><i class="ph-duotone ph-megaphone"></i><span><b>Sou uma agência</b><small>Revender com o meu nome</small></span><i class="ph ph-arrow-up-right"></i></a>
-            <a href="/servicos"><i class="ph-duotone ph-storefront"></i><span><b>Tenho um negócio</b><small>Contratar diretamente</small></span><i class="ph ph-arrow-up-right"></i></a>
-          </div>
-        </div>
-        <div class="hero-photo load" style="--d:3">
-          <div class="hp-frame img-reveal"><img src="/img/hero.jpg" alt="Dono de um negócio a ver uma mensagem no telemóvel" width="1400" height="1600" class="hp-img" data-zoom /></div>
-          <div class="hp-card hp-msg" data-drift="-70">
-            <img src="/logos/whatsapp-color.svg" alt="" width="30" height="30" />
-            <span><small>Assistente de IA · 23:14</small><b>Vaga marcada: sábado às 10h</b></span>
-          </div>
-          <div class="hp-card hp-reply" data-drift="-140">
-            <span class="hp-ic"><i class="ph-bold ph-flow-arrow"></i></span>
-            <span><small>Automação · agora</small><b>Fatura enviada e lançada no Excel</b></span>
-          </div>
-          <div class="hp-card hp-booked" data-drift="-40">
-            <span class="hp-ic web"><i class="ph-bold ph-browser"></i></span>
-            <span><small>Site · novo pedido</small><b>Orçamento pedido por Ana Costa</b></span>
+          <div class="hx-log load" style="--d:5" aria-hidden="true" data-log={JSON.stringify(home.log)}>
+            <div class="hx-log-head"><span class="hx-live"><i></i>Ao vivo</span><span>exemplo</span></div>
+            <ul class="hx-list"></ul>
+            <div class="hx-count"><b id="hx-n">0</b><span>tarefas feitas sozinhas hoje</span></div>
           </div>
         </div>
       </div>

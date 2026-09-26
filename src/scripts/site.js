@@ -127,6 +127,28 @@ if (!REDUCED && rots.length > 1) setInterval(() => {
   rots[rotI].classList.add("on");
 }, 2400);
 
+/* ---------- registo ao vivo da capa ---------- */
+const hxLog = $(".hx-log");
+if (hxLog) {
+  const items = JSON.parse(hxLog.dataset.log), ul = $(".hx-list", hxLog), n = $("#hx-n");
+  // contador começa num valor plausível para a hora do dia
+  const now = new Date();
+  let count = 40 + Math.round((now.getHours() * 60 + now.getMinutes()) / 9), k = 0;
+  const hhmm = d => d.toTimeString().slice(0, 5);
+  const add = (anim, when = new Date()) => {
+    const [icon, svc, text] = items[k++ % items.length];
+    const li = document.createElement("li");
+    li.innerHTML = `<span class="ic"><i class="ph-bold ${icon}"></i></span><span><small>${svc} · ${hhmm(when)}</small><b></b></span><i class="ph-bold ph-check-circle ok"></i>`;
+    $("b", li).textContent = text;
+    if (anim) li.className = "new";
+    ul.prepend(li);
+    while (ul.children.length > 6) ul.lastChild.remove();
+  };
+  for (let i = 4; i >= 0; i--) add(false, new Date(Date.now() - i * 97000));
+  n.textContent = count;
+  if (!REDUCED) setInterval(() => { if (document.hidden) return; add(true); n.textContent = ++count; }, 2300);
+}
+
 /* ---------- telemóveis com conversa em loop ---------- */
 $$(".phone[data-chat]").forEach(ph => {
   const lines = JSON.parse(ph.dataset.chat), body = $(".phone-body", ph);
