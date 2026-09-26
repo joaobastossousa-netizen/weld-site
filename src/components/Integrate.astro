@@ -1,0 +1,36 @@
+---
+// Como o serviço entra no negócio: passos, ferramentas a que se liga e antes/depois.
+interface Props { s: { name: string; integrate: { steps: string[][]; tools: string[][]; before: string[]; after: string[] } } }
+const { s } = Astro.props;
+const it = s.integrate;
+---
+<section class="section wrap integ">
+  <div class="sec-head">
+    <p class="idx reveal">Integração</p>
+    <h2 class="h2 reveal">Como entra no teu negócio.</h2>
+    <p class="lead reveal">Sem parar o que já funciona. Começamos pequeno, testamos com a equipa e só depois fica a trabalhar sozinho.</p>
+  </div>
+  <ol class="steps five">
+    <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
+    {it.steps.map(([icon, t, p], i) => (
+      <li class="step reveal" style={`--i:${i}`}><span class="step-n"><i class={`ph-bold ${icon}`}></i></span><span class="step-k">{String(i + 1).padStart(2, "0")}</span><h3>{t}</h3><p>{p}</p></li>
+    ))}
+  </ol>
+  <div class="integ-grid">
+    <div class="integ-tools reveal">
+      <p class="integ-h"><i class="ph-duotone ph-plugs-connected"></i>Liga-se ao que já usam</p>
+      <div class="integ-logos">{it.tools.map(([slug, name]) => <span><img src={`/logos/${slug}.svg`} alt="" width="22" height="22" loading="lazy" />{name}</span>)}</div>
+      <p class="integ-note">E a outras ferramentas, se tiverem forma de se ligar.</p>
+    </div>
+    <div class="integ-ba reveal" style="--i:1">
+      <div class="ba-col ba-before">
+        <p class="integ-h"><i class="ph ph-x-circle"></i>Antes</p>
+        <ul>{it.before.map((b) => <li>{b}</li>)}</ul>
+      </div>
+      <div class="ba-col ba-after">
+        <p class="integ-h"><i class="ph-fill ph-check-circle"></i>Depois, com a Weld</p>
+        <ul>{it.after.map((a) => <li>{a}</li>)}</ul>
+      </div>
+    </div>
+  </div>
+</section>

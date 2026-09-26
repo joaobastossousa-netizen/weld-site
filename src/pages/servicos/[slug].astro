@@ -1,9 +1,10 @@
 ---
 import Base from "../../layouts/Base.astro";
-import Phone from "../../components/Phone.astro";
+import ServiceVisual from "../../components/ServiceVisual.astro";
+import Integrate from "../../components/Integrate.astro";
 import Faq from "../../components/Faq.astro";
 import CtaBand from "../../components/CtaBand.astro";
-import { services, process, site } from "../../content";
+import { services, site } from "../../content";
 
 export function getStaticPaths() {
   return services.map((s) => ({ params: { slug: s.slug }, props: { s } }));
@@ -23,9 +24,8 @@ const others = services.filter((o) => o.slug !== s.slug);
         <a href="/demos" class="btn btn-ghost"><i class="ph ph-play-circle"></i>Ver as demos</a>
       </div>
     </div>
-    <div class="hero-visual load" style="--d:3">
-      <div class="hero-glow" aria-hidden="true"></div>
-      <Phone chat={s.chat as any} class="hero-phone" />
+    <div class="load sv-wrap" style="--d:3">
+      <ServiceVisual slug={s.slug} chat={s.chat} />
     </div>
   </section>
 
@@ -42,21 +42,13 @@ const others = services.filter((o) => o.slug !== s.slug);
     </div>
   </section>
 
+  <Integrate s={s as any} />
+
   <section class="section wrap">
     <div class="for-panel reveal">
       <h2 class="h2">Para quem é.</h2>
       <div class="chips">{s.for.map((f, i) => <span class="chip-lg" style={`--i:${i}`}>{f}</span>)}</div>
     </div>
-  </section>
-
-  <section class="section wrap">
-    <div class="sec-head"><h2 class="h2 reveal">{process.title}</h2></div>
-    <ol class="steps">
-      <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
-      {process.steps.map((p, i) => (
-        <li class="step reveal" style={`--i:${i}`}><span class="step-n"><i class={`ph-bold ${p.icon}`}></i></span><span class="step-k">{String(i + 1).padStart(2, "0")}</span><h3>{p.name}</h3><p>{p.text}</p></li>
-      ))}
-    </ol>
   </section>
 
   <Faq items={s.faq} />

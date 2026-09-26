@@ -1,0 +1,103 @@
+---
+// Exemplo animado do lado direito do topo de cada página de serviço. Um por serviço, todos diferentes.
+import Phone from "./Phone.astro";
+interface Props { slug: string; chat?: string }
+const { slug, chat = "clinica" } = Astro.props;
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+// fluxo de automação: posições num quadro de 520x480
+const NODES = [
+  { k: 0, x: 3, y: 5, ic: "shopify", t: "Nova encomenda", s: "#1042 · 86,90 €" },
+  { k: 1, x: 30, y: 31, ic: "weld", t: "A Weld processa", s: "valida e decide" },
+  { k: 2, x: 3, y: 58, ic: "ph-receipt", t: "Fatura criada", s: "FT 2026/214" },
+  { k: 2, x: 56, y: 58, ic: "gmail", t: "Email ao cliente", s: "com fatura e prazo" },
+  { k: 3, x: 3, y: 81, ic: "googlesheets", t: "Relatório de vendas", s: "+1 linha" },
+  { k: 3, x: 56, y: 81, ic: "whatsapp", t: "Equipa avisada", s: "embalar #1042" },
+];
+const PATHS = ["M125 80 C125 118 260 112 260 150", "M362 178 L398 178", "M260 206 C260 246 118 240 118 278", "M260 206 C260 246 395 240 395 278", "M118 334 L118 388", "M395 334 L395 388"];
+---
+{slug === "assistentes-de-ia" && (
+  <div class="sv sv-assist" aria-hidden="true">
+    <div class="hero-glow"></div>
+    <Phone chat={chat as any} class="sv-phone" />
+    <div class="sv-card sv-cal">
+      <p class="sv-h"><i class="ph-duotone ph-calendar-check"></i>Agenda · sábado</p>
+      <span class="sv-slot"><b>09:00</b>Marta · Revisão</span>
+      <span class="sv-slot sv-new"><b>10:00</b>Rita · Limpeza<em>nova</em></span>
+      <span class="sv-slot free"><b>11:30</b>Livre</span>
+      <span class="sv-slot"><b>12:00</b>Nuno · Avaliação</span>
+    </div>
+    <div class="sv-card sv-crm">
+      <p class="sv-h"><i class="ph-duotone ph-address-book"></i>CRM · novo contacto</p>
+      <b class="sv-name">Rita Sousa</b>
+      <span class="sv-tags"><i>WhatsApp</i><i>Limpeza</i><i>1.ª consulta</i></span>
+    </div>
+    <div class="sv-card sv-hand"><i class="ph-duotone ph-user-switch"></i><span><b>Passado à Joana</b><small>Pedido de urgência</small></span></div>
+    <div class="sv-channels"><img src="/logos/whatsapp.svg" alt="" /><img src="/logos/instagram.svg" alt="" /><img src="/logos/messenger.svg" alt="" /><span>3 canais, 1 assistente</span></div>
+  </div>
+)}
+
+{slug === "automacoes" && (
+  <div class="sv sv-flow" aria-hidden="true">
+    <div class="sv-flow-in">
+      <span class="sv-run"><i></i>A correr · 37 execuções hoje</span>
+      <svg class="sv-wires" viewBox="0 0 520 480" preserveAspectRatio="none">
+        {PATHS.map((d, i) => <path d={d} id={`svp${i}`} />)}
+        {PATHS.map((d, i) => (
+          <circle r="4" class="sv-pulse"><animateMotion dur="1.6s" repeatCount="indefinite" begin={`${(i % 3) * 0.5}s`} path={d} /></circle>
+        ))}
+      </svg>
+      <span class="sv-cond" style="left:77%;top:33%"><i class="ph-bold ph-git-branch"></i>&gt; 500 € pede aprovação</span>
+      {NODES.map((n) => (
+        <div class="sv-node" style={`left:${n.x}%;top:${n.y}%;--k:${n.k}`}>
+          <span class="sv-ic">{n.ic === "weld" ? <svg viewBox="0 0 100 100"><path d={W} /></svg> : n.ic.startsWith("ph-") ? <i class={`ph-duotone ${n.ic}`}></i> : <img src={`/logos/${n.ic}.svg`} alt="" />}</span>
+          <span><b>{n.t}</b><small>{n.s}</small></span>
+          <i class="ph-bold ph-check sv-ck"></i>
+        </div>
+      ))}
+    </div>
+  </div>
+)}
+
+{slug === "sites" && (
+  <div class="sv sv-site" aria-hidden="true">
+    <div class="sv-browser">
+      <div class="st-bar"><i></i><i></i><i></i><span>weldstudio.pt/demos/clinica</span></div>
+      <div class="sv-view">
+        <div class="sv-page">
+          <div class="sp-nav"><b><span class="sp-logo"></span>Oriva Dental</b><span>Tratamentos</span><span>Equipa</span><span class="sp-cta">Marcar</span></div>
+          <div class="sp-hero"><div><p class="sp-h">Sorrisos cuidados no Porto.</p><p class="sp-p">Primeira consulta com avaliação completa e plano por escrito.</p><span class="sp-btn">Marcar consulta</span></div><div class="sp-img"></div></div>
+          <div class="sp-cards">{[["ph-sparkle", "Limpeza"], ["ph-tooth", "Implantes"], ["ph-smiley", "Ortodontia"]].map(([ic, t]) => <span><i class={`ph-duotone ${ic}`}></i><b>{t}</b><small>Saber mais</small></span>)}</div>
+          <div class="sp-strip"><i class="ph-duotone ph-chats-circle"></i>Marque pelo site ou pelo WhatsApp, a qualquer hora.</div>
+          <div class="sp-form"><b>Pedido de marcação</b><span>Nome</span><span>Telefone</span><span>Tratamento</span><span class="sp-send">Pedir marcação</span></div>
+          <div class="sp-foot"><b>Oriva Dental</b><span>Porto · Matosinhos</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="sv-mobile"><div class="sv-mob-in"><span class="sp-logo"></span><p class="sp-h">Sorrisos cuidados no Porto.</p><span class="sp-btn">Marcar consulta</span><div class="sp-img"></div></div></div>
+    <div class="sv-card sv-lead"><i class="ph-duotone ph-envelope-simple"></i><span><b>Novo pedido · Ana Costa</b><small>Enviado para o CRM e para a receção</small></span></div>
+    <ul class="sv-checks"><li><i class="ph-bold ph-check"></i>Rápido no telemóvel</li><li><i class="ph-bold ph-check"></i>Pedidos ligados ao CRM</li><li><i class="ph-bold ph-check"></i>Pronto para anúncios</li></ul>
+  </div>
+)}
+
+{slug === "software-a-medida" && (
+  <div class="sv sv-app" aria-hidden="true">
+    <div class="sv-win">
+      <aside>
+        <span class="sa-logo"><svg viewBox="0 0 100 100"><path d={W} /></svg></span>
+        {[["ph-package", "Encomendas", true], ["ph-stack", "Stock"], ["ph-users", "Clientes"], ["ph-receipt", "Faturas"], ["ph-chart-bar", "Relatórios"]].map(([ic, t, on]) => <span class={on ? "on" : ""}><i class={`ph-duotone ${ic}`}></i>{t}</span>)}
+      </aside>
+      <div class="sa-main">
+        <div class="sa-top"><b>Encomendas</b><span class="sa-search"><i class="ph ph-magnifying-glass"></i>Procurar</span><span class="sa-av">PP</span></div>
+        <div class="sa-kpis"><span><small>Hoje</small><b>18</b></span><span><small>Por preparar</small><b>6</b></span><span><small>Enviadas</small><b>12</b></span><span><small>Faturado</small><b>2 340 €</b></span></div>
+        <svg class="sa-chart" viewBox="0 0 300 70" preserveAspectRatio="none"><path class="sa-area" d="M0 55 L40 48 L80 52 L120 35 L160 40 L200 24 L240 30 L300 12 L300 70 L0 70 Z" /><path class="sa-line" d="M0 55 L40 48 L80 52 L120 35 L160 40 L200 24 L240 30 L300 12" /></svg>
+        <div class="sa-rows">
+          {[["#1042", "Pastilhas de travão"], ["#1043", "Filtro de óleo"], ["#1044", "Kit de embraiagem"], ["#1045", "Escovas"]].map(([id, p], r) => (
+            <span class="sa-row" style={`--r:${r}`}><b>{id}</b>{p}<em class="sa-chip"><i class="c1">Nova</i><i class="c2">A preparar</i><i class="c3">Enviada</i></em></span>
+          ))}
+        </div>
+      </div>
+    </div>
+    <div class="sv-card sv-sync"><i class="ph-bold ph-arrows-clockwise"></i><span><b>Sincronizado com a faturação</b><small>agora mesmo</small></span></div>
+    <div class="sv-card sv-alert"><i class="ph-duotone ph-warning"></i><span><b>Stock baixo</b><small>Filtros de óleo · 4 unidades</small></span></div>
+  </div>
+)}

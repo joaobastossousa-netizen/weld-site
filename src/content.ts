@@ -155,6 +155,18 @@ export const services = [
       ["ph-user-switch", "Sabe parar", "Reclamações, urgências e casos estranhos vão logo para uma pessoa."],
     ],
     for: ["Clínicas e consultórios", "Restaurantes", "Oficinas e lojas", "Ginásios e estúdios", "Imobiliárias", "Serviços ao domicílio"],
+    integrate: {
+      steps: [
+        ["ph-coffee", "Conversa de 20 minutos", "Percebemos que perguntas chegam, a que horas e quem responde hoje."],
+        ["ph-book-open-text", "Ensinamos o assistente", "Preços, horários, serviços e regras da casa. Revês tudo antes de ligar."],
+        ["ph-plugs-connected", "Ligamos aos vossos canais", "WhatsApp Business, Instagram e o chat do site, com a agenda que já usam."],
+        ["ph-eye", "Semana de teste", "Responde connosco a vigiar. Afinamos o tom e as respostas."],
+        ["ph-check-circle", "A funcionar", "A equipa só recebe o que precisa de uma pessoa. Acompanhamos todos os meses."],
+      ],
+      tools: [["whatsapp", "WhatsApp"], ["instagram", "Instagram"], ["messenger", "Messenger"], ["googlecalendar", "Google Calendar"], ["calendly", "Calendly"], ["hubspot", "HubSpot"]],
+      before: ["Mensagens por responder à noite e ao fim de semana", "Alguém ao telefone só para marcar", "Clientes que desistem à espera de resposta"],
+      after: ["Resposta em segundos, a qualquer hora", "Marcações diretas na agenda, com lembrete", "A equipa só entra quando é mesmo preciso"],
+    },
     faq: [
       ["Usa a API oficial do WhatsApp?", "Sim. Ligamos pela WhatsApp Business Platform da Meta, com o número do negócio."],
       ["A equipa continua a ver as conversas?", "Sim. Pode entrar em qualquer conversa a meio, e o assistente para de responder."],
@@ -174,6 +186,18 @@ export const services = [
       ["ph-bell-ringing", "Avisos à equipa", "Quando entra um pedido importante, a pessoa certa sabe logo."],
     ],
     for: ["Agências de marketing", "Equipas comerciais", "Clínicas", "Imobiliárias", "Lojas online", "Escritórios"],
+    integrate: {
+      steps: [
+        ["ph-list-magnifying-glass", "Mapeamos as tarefas", "Listamos com a equipa o que se faz à mão todas as semanas e quanto tempo leva."],
+        ["ph-target", "Escolhemos por onde começar", "Primeiro o que poupa mais horas com menos risco."],
+        ["ph-plugs-connected", "Ligamos as ferramentas", "As que já usam: email, folhas, CRM, faturação, agenda. Sem mudar de programas."],
+        ["ph-flask", "Testamos com dados reais", "Corre em paralelo com o processo atual até dar sempre certo."],
+        ["ph-check-circle", "Fica a correr", "Com registo de tudo o que faz e aviso imediato se algo falhar."],
+      ],
+      tools: [["gmail", "Gmail"], ["googlesheets", "Google Sheets"], ["hubspot", "HubSpot"], ["notion", "Notion"], ["stripe", "Stripe"], ["n8n", "n8n"], ["make", "Make"]],
+      before: ["Copiar dados de um sítio para outro", "Relatórios montados à mão à sexta à tarde", "Faturas e lembretes que ficam esquecidos"],
+      after: ["Os dados passam sozinhos entre ferramentas", "Relatório no email todas as segundas", "Nada fica esquecido e fica tudo registado"],
+    },
     faq: [
       ["Que ferramentas usam?", "As que já têm, sempre que possível. Quando falta alguma peça, usamos n8n ou Make."],
       ["E se uma automação falhar?", "Fica registado e avisamos. Na mensalidade, tratamos nós disso."],
@@ -193,6 +217,18 @@ export const services = [
       ["ph-magnifying-glass", "Prontos para o Google", "Estrutura, velocidade e textos pensados para aparecer."],
     ],
     for: ["Pequenos negócios", "Profissionais independentes", "Lançamentos", "Campanhas de agências", "Restaurantes", "Clínicas"],
+    integrate: {
+      steps: [
+        ["ph-target", "Objetivo e público", "Quem tem de entrar, o que tem de perceber e o que queremos que faça."],
+        ["ph-pencil-line", "Textos e estrutura", "Escrevemos convosco. Menos texto, mais claro."],
+        ["ph-paint-brush", "Design e construção", "Rápido, bonito no telemóvel e com a vossa marca."],
+        ["ph-plugs-connected", "Ligações", "Formulários para o email ou CRM, assistente de IA, estatísticas e pixel dos anúncios."],
+        ["ph-rocket-launch", "Online e a medir", "Domínio e alojamento tratados, e um resumo de contactos todos os meses."],
+      ],
+      tools: [["gmail", "Gmail"], ["hubspot", "HubSpot"], ["googlesheets", "Google Sheets"], ["calendly", "Calendly"], ["whatsapp", "WhatsApp"], ["stripe", "Stripe"]],
+      before: ["Site antigo que ninguém atualiza", "Pedidos perdidos na caixa de email", "Anúncios a mandar para uma página genérica"],
+      after: ["Quem entra percebe logo o que fazem", "Cada pedido vai direto a quem o trata", "Uma página por campanha, feita para converter"],
+    },
     faq: [
       ["Podemos editar os textos?", "Sim. Fica tudo organizado para mudar textos sem mexer no resto."],
       ["Tratam do domínio e do alojamento?", "Tratamos, e explicamos cada passo."],
@@ -212,6 +248,18 @@ export const services = [
       ["ph-shield-check", "Feito para durar", "Código limpo, documentado e vosso."],
     ],
     for: ["Empresas com processos próprios", "Startups", "Agências", "Equipas de operações", "Lojas com stock", "Serviços"],
+    integrate: {
+      steps: [
+        ["ph-magnifying-glass", "Descoberta", "Seguimos o processo de ponta a ponta e desenhamos o que falta."],
+        ["ph-cursor-click", "Protótipo clicável", "Vês e experimentas antes de escrevermos código."],
+        ["ph-stack", "Construção por etapas", "Entregas frequentes, sempre com algo a funcionar."],
+        ["ph-plugs-connected", "Ligação aos sistemas", "Faturação, loja online, stock e CRM sincronizados."],
+        ["ph-shield-check", "Entrega e manutenção", "Código e documentação vossos. Manutenção opcional."],
+      ],
+      tools: [["shopify", "Shopify"], ["stripe", "Stripe"], ["googlesheets", "Google Sheets"], ["hubspot", "HubSpot"], ["notion", "Notion"]],
+      before: ["Excel partilhado com versões trocadas", "Três programas que não falam entre si", "Processos que dependem de uma só pessoa"],
+      after: ["Um só ecrã com o que a equipa precisa", "Sistemas sincronizados sozinhos", "Um processo claro, que não depende de ninguém"],
+    },
     faq: [
       ["O código fica nosso?", "Sim. Entregamos tudo, com instruções para continuar."],
       ["Como se define o preço?", "Depois de uma conversa de descoberta, com âmbito e prazo por escrito."],

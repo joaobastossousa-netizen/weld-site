@@ -13,14 +13,14 @@ import { services, deals } from "../../content";
 
   <section class="wrap"><div class="svc-list page">
     {services.map((s, i) => (
-      <a href={`/servicos/${s.slug}`} class="svc-row reveal" style={`--i:${i}`}>
+      <a href={`/servicos/${s.slug}`} class="svc-row reveal" style={`--i:${i}`} data-img={`/img/svc-${s.slug.split("-")[0]}.jpg`}>
         <span class="svc-num">{String(i + 1).padStart(2, "0")}</span>
         <span class="svc-icon"><i class={`ph-duotone ${s.icon}`}></i></span>
         <span class="svc-row-txt"><h2>{s.name}</h2><p>{s.card}</p></span>
         <span class="svc-go"><i class="ph ph-arrow-up-right"></i></span>
       </a>
     ))}
-  </div></section>
+  </div><div class="svc-preview" aria-hidden="true"><img alt="" /></div></section>
 
   <section class="section wrap">
     <div class="sec-head"><h2 class="h2 reveal">{deals.title}</h2><p class="lead reveal">{deals.lead}</p></div>
