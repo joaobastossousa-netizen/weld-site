@@ -406,6 +406,18 @@ if (order) {
     else if (!phone && !email) msg = "Deixa um email ou um telemóvel.";
     err.textContent = msg; err.hidden = !msg;
     if (msg) { err.closest(".o-block").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    const btn = $(".os-send"); btn.disabled = true; note.textContent = "A enviar…";
+    try {
+      const r = await fetch("/api/pedido", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ subject: subject(), text: text(), name, email, phone, website: one("website") }) });
+      if (r.ok) {
+        const side = $(".order-side"); side.classList.add("sent"); $("#os-done").hidden = false;
+        $("#os-done-text").textContent = reach === "Email" ? "Já está connosco. Respondemos por email em 24 horas úteis." : `Já está connosco. ${reach === "WhatsApp" ? "Falamos por WhatsApp" : "Ligamos-te"} para o ${phone} em 24 horas úteis.`;
+        side.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+    } catch {}
+    btn.disabled = false;
+    // sem servidor (ou falhou): cai para o email pré-escrito
     const copied = await copy();
     note.textContent = copied ? "O pedido também ficou copiado. Se o email não abrir, cola-o numa mensagem para " + order.dataset.email : "Se o email não abrir, escreve-nos para " + order.dataset.email;
     location.href = `mailto:${order.dataset.email}?subject=${encodeURIComponent(subject())}&body=${encodeURIComponent(text())}`;

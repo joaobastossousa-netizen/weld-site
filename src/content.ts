@@ -14,7 +14,7 @@ export const site = {
   linkedin: "https://www.linkedin.com/in/jo%C3%A3o-bastos-de-sousa-8188723b6/",
   city: "Porto",
   // Número da Weld para ligar/WhatsApp. Vazio = não aparece no site (o cliente deixa o dele e ligamos nós).
-  phone: "",
+  phone: "932 803 139",
   cta: "Pedir proposta",
 };
 

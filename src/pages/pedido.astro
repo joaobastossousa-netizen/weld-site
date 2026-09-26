@@ -15,6 +15,7 @@ const tel = site.phone ? site.phone.replace(/\s/g, "") : "";
 
   <section class="wrap order">
     <form class="order-form" id="order" data-email={site.email} novalidate>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
       <fieldset class="o-block">
         <legend><span class="idx">01</span>Quem são?</legend>
         <div class="o-cards">
@@ -100,6 +101,11 @@ const tel = site.phone ? site.phone.replace(/\s/g, "") : "";
     </form>
 
     <aside class="order-side dark" aria-label="Resumo do pedido">
+      <div class="os-done" id="os-done" hidden>
+        <span class="os-tick"><i class="ph-bold ph-check"></i></span>
+        <b>Pedido enviado.</b>
+        <p id="os-done-text">Já está connosco. Respondemos em 24 horas úteis.</p>
+      </div>
       <div class="os-head">
         <span><b>O teu pedido</b><small id="os-pct">0% preenchido</small></span>
         <span class="os-ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" /><circle id="os-arc" cx="18" cy="18" r="15" pathLength="100" /></svg></span>
@@ -107,13 +113,13 @@ const tel = site.phone ? site.phone.replace(/\s/g, "") : "";
       <dl class="os-list" id="os-list"></dl>
       <button type="submit" form="order" class="btn btn-mint magnetic os-send">Enviar pedido<i class="ph ph-arrow-right"></i></button>
       <button type="button" class="os-copy" id="os-copy"><i class="ph ph-copy"></i><span>Copiar pedido</span></button>
-      <p class="os-note" id="os-note">Abre o teu email com tudo escrito. Respondemos em 24 horas úteis.</p>
+      <p class="os-note" id="os-note">Chega-nos na hora. Respondemos em 24 horas úteis.</p>
       <div class="os-talk">
         {tel ? (
           <>
             <b>Preferes falar já?</b>
-            <a href={`tel:${tel}`}><i class="ph ph-phone-call"></i>{site.phone}</a>
-            <a href={`https://wa.me/351${tel.replace(/^\+?351/, "")}`} target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo"></i>WhatsApp</a>
+            <a href={`tel:+351${tel}`}><i class="ph ph-phone-call"></i>{site.phone}</a>
+            <a href={`https://wa.me/351${tel}`} target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo"></i>WhatsApp</a>
           </>
         ) : (
           <><b>Preferes falar?</b><span>Deixa o teu número no passo 05 e ligamos nós.</span></>

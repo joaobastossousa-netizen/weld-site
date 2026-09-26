@@ -19,6 +19,8 @@ import { contact, site } from "../content";
       <div class="direct load" style="--d:4">
         <button class="copy" type="button" id="copy-email" data-email={site.email}><i class="ph ph-envelope-simple"></i><span id="copy-label">{site.email}</span><small>copiar</small></button>
         <div class="direct-row">
+          <a href={`tel:+351${site.phone.replace(/\s/g, "")}`} class="direct-link"><i class="ph ph-phone-call"></i>{site.phone}</a>
+          <a href={`https://wa.me/351${site.phone.replace(/\s/g, "")}`} target="_blank" rel="noopener" class="direct-link"><i class="ph ph-whatsapp-logo"></i>WhatsApp</a>
           <a href={site.linkedin} target="_blank" rel="noopener" class="direct-link"><i class="ph-fill ph-linkedin-logo"></i>LinkedIn</a>
           <a href={site.instagram} target="_blank" rel="noopener" class="direct-link"><i class="ph ph-instagram-logo"></i>Instagram</a>
         </div>
