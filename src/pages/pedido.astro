@@ -1,0 +1,124 @@
+---
+// Pedido detalhado: saltar a demo e pedir já um projeto. Sem backend: gera um email completo (e copia o texto).
+import Base from "../layouts/Base.astro";
+import { order, site } from "../content";
+const tel = site.phone ? site.phone.replace(/\s/g, "") : "";
+---
+<Base title="Pedido detalhado · Weld" description={order.lead}>
+  <section class="page-hero wrap">
+    <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><a href="/contacto">Contacto</a><i class="ph ph-caret-right"></i><span>Pedido detalhado</span></nav>
+    <p class="kicker load" style="--d:1"><span class="dot"></span>Pedido detalhado</p>
+    <h1 class="h1 load" style="--d:2">{order.title}</h1>
+    <p class="lead load" style="--d:3">{order.lead}</p>
+    <p class="order-alt load" style="--d:4"><i class="ph ph-gift"></i>Preferes ver primeiro a funcionar? <a href="/contacto?demo">Pede a demo grátis</a></p>
+  </section>
+
+  <section class="wrap order">
+    <form class="order-form" id="order" data-email={site.email} novalidate>
+      <fieldset class="o-block">
+        <legend><span class="idx">01</span>Quem são?</legend>
+        <div class="o-cards">
+          {order.who.map(([icon, t, s], i) => (
+            <label class="o-card"><input type="radio" name="who" value={t} checked={i === 0} /><i class={`ph-duotone ${icon}`}></i><b>{t}</b><small>{s}</small></label>
+          ))}
+        </div>
+        <div class="o-agency" data-when-who="Agência, para um cliente" hidden>
+          <div class="o-row">
+            <label class="o-field"><span>Cliente final (setor ou nome)</span><input name="endClient" placeholder="ex.: clínica dentária em Gaia" /></label>
+            <label class="o-field"><span>Nº de clientes onde isto pode entrar</span><input name="agencyCount" placeholder="ex.: 1 para já, 5 se correr bem" /></label>
+          </div>
+          <p class="o-q">Marca</p>
+          <div class="chips">
+            {["Marca branca (nome da agência)", "Pode aparecer a Weld", "Tanto faz"].map((v) => <label class="chip"><input type="radio" name="brand" value={v} /><span>{v}</span></label>)}
+          </div>
+        </div>
+      </fieldset>
+
+      <fieldset class="o-block">
+        <legend><span class="idx">02</span>O que querem?<small>Podes escolher mais do que um.</small></legend>
+        <div class="o-cards five">
+          {order.services.map(([key, icon, t]) => (
+            <label class="o-card sm"><input type="checkbox" name="service" value={key} data-label={t} /><i class={`ph-duotone ${icon}`}></i><b>{t}</b></label>
+          ))}
+        </div>
+        <p class="err" id="o-err-svc" hidden>Escolhe pelo menos uma opção.</p>
+      </fieldset>
+
+      <fieldset class="o-block" id="o-details">
+        <legend><span class="idx">03</span>Os pormenores</legend>
+        <p class="o-empty" id="o-empty"><i class="ph ph-arrow-up"></i>Escolhe acima o que querem e aparecem aqui as perguntas certas.</p>
+        {Object.entries(order.details).map(([key, d]) => (
+          <div class="o-detail" data-detail={key} hidden>
+            <h3 class="o-dt">{d.title}</h3>
+            {d.chips.map(([q, opts]) => (
+              <>
+                <p class="o-q">{q}</p>
+                <div class="chips">{opts.map((v) => <label class="chip"><input type="checkbox" name={`${key}:${q}`} value={v} /><span>{v}</span></label>)}</div>
+              </>
+            ))}
+            <div class="o-row">
+              {d.fields.map(([q, ph, long]) => (
+                <label class={`o-field${long ? " full" : ""}`}><span>{q}</span>{long ? <textarea name={`${key}:${q}`} rows="4" placeholder={ph}></textarea> : <input name={`${key}:${q}`} placeholder={ph} />}</label>
+              ))}
+            </div>
+          </div>
+        ))}
+      </fieldset>
+
+      <fieldset class="o-block">
+        <legend><span class="idx">04</span>O contexto</legend>
+        <div class="o-row">
+          <label class="o-field"><span>Empresa ou agência</span><input name="company" autocomplete="organization" /></label>
+          <label class="o-field"><span>Setor</span><input name="sector" placeholder="ex.: restauração, clínica, oficina" /></label>
+          <label class="o-field"><span>Site ou Instagram</span><input name="link" placeholder="weldstudio.pt ou @weld.studio" /></label>
+          <label class="o-field"><span>Pessoas na equipa</span><input name="team" placeholder="ex.: 6" /></label>
+          <label class="o-field full"><span>Se isto correr bem, o que muda no vosso dia?</span><textarea name="goal" rows="3" placeholder="ex.: deixamos de perder marcações ao fim de semana e a rececionista ganha 2 horas por dia"></textarea></label>
+        </div>
+        <p class="o-q">Prazo</p>
+        <div class="chips">{order.timing.map((v) => <label class="chip"><input type="radio" name="timing" value={v} /><span>{v}</span></label>)}</div>
+        <p class="o-q">Orçamento indicativo</p>
+        <div class="chips">{order.budget.map((v) => <label class="chip"><input type="radio" name="budget" value={v} /><span>{v}</span></label>)}</div>
+        <p class="o-q">Como preferem pagar</p>
+        <div class="chips">{order.models.map((v) => <label class="chip"><input type="radio" name="model" value={v} /><span>{v}</span></label>)}</div>
+      </fieldset>
+
+      <fieldset class="o-block">
+        <legend><span class="idx">05</span>Como falamos contigo?</legend>
+        <div class="o-row">
+          <label class="o-field"><span>Nome *</span><input name="name" autocomplete="name" required /></label>
+          <label class="o-field"><span>Email</span><input name="email" type="email" autocomplete="email" /></label>
+          <label class="o-field"><span>Telemóvel</span><input name="phone" type="tel" autocomplete="tel" placeholder="9xx xxx xxx" /></label>
+          <label class="o-field"><span>Cargo</span><input name="role" placeholder="ex.: sócio, gestor de marketing" /></label>
+        </div>
+        <p class="o-q">Preferes que</p>
+        <div class="chips">{order.reach.map(([icon, v], i) => <label class="chip"><input type="radio" name="reach" value={v} checked={i === 0} /><span><i class={`ph ${icon}`}></i>{v === "Ligar" ? "Te liguemos" : v === "WhatsApp" ? "Falemos por WhatsApp" : "Respondamos por email"}</span></label>)}</div>
+        <p class="o-q">Melhor altura</p>
+        <div class="chips">{order.when.map((v) => <label class="chip"><input type="checkbox" name="when" value={v} /><span>{v}</span></label>)}</div>
+        <label class="o-field full"><span>Mais alguma coisa?</span><textarea name="extra" rows="3" placeholder="Links, exemplos, ferramentas, o que já tentaram. Ficheiros podes anexar no email."></textarea></label>
+        <p class="err" id="o-err" hidden></p>
+      </fieldset>
+    </form>
+
+    <aside class="order-side dark" aria-label="Resumo do pedido">
+      <div class="os-head">
+        <span><b>O teu pedido</b><small id="os-pct">0% preenchido</small></span>
+        <span class="os-ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15" /><circle id="os-arc" cx="18" cy="18" r="15" pathLength="100" /></svg></span>
+      </div>
+      <dl class="os-list" id="os-list"></dl>
+      <button type="submit" form="order" class="btn btn-mint magnetic os-send">Enviar pedido<i class="ph ph-arrow-right"></i></button>
+      <button type="button" class="os-copy" id="os-copy"><i class="ph ph-copy"></i><span>Copiar pedido</span></button>
+      <p class="os-note" id="os-note">Abre o teu email com tudo escrito. Respondemos em 24 horas úteis.</p>
+      <div class="os-talk">
+        {tel ? (
+          <>
+            <b>Preferes falar já?</b>
+            <a href={`tel:${tel}`}><i class="ph ph-phone-call"></i>{site.phone}</a>
+            <a href={`https://wa.me/351${tel.replace(/^\+?351/, "")}`} target="_blank" rel="noopener"><i class="ph ph-whatsapp-logo"></i>WhatsApp</a>
+          </>
+        ) : (
+          <><b>Preferes falar?</b><span>Deixa o teu número no passo 05 e ligamos nós.</span></>
+        )}
+      </div>
+    </aside>
+  </section>
+</Base>

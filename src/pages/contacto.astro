@@ -11,6 +11,11 @@ import { contact, site } from "../content";
       <p class="kicker load" style="--d:1"><span class="dot"></span>Contacto</p>
       <h1 class="h1 load" style="--d:2" set:html={contact.title.replace(/(\S+-\S+)/g, '<span class="nw">$1</span>')} />
       <p class="lead load" style="--d:3">{contact.lead}</p>
+      <a href="/pedido" class="skip-card load" style="--d:4">
+        <i class="ph-duotone ph-clipboard-text"></i>
+        <span><b>Já sabes o que queres?</b><small>Salta a demo: pedido detalhado para site, automação ou assistente. Ligamos nós, se preferires.</small></span>
+        <i class="ph ph-arrow-right"></i>
+      </a>
       <div class="direct load" style="--d:4">
         <button class="copy" type="button" id="copy-email" data-email={site.email}><i class="ph ph-envelope-simple"></i><span id="copy-label">{site.email}</span><small>copiar</small></button>
         <div class="direct-row">

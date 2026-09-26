@@ -343,6 +343,79 @@ if (form) {
     location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
   });
 }
+/* ---------- pedido detalhado (/pedido) ---------- */
+const order = $("#order");
+if (order) {
+  const list = $("#os-list"), pct = $("#os-pct"), arc = $("#os-arc"), note = $("#os-note");
+  const svcLabel = {}; $$('input[name="service"]', order).forEach(i => { svcLabel[i.value] = i.dataset.label; });
+  const vals = name => $$(`[name="${CSS.escape(name)}"]`, order).filter(i => (i.type === "checkbox" || i.type === "radio") ? i.checked : i.value.trim()).map(i => i.value.trim());
+  const one = name => vals(name).join(", ");
+  let last = {};
+  // lê o formulário todo, na ordem em que aparece, e devolve secções de [pergunta, resposta]
+  const read = () => {
+    const who = one("who"), services = vals("service");
+    const s = { who, services, sections: [] };
+    const push = (title, rows) => { rows = rows.filter(r => r[1]); if (rows.length) s.sections.push([title, rows]); };
+    push("Quem somos", [["Tipo", who], ["Cliente final", who.includes("cliente") ? one("endClient") : ""], ["Nº de clientes", who.includes("cliente") ? one("agencyCount") : ""], ["Marca", who.includes("cliente") ? one("brand") : ""]]);
+    push("O que queremos", [["Serviços", services.map(k => svcLabel[k]).join(", ")]]);
+    services.forEach(k => {
+      const box = $(`[data-detail="${k}"]`, order); if (!box) return;
+      const names = [...new Set($$("input,textarea", box).map(i => i.name))];
+      push(svcLabel[k], names.map(n => [n.split(":").slice(1).join(":"), one(n)]));
+    });
+    push("Contexto", [["Empresa", one("company")], ["Setor", one("sector")], ["Site/Instagram", one("link")], ["Equipa", one("team")], ["Objetivo", one("goal")], ["Prazo", one("timing")], ["Orçamento", one("budget")], ["Modelo", one("model")]]);
+    push("Contacto", [["Nome", one("name")], ["Cargo", one("role")], ["Email", one("email")], ["Telemóvel", one("phone")], ["Preferência", one("reach")], ["Melhor altura", one("when")], ["Mais", one("extra")]]);
+    return s;
+  };
+  const summary = [["Quem", () => one("who")], ["Precisa de", () => vals("service").map(k => svcLabel[k]).join(", ")], ["Empresa", () => [one("company"), one("sector")].filter(Boolean).join(" · ")], ["Prazo", () => one("timing")], ["Orçamento", () => one("budget")], ["Contacto", () => [one("name"), one("phone") || one("email")].filter(Boolean).join(" · ")], ["Preferência", () => one("reach")]];
+  const refresh = () => {
+    const who = one("who"), services = vals("service");
+    $$("[data-when-who]", order).forEach(el => { el.hidden = el.dataset.whenWho !== who; });
+    $$("[data-detail]", order).forEach(el => { el.hidden = !services.includes(el.dataset.detail); });
+    $("#o-empty").hidden = services.length > 0;
+    if (services.length) $("#o-err-svc").hidden = true;
+    list.innerHTML = "";
+    summary.forEach(([k, f]) => {
+      const v = f(), row = document.createElement("div"), dt = document.createElement("dt"), dd = document.createElement("dd");
+      dt.textContent = k; dd.textContent = v || "por preencher"; if (!v) dd.className = "none";
+      if (v && v !== last[k]) row.className = "fresh"; last[k] = v;
+      row.append(dt, dd); list.append(row);
+    });
+    // progresso: blocos essenciais preenchidos
+    const checks = [who, services.length, services.some(k => $$(`[data-detail="${k}"] input,[data-detail="${k}"] textarea`, order).some(i => (i.type === "checkbox") ? i.checked : i.value.trim())), one("company") || one("sector"), one("goal"), one("timing"), one("budget"), one("name"), one("email") || one("phone")];
+    const p = Math.round(checks.filter(Boolean).length / checks.length * 100);
+    pct.textContent = `${p}% preenchido`; arc.style.strokeDasharray = `${p} 100`;
+  };
+  const text = () => {
+    const s = read(), out = ["Olá João,", "", "Segue o nosso pedido, feito no site da Weld.", ""];
+    s.sections.forEach(([t, rows]) => { out.push(`▸ ${t.toUpperCase()}`); rows.forEach(([q, a]) => { const k = /[?:]$/.test(q) ? q : q + ":"; out.push(a.includes("\n") ? `${k}\n${a}` : `${k} ${a}`); }); out.push(""); });
+    const reach = one("reach");
+    out.push(reach === "Ligar" ? "Prefiro que me liguem." : reach === "WhatsApp" ? "Prefiro falar por WhatsApp." : "Prefiro resposta por email.", "", "Obrigado!");
+    return out.join("\n");
+  };
+  const subject = () => { const s = read(); return `Pedido Weld: ${s.services.map(k => svcLabel[k]).join(" + ") || "projeto"}${one("company") ? " para " + one("company") : ""}`; };
+  const copy = async () => { try { await navigator.clipboard.writeText(`${subject()}\n\n${text()}`); return true; } catch { return false; } };
+  order.addEventListener("input", refresh); order.addEventListener("change", refresh); refresh();
+  order.addEventListener("submit", async e => {
+    e.preventDefault();
+    const err = $("#o-err"), svc = vals("service").length, name = one("name"), reach = one("reach"), phone = one("phone"), email = one("email");
+    let msg = "";
+    if (!svc) { $("#o-err-svc").hidden = false; $('input[name="service"]', order).focus(); $('input[name="service"]', order).closest(".o-block").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    if (!name) msg = "Falta o nome.";
+    else if (reach !== "Email" && !phone) msg = "Deixa o teu telemóvel para te ligarmos (ou escolhe email).";
+    else if (!phone && !email) msg = "Deixa um email ou um telemóvel.";
+    err.textContent = msg; err.hidden = !msg;
+    if (msg) { err.closest(".o-block").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
+    const copied = await copy();
+    note.textContent = copied ? "O pedido também ficou copiado. Se o email não abrir, cola-o numa mensagem para " + order.dataset.email : "Se o email não abrir, escreve-nos para " + order.dataset.email;
+    location.href = `mailto:${order.dataset.email}?subject=${encodeURIComponent(subject())}&body=${encodeURIComponent(text())}`;
+  });
+  $("#os-copy").addEventListener("click", async () => {
+    const lbl = $("#os-copy span"), ok = await copy();
+    lbl.textContent = ok ? "Pedido copiado" : "Não deu para copiar";
+    setTimeout(() => { lbl.textContent = "Copiar pedido"; }, 1800);
+  });
+}
 const copyBtn = $("#copy-email");
 if (copyBtn) {
   const label = $("#copy-label");

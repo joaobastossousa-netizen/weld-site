@@ -13,6 +13,8 @@ export const site = {
   instagramHandle: "@weld.studio",
   linkedin: "https://www.linkedin.com/in/jo%C3%A3o-bastos-de-sousa-8188723b6/",
   city: "Porto",
+  // Número da Weld para ligar/WhatsApp. Vazio = não aparece no site (o cliente deixa o dele e ligamos nós).
+  phone: "",
   cta: "Pedir proposta",
 };
 
@@ -376,4 +378,78 @@ export const contact = {
   lead: "Três passos e o email fica escrito. Respondemos rápido.",
   who: ["Agência", "Negócio"],
   needs: ["Demo grátis", "Assistente de IA", "Automação", "Site", "Software à medida", "Ainda não sei"],
+};
+
+// Pedido detalhado: para quem já sabe o que quer e salta a demo.
+export const order = {
+  title: "Já sabes o que queres? Faz o pedido.",
+  lead: "Sem demo, sem voltas. Conta-nos o projeto com detalhe e respondemos com perguntas certas ou uma proposta. Quanto mais disseres, mais rápido fica.",
+  who: [
+    ["ph-storefront", "Negócio", "Para a minha empresa"],
+    ["ph-megaphone", "Agência, para um cliente", "Vendemos nós, fazem vocês"],
+    ["ph-buildings", "Agência, para nós", "Para a própria agência"],
+  ],
+  services: [
+    ["assistente", "ph-chat-circle-dots", "Assistente de IA"],
+    ["automacao", "ph-flow-arrow", "Automação"],
+    ["site", "ph-browser", "Site"],
+    ["software", "ph-squares-four", "Software à medida"],
+    ["outro", "ph-dots-three-outline", "Outra coisa"],
+  ],
+  // perguntas que aparecem conforme o serviço escolhido
+  details: {
+    assistente: {
+      title: "Assistente de IA",
+      chips: [
+        ["Onde responde", ["WhatsApp", "Instagram", "Site", "Email", "Facebook", "Telefone"]],
+        ["O que faz", ["Marcações", "Dúvidas e preços", "Orçamentos", "Qualificar leads", "Encomendas", "Passar a uma pessoa"]],
+      ],
+      fields: [
+        ["Mensagens por dia (mais ou menos)", "ex.: 30, sobretudo à noite"],
+        ["Onde marcam hoje", "ex.: agenda em papel, Google Calendar, software da clínica"],
+      ],
+    },
+    automacao: {
+      title: "Automação",
+      chips: [["Ferramentas que usam", ["Excel / Google Sheets", "Gmail / Outlook", "Faturação (Moloni, InvoiceXpress, PHC…)", "CRM", "Loja online", "Notion", "WhatsApp", "Outra"]]],
+      fields: [
+        ["Que tarefa fazem à mão hoje?", "Passo a passo, como se explicasses a alguém novo na equipa", true],
+        ["Horas por semana nisso", "ex.: 6 horas, 2 pessoas"],
+      ],
+    },
+    site: {
+      title: "Site",
+      chips: [
+        ["Situação", ["Não temos site", "Refazer o atual", "Melhorar o atual"]],
+        ["Precisa de", ["Marcações", "Pedidos de orçamento", "Loja online", "Blog", "Várias línguas", "Área de cliente"]],
+      ],
+      fields: [
+        ["Site atual ou sites de que gostam", "links"],
+        ["Textos e fotos", "ex.: temos tudo, só logótipo, precisamos de ajuda"],
+      ],
+    },
+    software: {
+      title: "Software à medida",
+      chips: [["Quem usa", ["Equipa interna", "Clientes", "Parceiros / fornecedores"]]],
+      fields: [
+        ["O que deve fazer?", "As 3 ou 4 coisas principais", true],
+        ["O que usam hoje para isso", "ex.: folhas de Excel partilhadas, papel, outro programa"],
+        ["Quantas pessoas vão usar", "ex.: 8 na equipa"],
+      ],
+    },
+    outro: {
+      title: "Outra coisa",
+      chips: [],
+      fields: [["Descreve o que tens em mente", "Sem filtro, nós organizamos", true]],
+    },
+  },
+  timing: ["Urgente", "Este mês", "1 a 3 meses", "Sem pressa"],
+  budget: ["Até 1.000 €", "1.000 a 3.000 €", "3.000 a 8.000 €", "Mais de 8.000 €", "Prefiro falar"],
+  models: ["Projeto fechado", "Mensalidade", "Revenda (agência)", "Percentagem", "Aconselhem-nos"],
+  reach: [
+    ["ph-phone-call", "Ligar"],
+    ["ph-whatsapp-logo", "WhatsApp"],
+    ["ph-envelope-simple", "Email"],
+  ],
+  when: ["Manhã", "Almoço", "Tarde", "Fim do dia"],
 };
