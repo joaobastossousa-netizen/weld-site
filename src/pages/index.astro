@@ -51,17 +51,63 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
     </div>
   </section>
 
+  <div class="dark band band-calc">
+  <!-- CALCULADORA: quanto tempo estás a perder -->
+  <section class="section wrap calc" id="calculadora">
+    <div class="sec-head">
+      <p class="idx reveal">01 / Calculadora</p>
+      <h2 class="h2 reveal">Quanto tempo estás a perder?</h2>
+      <p class="lead reveal">Mexe nos valores do teu negócio. Fazemos as contas ao tempo que hoje vai para trabalho que dá para automatizar.</p>
+    </div>
+    <div class="calc-box reveal">
+      <div class="calc-in">
+        <label class="rng"><span><b>Mensagens de clientes por dia</b><output data-o="msg">40</output></span><input type="range" min="0" max="200" step="5" value="40" data-k="msg" /></label>
+        <label class="rng"><span><b>Minutos por resposta</b><output data-o="min">4</output></span><input type="range" min="1" max="15" step="1" value="4" data-k="min" /></label>
+        <label class="rng"><span><b>Horas por semana em tarefas repetidas</b><small>copiar dados, faturas, relatórios</small><output data-o="rep">6</output></span><input type="range" min="0" max="40" step="1" value="6" data-k="rep" /></label>
+        <label class="rng"><span><b>Custo de uma hora da equipa</b><output data-o="eur">12 €</output></span><input type="range" min="6" max="50" step="1" value="12" data-k="eur" /></label>
+      </div>
+      <div class="calc-out">
+        <p class="co-k">Por mês, vai para trabalho automatizável</p>
+        <p class="co-h"><b data-r="hours">0</b><span>horas</span></p>
+        <div class="co-bars">
+          <span><i data-bar="msg"></i><small>Mensagens</small><em data-r="hmsg">0 h</em></span>
+          <span><i data-bar="rep"></i><small>Tarefas repetidas</small><em data-r="hrep">0 h</em></span>
+        </div>
+        <p class="co-e">≈ <b data-r="eur">0 €</b> em tempo da equipa, todos os meses</p>
+        <p class="co-d"><b data-r="days">0</b> dias de trabalho por mês</p>
+        <a href="/contacto?demo" class="btn btn-mint magnetic">Ver isto a funcionar no meu negócio<i class="ph ph-arrow-right"></i></a>
+        <p class="co-note">Estimativa com os números que puseste, a contar 22 dias úteis por mês.</p>
+      </div>
+    </div>
+  </section>
+  </div>
+
+  <!-- O QUE MUDA -->
+  <section class="section wrap">
+    <div class="sec-head"><p class="idx reveal">02 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
+    <div class="compare">
+      <div class="cmp cmp-no reveal">
+        <p class="cmp-h"><i class="ph ph-x-circle"></i>Sem automação</p>
+        <ul>{compare.without.map((t) => <li>{t}</li>)}</ul>
+      </div>
+      <div class="cmp cmp-yes reveal" style="--i:1">
+        <p class="cmp-h"><i class="ph-fill ph-check-circle"></i>Com a Weld</p>
+        <ul>{compare.with.map((t) => <li>{t}</li>)}</ul>
+      </div>
+    </div>
+  </section>
+
   <!-- DUAS FORMAS -->
-  <Ways idx="01 / Como trabalhamos" />
+  <Ways idx="03 / Como trabalhamos" />
 
   <!-- EXEMPLOS DOS QUATRO SERVIÇOS -->
-  <Examples idx="02 / Exemplos" />
+  <Examples idx="04 / Exemplos" />
 
   <!-- SETORES: galeria horizontal presa ao scroll -->
   <section class="sectors" id="setores">
     <div class="sectors-pin">
       <div class="wrap sectors-head">
-        <p class="idx">03 / {sectors.idx}</p>
+        <p class="idx">05 / {sectors.idx}</p>
         <h2 class="h2">{sectors.title}</h2>
         <p class="lead">{sectors.lead}</p>
       </div>
@@ -97,7 +143,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- SERVIÇOS -->
   <section class="section wrap" id="servicos">
     <div class="sec-head">
-      <p class="idx reveal">04 / Serviços</p>
+      <p class="idx reveal">06 / Serviços</p>
       <h2 class="h2 reveal">O que construímos.</h2>
     </div>
     <div class="svc-list">
@@ -117,7 +163,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- MÁQUINA -->
   <section class="section wrap">
     <div class="sec-head">
-      <p class="idx reveal">05 / Como funciona</p>
+      <p class="idx reveal">07 / Como funciona</p>
       <h2 class="h2 reveal">Entra um pedido. Sai tudo tratado.</h2>
     </div>
     <div class="machine reveal" aria-label="Mensagens de clientes transformadas em marcações e pedidos">
@@ -138,50 +184,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
     </div>
   </section>
 
-  <!-- CALCULADORA: quanto tempo estás a perder -->
-  <section class="section wrap calc" id="calculadora">
-    <div class="sec-head">
-      <p class="idx reveal">Calculadora</p>
-      <h2 class="h2 reveal">Quanto tempo estás a perder?</h2>
-      <p class="lead reveal">Mexe nos valores do teu negócio. Fazemos as contas ao tempo que hoje vai para trabalho que dá para automatizar.</p>
-    </div>
-    <div class="calc-box reveal">
-      <div class="calc-in">
-        <label class="rng"><span><b>Mensagens de clientes por dia</b><output data-o="msg">40</output></span><input type="range" min="0" max="200" step="5" value="40" data-k="msg" /></label>
-        <label class="rng"><span><b>Minutos por resposta</b><output data-o="min">4</output></span><input type="range" min="1" max="15" step="1" value="4" data-k="min" /></label>
-        <label class="rng"><span><b>Horas por semana em tarefas repetidas</b><small>copiar dados, faturas, relatórios</small><output data-o="rep">6</output></span><input type="range" min="0" max="40" step="1" value="6" data-k="rep" /></label>
-        <label class="rng"><span><b>Custo de uma hora da equipa</b><output data-o="eur">12 €</output></span><input type="range" min="6" max="50" step="1" value="12" data-k="eur" /></label>
-      </div>
-      <div class="calc-out">
-        <p class="co-k">Por mês, vai para trabalho automatizável</p>
-        <p class="co-h"><b data-r="hours">0</b><span>horas</span></p>
-        <div class="co-bars">
-          <span><i data-bar="msg"></i><small>Mensagens</small><em data-r="hmsg">0 h</em></span>
-          <span><i data-bar="rep"></i><small>Tarefas repetidas</small><em data-r="hrep">0 h</em></span>
-        </div>
-        <p class="co-e">≈ <b data-r="eur">0 €</b> em tempo da equipa, todos os meses</p>
-        <p class="co-d"><b data-r="days">0</b> dias de trabalho por mês</p>
-        <a href="/contacto?demo" class="btn btn-mint magnetic">Ver isto a funcionar no meu negócio<i class="ph ph-arrow-right"></i></a>
-        <p class="co-note">Estimativa com os números que puseste, a contar 22 dias úteis por mês.</p>
-      </div>
-    </div>
-  </section>
   </div>
-
-  <!-- O QUE MUDA -->
-  <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">06 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
-    <div class="compare">
-      <div class="cmp cmp-no reveal">
-        <p class="cmp-h"><i class="ph ph-x-circle"></i>Sem assistente</p>
-        <ul>{compare.without.map((t) => <li>{t}</li>)}</ul>
-      </div>
-      <div class="cmp cmp-yes reveal" style="--i:1">
-        <p class="cmp-h"><i class="ph-fill ph-check-circle"></i>Com a Weld</p>
-        <ul>{compare.with.map((t) => <li>{t}</li>)}</ul>
-      </div>
-    </div>
-  </section>
 
   <!-- NÚMEROS -->
   <section class="stats-band">
@@ -193,7 +196,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- DEMOS -->
   <section class="section wrap" id="demos">
     <div class="sec-head">
-      <p class="idx reveal">07 / Demos</p>
+      <p class="idx reveal">08 / Demos</p>
       <h2 class="h2 reveal">{demos.title}</h2>
       <p class="lead reveal">{demos.lead}</p>
     </div>
@@ -234,7 +237,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <section class="section wrap">
     <div class="agency-teaser dark reveal">
       <div>
-        <p class="idx">08 / {agencies.kicker}</p>
+        <p class="idx">09 / {agencies.kicker}</p>
         <h2 class="h2">{agencies.title}</h2>
         <p class="lead">{agencies.lead}</p>
         <a href="/agencias" class="btn btn-mint magnetic">Como funciona para agências<i class="ph ph-arrow-right"></i></a>
@@ -250,7 +253,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- PROCESSO -->
   <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">09 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">10 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
     <ol class="steps">
       <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
       {process.steps.map((s, i) => (
