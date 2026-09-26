@@ -241,6 +241,22 @@ if (prev && FINE && !REDUCED) {
   });
 }
 
+/* ---------- exemplos: separadores que avançam sozinhos ---------- */
+const exEl = $(".ex");
+if (exEl) {
+  const tabs = $$(".ex-tab", exEl), panels = $$(".ex-panel", exEl);
+  let cur = 0, timer = null, visible = false;
+  const show = i => {
+    cur = i;
+    tabs.forEach((t, k) => { t.classList.toggle("on", k === i); t.setAttribute("aria-selected", String(k === i)); const b = $(".ex-bar i", t); b.style.animation = "none"; void b.offsetWidth; b.style.animation = ""; });
+    panels.forEach((p, k) => p.classList.toggle("on", k === i));
+    clearTimeout(timer);
+    if (visible && !REDUCED) timer = setTimeout(() => show((cur + 1) % tabs.length), 7000);
+  };
+  tabs.forEach((t, k) => t.addEventListener("click", () => show(k)));
+  new IntersectionObserver(([e]) => { visible = e.isIntersecting; if (visible) show(cur); else clearTimeout(timer); }, { threshold: .3 }).observe(exEl);
+}
+
 /* ---------- linha do processo ---------- */
 $$(".steps").forEach(st => {
   const fill = $(".steps-fill", st), vertical = matchMedia("(max-width: 900px)").matches;

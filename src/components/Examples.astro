@@ -1,0 +1,81 @@
+---
+// Exemplos dos quatro serviços, com um palco animado para cada um (separadores que avançam sozinhos).
+import { examples } from "../content";
+interface Props { idx?: string }
+const { idx } = Astro.props;
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+---
+<section class="section wrap examples" id="exemplos">
+  <div class="sec-head">
+    <p class="idx reveal">{idx ?? examples.idx}</p>
+    <h2 class="h2 reveal">{examples.title}</h2>
+  </div>
+  <div class="ex reveal">
+    <div class="ex-tabs" role="tablist" aria-label="Serviços">
+      {examples.tabs.map((t, i) => (
+        <button class={`ex-tab${i === 0 ? " on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} data-i={i}>
+          <i class={`ph-duotone ${t.icon}`}></i><span>{t.label}</span><span class="ex-bar"><i></i></span>
+        </button>
+      ))}
+    </div>
+    <div class="ex-body">
+      {examples.tabs.map((t, i) => (
+        <div class={`ex-panel ex-${t.key}${i === 0 ? " on" : ""}`} role="tabpanel">
+          <div class="ex-copy">
+            <h3>{t.title}</h3>
+            <ul>{t.items.map((it) => <li><i class="ph-bold ph-check"></i>{it}</li>)}</ul>
+            <a href={t.href} class="more">Ver o serviço <i class="ph ph-arrow-right"></i></a>
+          </div>
+          <div class="ex-stage" aria-hidden="true">
+            {t.key === "assistentes" && (
+              <div class="st-chat">
+                <div class="st-chat-head"><span class="hp-av"><svg viewBox="0 0 100 100"><path d={W} /></svg></span><b>Assistente</b><small>online</small></div>
+                <span class="st-b me" style="--k:0">Têm vaga amanhã de manhã?</span>
+                <span class="st-b bot" style="--k:1">Tenho às 10h00 e às 11h30. Qual prefere?</span>
+                <span class="st-b me" style="--k:2">10h, obrigada!</span>
+                <span class="st-b ok" style="--k:3"><i class="ph-bold ph-check"></i> Marcação feita e lembrete agendado</span>
+              </div>
+            )}
+            {t.key === "automacoes" && (
+              <div class="st-flow">
+                {[["gmail-color", "Fatura recebida", "fornecedor.pdf"], ["weld", "A Weld lê a fatura", "valor, data, NIF"], ["googlesheets", "Linha no Excel", "contabilidade.xlsx"], ["whatsapp-color", "Equipa avisada", "no WhatsApp"]].map(([ic, a, b], k) => (
+                  <>
+                    {k > 0 && <span class="st-link" style={`--k:${k}`}><i></i></span>}
+                    <div class="st-node" style={`--k:${k}`}>
+                      <span class="st-ic">{ic === "weld" ? <svg viewBox="0 0 100 100"><path d={W} /></svg> : <img src={`/logos/${ic}.svg`} alt="" width="22" height="22" />}</span>
+                      <span><b>{a}</b><small>{b}</small></span>
+                      <i class="ph-bold ph-check st-done"></i>
+                    </div>
+                  </>
+                ))}
+              </div>
+            )}
+            {t.key === "sites" && (
+              <div class="st-browser">
+                <div class="st-bar"><i></i><i></i><i></i><span>weldstudio.pt/demos/clinica</span></div>
+                <div class="st-site">
+                  <div class="st-nav"><b>Oriva Dental</b><span></span><span></span><span></span></div>
+                  <div class="st-hero"><div><p class="st-h">Sorrisos cuidados<br />no Porto.</p><p class="st-p">Primeira consulta com avaliação completa.</p><span class="st-btn">Marcar consulta</span></div><div class="st-img"></div></div>
+                  <div class="st-form"><b>Pedido de marcação</b><span class="st-in">Ana Costa</span><span class="st-in">Quinta, de manhã</span><span class="st-send">Enviar</span></div>
+                  <div class="st-toast"><i class="ph-bold ph-check"></i> Novo pedido · Ana Costa</div>
+                </div>
+              </div>
+            )}
+            {t.key === "software" && (
+              <div class="st-dash">
+                <div class="st-dh"><b>Encomendas</b><span class="live">Hoje</span></div>
+                <div class="st-kpis"><span><small>Novas</small><b>18</b></span><span><small>Em preparação</small><b>6</b></span><span><small>Enviadas</small><b>12</b></span></div>
+                <div class="st-chart">{[40, 62, 48, 80, 66, 92, 74].map((h, k) => <i style={`--h:${h}%;--k:${k}`}></i>)}</div>
+                <div class="st-rows">
+                  <span><b>#1042</b> Pastilhas Golf VII<em class="s1">Enviada</em></span>
+                  <span><b>#1043</b> Filtro de óleo<em class="s2">A preparar</em></span>
+                  <span><b>#1044</b> Kit de travões<em class="s3">Nova</em></span>
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>

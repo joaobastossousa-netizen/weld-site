@@ -1,6 +1,7 @@
 ---
 import Base from "../layouts/Base.astro";
 import Ways from "../components/Ways.astro";
+import Examples from "../components/Examples.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { sectors, home, integrations, story, services, demos, agencies, compare, stats, process, faq, site } from "../content";
@@ -34,15 +35,15 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
           <div class="hp-frame img-reveal"><img src="/img/hero.jpg" alt="Dono de um negócio a ver uma mensagem no telemóvel" width="1400" height="1600" class="hp-img" data-zoom /></div>
           <div class="hp-card hp-msg" data-drift="-70">
             <img src="/logos/whatsapp-color.svg" alt="" width="30" height="30" />
-            <span><small>Nova mensagem · 23:14</small><b>Olá! Têm vaga amanhã?</b></span>
+            <span><small>Assistente de IA · 23:14</small><b>Vaga marcada: sábado às 10h</b></span>
           </div>
           <div class="hp-card hp-reply" data-drift="-140">
-            <span class="hp-av"><svg viewBox="0 0 100 100"><path d="M12 20 L32 78 L50 40 L68 78 L88 20" /></svg></span>
-            <span><small>Assistente · agora</small><b>Tenho às 10h e às 15h30. Qual prefere?</b></span>
+            <span class="hp-ic"><i class="ph-bold ph-flow-arrow"></i></span>
+            <span><small>Automação · agora</small><b>Fatura enviada e lançada no Excel</b></span>
           </div>
           <div class="hp-card hp-booked" data-drift="-40">
-            <span class="hp-tick"><i class="ph-bold ph-check"></i></span>
-            <span><small>Agenda</small><b>Marcação confirmada · 10:00</b></span>
+            <span class="hp-ic web"><i class="ph-bold ph-browser"></i></span>
+            <span><small>Site · novo pedido</small><b>Orçamento pedido por Ana Costa</b></span>
           </div>
         </div>
       </div>
@@ -52,11 +53,14 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- DUAS FORMAS -->
   <Ways idx="01 / Como trabalhamos" />
 
+  <!-- EXEMPLOS DOS QUATRO SERVIÇOS -->
+  <Examples idx="02 / Exemplos" />
+
   <!-- SETORES: galeria horizontal presa ao scroll -->
   <section class="sectors" id="setores">
     <div class="sectors-pin">
       <div class="wrap sectors-head">
-        <p class="idx">02 / {sectors.idx}</p>
+        <p class="idx">03 / {sectors.idx}</p>
         <h2 class="h2">{sectors.title}</h2>
         <p class="lead">{sectors.lead}</p>
       </div>
@@ -66,8 +70,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
             <img src={`/img/${it.img}`} alt={it.name} width="900" height="1150" loading="lazy" class="sector-img" />
             <span class="sector-tag">{it.tag}</span>
             <div class="sector-chat" aria-hidden="true">
-              <span class="sc-b me">{it.chat[0]}</span>
-              <span class="sc-b bot">{it.chat[1]}</span>
+              {it.events.map(([ic, txt], k) => <span class={`sc-e ${k ? "bot" : "me"}`}><i class={`ph-bold ${ic}`}></i>{txt}</span>)}
             </div>
             <h3>{it.name}</h3>
           </article>
@@ -93,7 +96,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- SERVIÇOS -->
   <section class="section wrap" id="servicos">
     <div class="sec-head">
-      <p class="idx reveal">03 / Serviços</p>
+      <p class="idx reveal">04 / Serviços</p>
       <h2 class="h2 reveal">O que construímos.</h2>
     </div>
     <div class="svc-list">
@@ -113,8 +116,8 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- MÁQUINA -->
   <section class="section wrap">
     <div class="sec-head">
-      <p class="idx reveal">04 / Como funciona</p>
-      <h2 class="h2 reveal">Entra uma mensagem. Sai um cliente.</h2>
+      <p class="idx reveal">05 / Como funciona</p>
+      <h2 class="h2 reveal">Entra um pedido. Sai tudo tratado.</h2>
     </div>
     <div class="machine reveal" aria-label="Mensagens de clientes transformadas em marcações e pedidos">
       <div class="lane lane-in">
@@ -172,7 +175,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- O QUE MUDA -->
   <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">05 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">06 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
     <div class="compare">
       <div class="cmp cmp-no reveal">
         <p class="cmp-h"><i class="ph ph-x-circle"></i>Sem assistente</p>
@@ -195,7 +198,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <!-- DEMOS -->
   <section class="section wrap" id="demos">
     <div class="sec-head">
-      <p class="idx reveal">06 / Demos</p>
+      <p class="idx reveal">07 / Demos</p>
       <h2 class="h2 reveal">{demos.title}</h2>
       <p class="lead reveal">{demos.lead}</p>
     </div>
@@ -233,7 +236,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   <section class="section wrap">
     <div class="agency-teaser dark reveal">
       <div>
-        <p class="idx">07 / {agencies.kicker}</p>
+        <p class="idx">08 / {agencies.kicker}</p>
         <h2 class="h2">{agencies.title}</h2>
         <p class="lead">{agencies.lead}</p>
         <a href="/agencias" class="btn btn-mint magnetic">Como funciona para agências<i class="ph ph-arrow-right"></i></a>
@@ -249,7 +252,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- PROCESSO -->
   <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">08 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">09 / Processo</p><h2 class="h2 reveal">{process.title}</h2></div>
     <ol class="steps">
       <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
       {process.steps.map((s, i) => (

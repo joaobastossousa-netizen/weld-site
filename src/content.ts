@@ -52,9 +52,9 @@ export const chats = {
 
 export const home = {
   kicker: "Estúdio de automação com IA no Porto",
-  line1: "Mensagens respondidas.",
-  line2: "Clientes",
-  rotate: ["marcados.", "atendidos.", "qualificados."],
+  line1: "Menos trabalho à mão.",
+  line2: "Mais",
+  rotate: ["clientes.", "tempo.", "vendas."],
   lead: "Assistentes de IA, automações e sites feitos à medida. Trabalhamos diretamente com empresas e, por trás, para os clientes de agências de marketing.",
   floats: [
     { icon: "ph-lightning", title: "Responde em segundos", text: "A qualquer hora, fins de semana incluídos" },
@@ -64,11 +64,22 @@ export const home = {
   flow: {
     inputs: [
       { icon: "whatsapp-color", text: "Têm vaga sábado?" },
-      { icon: "instagram-color", text: "Quanto custa?" },
-      { icon: "gmail-color", text: "Pedido de orçamento" },
+      { icon: "gmail-color", text: "Fatura do fornecedor.pdf" },
+      { icon: "web", text: "Formulário do site" },
     ],
-    outputs: ["Consulta marcada · sáb 10:00", "Preço enviado e lead guardado", "Proposta pedida à equipa"],
+    outputs: ["Consulta marcada · sáb 10:00", "Fatura lançada no Excel", "Lead no CRM e equipa avisada"],
   },
+};
+
+export const examples = {
+  idx: "Exemplos",
+  title: "O que fazemos, na prática.",
+  tabs: [
+    { key: "assistentes", label: "Assistentes de IA", icon: "ph-chats-circle", title: "Respondem, marcam e qualificam.", items: ["Marcações pelo WhatsApp com lembrete na véspera", "Preços e horários respondidos no Instagram", "Pedidos qualificados antes de chegarem à equipa"], href: "/servicos/assistentes-de-ia" },
+    { key: "automacoes", label: "Automações", icon: "ph-flow-arrow", title: "O que se faz sempre igual passa a fazer-se sozinho.", items: ["Faturas lidas e lançadas no Excel", "Relatório semanal no email todas as segundas", "Formulários que vão direto para o CRM", "Lembretes de pagamento a clientes em atraso"], href: "/servicos/automacoes" },
+    { key: "sites", label: "Sites e landing pages", icon: "ph-browser", title: "Sites rápidos que trazem contactos.", items: ["Site de clínica com pedido de marcação", "Landing page para campanhas de anúncios", "Página de reservas para restaurantes"], href: "/servicos/sites" },
+    { key: "software", label: "Software à medida", icon: "ph-code-block", title: "Quando nenhuma ferramenta serve, fazemos a vossa.", items: ["Painel de encomendas e stock", "Portal onde o cliente vê o estado do pedido", "Ligação entre sistemas que não falam entre si"], href: "/servicos/software-a-medida" },
+  ],
 };
 
 export const sectors = {
@@ -76,11 +87,11 @@ export const sectors = {
   title: "Negócios que vivem de mensagens.",
   lead: "Onde os clientes perguntam, marcam e encomendam por mensagem, um assistente faz a diferença.",
   items: [
-    { img: "setor-clinica.jpg", name: "Clínicas", tag: "Marcações e lembretes", chat: ["Têm vaga para uma limpeza?", "Sexta às 9h30 ou às 16h. Qual prefere?"] },
-    { img: "setor-oficina.jpg", name: "Oficinas e peças", tag: "Pedidos ao balcão", chat: ["Têm pastilhas para um Golf VII?", "Temos. Passei o pedido ao balcão."] },
-    { img: "setor-ginasio.jpg", name: "Ginásios", tag: "Aulas experimentais", chat: ["Posso experimentar uma aula?", "Claro! Quinta às 19h há vaga."] },
-    { img: "setor-restaurante.jpg", name: "Restaurantes", tag: "Reservas", chat: ["Mesa para 4 no sábado?", "Às 20h30 temos. Fica reservada."] },
-    { img: "setor-imobiliaria.jpg", name: "Imobiliárias", tag: "Leads e visitas", chat: ["O T2 da Boavista está livre?", "Está. Quer visitar amanhã às 18h?"] },
+    { img: "setor-clinica.jpg", name: "Clínicas", tag: "Assistente de IA", events: [["ph-chats-circle", "Consulta marcada pelo WhatsApp"], ["ph-bell-ringing", "Lembrete enviado na véspera"]] },
+    { img: "setor-oficina.jpg", name: "Oficinas e peças", tag: "Automação", events: [["ph-package", "Pedido registado no balcão"], ["ph-arrows-clockwise", "Stock atualizado sozinho"]] },
+    { img: "setor-ginasio.jpg", name: "Ginásios", tag: "Automação", events: [["ph-credit-card", "Mensalidade em atraso detetada"], ["ph-paper-plane-tilt", "Lembrete de pagamento enviado"]] },
+    { img: "setor-restaurante.jpg", name: "Restaurantes", tag: "Site com reservas", events: [["ph-browser", "Reserva feita pelo site"], ["ph-calendar-check", "Mesa para 4 · sábado 20h30"]] },
+    { img: "setor-imobiliaria.jpg", name: "Imobiliárias", tag: "Software à medida", events: [["ph-user-plus", "Novo lead do portal"], ["ph-house-line", "Visita marcada e agente avisado"]] },
   ],
 };
 
