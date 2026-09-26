@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Ways from "../components/Ways.astro";
 import Examples from "../components/Examples.astro";
+import DemoOffer from "../components/DemoOffer.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import { sectors, home, integrations, story, services, demos, agencies, compare, stats, process, faq, site } from "../content";
@@ -24,7 +25,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
           <p class="lead load" style="--d:4">{home.lead}</p>
           <div class="hero-ctas load" style="--d:5">
             <a href="/contacto" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
-            <a href="/demos" class="btn btn-ghost"><i class="ph ph-play-circle"></i>Ver as demos</a>
+            <a href="/contacto?demo" class="btn btn-ghost"><i class="ph ph-gift"></i>Pedir demo grátis</a>
           </div>
           <div class="hero-paths load" style="--d:6">
             <a href="/agencias"><i class="ph-duotone ph-megaphone"></i><span><b>Sou uma agência</b><small>Revender com o meu nome</small></span><i class="ph ph-arrow-up-right"></i></a>
@@ -231,6 +232,9 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       </div>
     </div>
   </section>
+
+  <!-- DEMO GRÁTIS -->
+  <DemoOffer idx="Demo grátis" />
 
   <!-- AGÊNCIAS -->
   <section class="section wrap">

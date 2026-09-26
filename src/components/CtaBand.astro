@@ -1,7 +1,7 @@
 ---
 import { site } from "../content";
 interface Props { title?: string; text?: string }
-const { title = "Vamos pôr isto a funcionar?", text = "Uma conversa de 20 minutos chega para perceber se faz sentido." } = Astro.props;
+const { title = "Queres ver isto no teu negócio?", text = "Fazemos uma demo personalizada, de graça. Apresentamos em 20 minutos e, se fizer sentido, enviamos a proposta." } = Astro.props;
 const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 ---
 <section class="wrap cta-wrap">
@@ -12,8 +12,8 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       <p class="lead">{text}</p>
     </div>
     <div class="cta-actions">
-      <a href="/contacto" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
-      <a href="/demos" class="btn btn-ghost">Ver as demos</a>
+      <a href="/contacto?demo" class="btn btn-mint magnetic">Pedir demo grátis<i class="ph ph-arrow-right"></i></a>
+      <a href="/contacto" class="btn btn-ghost">{site.cta}</a>
     </div>
   </div>
 </section>

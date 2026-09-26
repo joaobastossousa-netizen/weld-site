@@ -302,6 +302,7 @@ if (FINE && !REDUCED) {
 const form = $("#brief");
 if (form) {
   const data = {}, stepsEls = $$(".brief-step", form), dots = $$(".brief-steps li", form);
+  let wantsDemo = false;
   const go = n => {
     stepsEls.forEach(s => s.classList.toggle("on", +s.dataset.step === n));
     dots.forEach((d, i) => { d.classList.toggle("on", i === n - 1); d.classList.toggle("done", i < n - 1); });
@@ -310,16 +311,24 @@ if (form) {
   $$(".opt", form).forEach(o => o.addEventListener("click", () => {
     $$(`.opt[data-field="${o.dataset.field}"]`, form).forEach(x => x.classList.toggle("sel", x === o));
     data[o.dataset.field] = o.dataset.value;
-    setTimeout(() => go(o.dataset.field === "who" ? 2 : 3), 220);
+    if (!(wantsDemo && o.dataset.field === "who")) setTimeout(() => go(o.dataset.field === "who" ? 2 : 3), 220);
   }));
   $$("[data-back]", form).forEach(b => b.addEventListener("click", () => go(+b.closest(".brief-step").dataset.step - 1)));
+  // vindo de um botão "Pedir demo grátis": a demo fica escolhida e salta esse passo
+  wantsDemo = new URLSearchParams(location.search).has("demo");
+  if (wantsDemo) {
+    data.need = "Demo grátis";
+    $$('.opt[data-field="need"]', form).forEach(x => x.classList.toggle("sel", x.dataset.value === "Demo grátis"));
+    const lbl = $('label[for="f-msg"]', form); if (lbl) lbl.textContent = "Site ou Instagram do negócio, e o que fazem";
+    $$('.opt[data-field="who"]', form).forEach(o => o.addEventListener("click", () => setTimeout(() => go(3), 230)));
+  }
   form.addEventListener("submit", e => {
     e.preventDefault();
     const name = $("#f-name").value.trim(), company = $("#f-company").value.trim(), msg = $("#f-msg").value.trim();
     $("#f-err").hidden = !!name;
     if (!name) { $("#f-name").focus(); return; }
     const subject = `Pedido Weld: ${data.need || "conversa"}${company ? " para " + company : ""}`;
-    const lines = ["Olá João,", "", `Sou ${name}${company ? ", da " + company : ""}.`, `Somos: ${data.who || "não indicado"}.`, `Precisamos de: ${data.need || "ainda não sei"}.`, msg ? `\n${msg}` : "", "", "Podemos marcar uma conversa de 20 minutos?"];
+    const lines = ["Olá João,", "", `Sou ${name}${company ? ", da " + company : ""}.`, `Somos: ${data.who || "não indicado"}.`, `Precisamos de: ${data.need || "ainda não sei"}.`, msg ? `\n${msg}` : "", "", data.need === "Demo grátis" ? "Gostava de ver a demo grátis com o nosso negócio. Quando podemos marcar os 20 minutos?" : "Podemos marcar uma conversa de 20 minutos?"];
     location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
   });
 }

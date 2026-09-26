@@ -2,6 +2,7 @@
 import Base from "../layouts/Base.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
+import DemoOffer from "../components/DemoOffer.astro";
 import { agencies, deals, demos, faq } from "../content";
 const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 ---
@@ -16,7 +17,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
     </div>
     <div class="hero-ctas load" style="--d:5">
       <a href="/contacto" class="btn btn-mint magnetic">Propor uma parceria<i class="ph ph-arrow-right"></i></a>
-      <a href="/demos" class="btn btn-ghost"><i class="ph ph-play-circle"></i>Ver as demos</a>
+      <a href="/contacto?demo" class="btn btn-ghost"><i class="ph ph-gift"></i>Demo grátis para um cliente</a>
     </div>
   </section>
 
@@ -67,6 +68,8 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       ))}
     </div>
   </section>
+
+  <DemoOffer forAgencies />
 
   <Faq items={faq.items.slice(0, 3)} />
   <CtaBand title="Têm um cliente que recebe muitas mensagens?" text="Mandem-nos o site e o Instagram dele. Fazemos a demo." />

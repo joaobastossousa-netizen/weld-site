@@ -355,9 +355,25 @@ export const faq = {
   ],
 };
 
+export const demoOffer = {
+  idx: "Demo grátis",
+  title: "Fazemos a tua demo, de graça.",
+  lead: "Antes de pagares alguma coisa, vês a Weld a funcionar com o teu negócio: os teus serviços, os teus preços, a tua marca.",
+  steps: [
+    ["ph-hand-waving", "Pedes a demo", "Dois minutos: dizes o que fazes e mandas o site ou o Instagram."],
+    ["ph-hammer", "Construímos com o teu negócio", "Preparamos um exemplo real, feito para ti, não um modelo genérico."],
+    ["ph-presentation-chart", "Apresentamos em 20 minutos", "Mostramos a funcionar. Se fizer sentido, recebes a proposta por escrito."],
+  ],
+  note: "Sem compromisso. Se não avançares, não pagas nada.",
+  agencies: {
+    title: "Fazemos a demo para o vosso cliente, de graça.",
+    lead: "Escolhem um cliente, nós preparamos a demo com a marca e os serviços dele, e apresentamos convosco ou só a vocês.",
+  },
+};
+
 export const contact = {
   title: "Conta-nos o que precisas.",
   lead: "Três passos e o email fica escrito. Respondemos rápido.",
   who: ["Agência", "Negócio"],
-  needs: ["Assistente de IA", "Automação", "Site", "Software à medida", "Ainda não sei"],
+  needs: ["Demo grátis", "Assistente de IA", "Automação", "Site", "Software à medida", "Ainda não sei"],
 };

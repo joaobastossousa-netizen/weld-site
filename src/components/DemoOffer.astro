@@ -1,0 +1,37 @@
+---
+// Oferta: demo personalizada e grátis, apresentada em 20 minutos, depois proposta.
+import { demoOffer } from "../content";
+interface Props { idx?: string; forAgencies?: boolean }
+const { idx, forAgencies = false } = Astro.props;
+const title = forAgencies ? demoOffer.agencies.title : demoOffer.title;
+const lead = forAgencies ? demoOffer.agencies.lead : demoOffer.lead;
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+---
+<section class="section wrap demo-offer" id="demo-gratis">
+  <div class="do-box dark reveal">
+    <div class="do-copy">
+      <p class="idx">{idx ?? demoOffer.idx}</p>
+      <h2 class="h2">{title}</h2>
+      <p class="lead">{lead}</p>
+      <ol class="do-steps">
+        {demoOffer.steps.map(([icon, t, p], i) => (
+          <li><span class="do-n"><i class={`ph-duotone ${icon}`}></i></span><span><b><em>{String(i + 1).padStart(2, "0")}</em>{t}</b><small>{p}</small></span></li>
+        ))}
+      </ol>
+      <div class="do-cta">
+        <a href="/contacto?demo" class="btn btn-mint magnetic">Pedir demo grátis<i class="ph ph-arrow-right"></i></a>
+        <span class="do-note"><i class="ph-bold ph-shield-check"></i>{demoOffer.note}</span>
+      </div>
+    </div>
+    <div class="do-visual" aria-hidden="true">
+      <div class="do-card">
+        <div class="do-head"><span class="do-logo"><svg viewBox="0 0 100 100"><path d={W} /></svg></span><span><b>Demo em preparação</b><small>{forAgencies ? "Para o cliente da agência" : "Para o teu negócio"}</small></span></div>
+        <div class="do-prog"><i></i></div>
+        {["Serviços e preços", "Marca e cores", "Assistente treinado", "Automações ligadas"].map((t, k) => <span class="do-item" style={`--k:${k}`}><i class="ph-bold ph-check"></i>{t}</span>)}
+        <span class="do-ready">Pronta para apresentar</span>
+      </div>
+      <div class="do-cal"><i class="ph-duotone ph-video-camera"></i><span><b>Apresentação · 20 min</b><small>Café no Porto ou chamada</small></span></div>
+      <div class="do-prop"><i class="ph-duotone ph-file-text"></i><span><b>Proposta por escrito</b><small>Âmbito, prazo e valor</small></span></div>
+    </div>
+  </div>
+</section>

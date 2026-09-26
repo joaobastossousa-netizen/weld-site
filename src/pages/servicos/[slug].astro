@@ -2,6 +2,7 @@
 import Base from "../../layouts/Base.astro";
 import ServiceVisual from "../../components/ServiceVisual.astro";
 import Integrate from "../../components/Integrate.astro";
+import DemoOffer from "../../components/DemoOffer.astro";
 import Faq from "../../components/Faq.astro";
 import CtaBand from "../../components/CtaBand.astro";
 import { services, site } from "../../content";
@@ -21,7 +22,7 @@ const others = services.filter((o) => o.slug !== s.slug);
       <p class="lead load" style="--d:3">{s.lead}</p>
       <div class="hero-ctas load" style="--d:4">
         <a href="/contacto" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
-        <a href="/demos" class="btn btn-ghost"><i class="ph ph-play-circle"></i>Ver as demos</a>
+        <a href="/contacto?demo" class="btn btn-ghost"><i class="ph ph-gift"></i>Pedir demo grátis</a>
       </div>
     </div>
     <div class="load sv-wrap" style="--d:3">
@@ -50,6 +51,8 @@ const others = services.filter((o) => o.slug !== s.slug);
       <div class="chips">{s.for.map((f, i) => <span class="chip-lg" style={`--i:${i}`}>{f}</span>)}</div>
     </div>
   </section>
+
+  <DemoOffer />
 
   <Faq items={s.faq} />
 
