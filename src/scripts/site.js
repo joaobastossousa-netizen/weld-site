@@ -210,20 +210,31 @@ if (!REDUCED) $$("[data-zoom]").forEach(img => gsap.fromTo(img, { scale: 1.18 },
 
 const sectorsEl = $(".sectors");
 if (sectorsEl) {
-  const track = $(".sectors-track", sectorsEl), cards = $$(".sector", sectorsEl);
-  const wide = matchMedia("(min-width: 901px)").matches;
-  if (wide && !REDUCED) {
-    const dist = () => Math.max(0, track.scrollWidth - innerWidth);
-    const tween = gsap.to(track, { x: () => -dist(), ease: "none", scrollTrigger: { trigger: sectorsEl, start: "top top", end: () => "+=" + dist() * 1.35, pin: ".sectors-pin", scrub: .8, invalidateOnRefresh: true } });
-    cards.forEach(card => {
-      const im = $(".sector-img", card);
-      if (im) gsap.fromTo(im, { xPercent: 6 }, { xPercent: -6, ease: "none", scrollTrigger: { trigger: card, containerAnimation: tween, start: "left right", end: "right left", scrub: true } });
-      ScrollTrigger.create({ trigger: card, containerAnimation: tween, start: "left 75%", onEnter: () => card.classList.add("in"), onLeaveBack: () => card.classList.remove("in") });
-    });
-  } else {
-    const io = new IntersectionObserver(es => es.forEach(e => e.isIntersecting && e.target.classList.add("in")), { threshold: .5 });
-    cards.forEach(c => io.observe(c));
-  }
+  const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: .35 });
+  $$(".sector", sectorsEl).forEach(c => (REDUCED ? c.classList.add("in") : io.observe(c)));
+}
+
+/* calculadora: tempo perdido por mês */
+const calc = $(".calc-box");
+if (calc) {
+  const v = {}, fmt = n => Math.round(n).toLocaleString("pt-PT");
+  const shown = { hours: 0 };
+  const run = () => {
+    $$("input[type=range]", calc).forEach(i => (v[i.dataset.k] = +i.value));
+    $('[data-o="msg"]', calc).textContent = v.msg; $('[data-o="min"]', calc).textContent = v.min;
+    $('[data-o="rep"]', calc).textContent = v.rep; $('[data-o="eur"]', calc).textContent = v.eur + " €";
+    const hmsg = v.msg * v.min * 22 / 60, hrep = v.rep * 4.33, hours = hmsg + hrep;
+    $('[data-r="hmsg"]', calc).textContent = fmt(hmsg) + " h"; $('[data-r="hrep"]', calc).textContent = fmt(hrep) + " h";
+    $('[data-r="eur"]', calc).textContent = fmt(hours * v.eur) + " €";
+    $('[data-r="days"]', calc).textContent = (hours / 8).toLocaleString("pt-PT", { maximumFractionDigits: 1 });
+    const max = Math.max(hmsg, hrep, 1);
+    $('[data-bar="msg"]', calc).style.width = (hmsg / max * 100) + "%"; $('[data-bar="rep"]', calc).style.width = (hrep / max * 100) + "%";
+    gsap.to(shown, { hours, duration: REDUCED ? 0 : .6, ease: "power3.out", onUpdate: () => ($('[data-r="hours"]', calc).textContent = fmt(shown.hours)) });
+    $$("input[type=range]", calc).forEach(i => i.style.setProperty("--p", ((i.value - i.min) / (i.max - i.min) * 100) + "%"));
+  };
+  $$("input[type=range]", calc).forEach(i => i.addEventListener("input", run));
+  ScrollTrigger.create({ trigger: calc, start: "top 80%", once: true, onEnter: run });
+  run();
 }
 
 /* serviços: foto que segue o cursor */

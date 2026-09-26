@@ -138,37 +138,31 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
     </div>
   </section>
 
-  <!-- HISTÓRIA -->
-  <section class="story" id="historia">
-    <div class="story-pin">
-      <div class="wrap story-in">
-        <div class="story-copy">
-          <h2 class="h2">{story.title}</h2>
-          <ol class="story-steps">
-            {story.steps.map((s, i) => (
-              <li class={`s-step${i === 0 ? " on" : ""}`}><span class="s-time">{s.time}</span><div><h3>{s.title}</h3><p>{s.text}</p></div></li>
-            ))}
-          </ol>
+  <!-- CALCULADORA: quanto tempo estás a perder -->
+  <section class="section wrap calc" id="calculadora">
+    <div class="sec-head">
+      <p class="idx reveal">Calculadora</p>
+      <h2 class="h2 reveal">Quanto tempo estás a perder?</h2>
+      <p class="lead reveal">Mexe nos valores do teu negócio. Fazemos as contas ao tempo que hoje vai para trabalho que dá para automatizar.</p>
+    </div>
+    <div class="calc-box reveal">
+      <div class="calc-in">
+        <label class="rng"><span><b>Mensagens de clientes por dia</b><output data-o="msg">40</output></span><input type="range" min="0" max="200" step="5" value="40" data-k="msg" /></label>
+        <label class="rng"><span><b>Minutos por resposta</b><output data-o="min">4</output></span><input type="range" min="1" max="15" step="1" value="4" data-k="min" /></label>
+        <label class="rng"><span><b>Horas por semana em tarefas repetidas</b><small>copiar dados, faturas, relatórios</small><output data-o="rep">6</output></span><input type="range" min="0" max="40" step="1" value="6" data-k="rep" /></label>
+        <label class="rng"><span><b>Custo de uma hora da equipa</b><output data-o="eur">12 €</output></span><input type="range" min="6" max="50" step="1" value="12" data-k="eur" /></label>
+      </div>
+      <div class="calc-out">
+        <p class="co-k">Por mês, vai para trabalho automatizável</p>
+        <p class="co-h"><b data-r="hours">0</b><span>horas</span></p>
+        <div class="co-bars">
+          <span><i data-bar="msg"></i><small>Mensagens</small><em data-r="hmsg">0 h</em></span>
+          <span><i data-bar="rep"></i><small>Tarefas repetidas</small><em data-r="hrep">0 h</em></span>
         </div>
-        <div class="stage" aria-hidden="true">
-          <div class="stage-phone">
-            <div class="sp-head"><span class="sp-av"></span><div><b>A tua loja</b><small id="sp-status">fechada · 23:14</small></div></div>
-            <div class="sp-body">
-              <div class="sb me s1">Olá! Têm vaga para sábado de manhã?</div>
-              <div class="sb bot s2">Olá! Sábado tenho às 10:00 e às 11:30. Qual prefere?</div>
-              <div class="sb me s2b">10h, por favor. Sou a Rita.</div>
-              <div class="sb bot s2c">Está marcado, Rita! Sábado às 10:00.</div>
-            </div>
-          </div>
-          <div class="stage-panel">
-            <div class="spn-head"><b>Painel</b><span class="live">Ao vivo</span></div>
-            <div class="spn-row"><b>09:30</b><span>Marta · Revisão</span></div>
-            <div class="spn-row new"><b>10:00</b><span>Rita · Nova marcação</span><em>nova</em></div>
-            <div class="spn-row"><b>14:30</b><span>Nuno · Orçamento</span></div>
-          </div>
-          <div class="stage-moon"><i class="ph-fill ph-moon-stars"></i>Loja fechada</div>
-          <div class="stage-toast">Nova marcação feita pelo assistente</div>
-        </div>
+        <p class="co-e">≈ <b data-r="eur">0 €</b> em tempo da equipa, todos os meses</p>
+        <p class="co-d"><b data-r="days">0</b> dias de trabalho por mês</p>
+        <a href="/contacto?demo" class="btn btn-mint magnetic">Ver isto a funcionar no meu negócio<i class="ph ph-arrow-right"></i></a>
+        <p class="co-note">Estimativa com os números que puseste, a contar 22 dias úteis por mês.</p>
       </div>
     </div>
   </section>
