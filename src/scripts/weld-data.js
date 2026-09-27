@@ -12,7 +12,8 @@ const ignored = (() => {
     return localStorage.getItem("weld_ignore") === "1";
   } catch { return false; }
 })();
-const bot = navigator.webdriver || /bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit|linkedinbot/i.test(navigator.userAgent);
+const bot = navigator.webdriver || /bot|crawl|spider|slurp|headless|lighthouse|preview|facebookexternalhit|linkedinbot|puppeteer|playwright|phantom|selenium|pingdom|uptime|monitor/i.test(navigator.userAgent)
+  || !navigator.languages || navigator.languages.length === 0;
 const local = /^(localhost|127\.|192\.168\.)/.test(location.hostname);
 
 let session = null, isNew = false;
@@ -40,6 +41,7 @@ export function track(kind, label = "") { send({ t: "ev", k: kind, l: String(lab
 
 /** Guarda um pedido no painel. Devolve true se ficou guardado. */
 export async function submitLead(lead) {
+  human();
   try {
     const r = await post("weld_submit_lead", { p: { ...lead, session, page: location.pathname, referrer: refHost || null, utm: utm.source ? utm : null } });
     if (!r.ok) return false;
@@ -48,14 +50,23 @@ export async function submitLead(lead) {
   } catch { return false; }
 }
 
-// visita
-send({
+// visita: só conta quando há sinal de uma pessoa (mexer o rato, fazer scroll, tocar, teclar).
+// Robôs que abrem a página e saem sem fazer nada não contam.
+const pageview = () => send({
   t: "pv", title: document.title.slice(0, 200), ref: refHost,
   us: utm.source || "", um: utm.medium || "", uc: utm.campaign || "",
   d: innerWidth < 700 ? "mobile" : innerWidth < 1024 ? "tablet" : "desktop",
   lang: navigator.language, tz: (() => { try { return Intl.DateTimeFormat().resolvedOptions().timeZone; } catch { return ""; } })(),
   w: String(screen.width || ""), new: isNew ? "true" : "false",
 });
+let counted = false;
+const human = () => {
+  if (counted) return;
+  counted = true;
+  ["pointermove", "scroll", "touchstart", "keydown", "wheel"].forEach((ev) => removeEventListener(ev, human, true));
+  pageview();
+};
+["pointermove", "scroll", "touchstart", "keydown", "wheel"].forEach((ev) => addEventListener(ev, human, { capture: true, passive: true }));
 
 // cliques nos botões que levam a pedir
 document.addEventListener("click", (e) => {
