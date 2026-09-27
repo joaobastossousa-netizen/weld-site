@@ -18,12 +18,23 @@ import { contact, site } from "../content";
     <input id="f-name" name="name" autocomplete="name" required />
     <label for="f-company">Empresa ou agência</label>
     <input id="f-company" name="company" autocomplete="organization" />
+    <div class="brief-row">
+      <span><label for="f-phone">Telemóvel</label><input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" /></span>
+      <span><label for="f-email">Email</label><input id="f-email" name="email" type="email" autocomplete="email" /></span>
+    </div>
     <label for="f-msg">Em duas linhas, o que querem resolver?</label>
     <textarea id="f-msg" name="msg" rows="3"></textarea>
+    <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
     <p class="err" id="f-err" hidden>Falta o nome.</p>
     <div class="brief-actions">
       <button type="button" class="back" data-back>Voltar</button>
-      <button type="submit" class="btn btn-mint">Abrir email pronto<i class="ph ph-arrow-right"></i></button>
+      <button type="submit" class="btn btn-mint" id="f-send">Enviar pedido<i class="ph ph-arrow-right"></i></button>
     </div>
+  </fieldset>
+  <fieldset class="brief-step brief-done" data-step="4">
+    <span class="bd-ic" aria-hidden="true"><i class="ph-bold ph-check"></i></span>
+    <legend>Recebido.</legend>
+    <p id="f-done-text">Já está connosco. Respondemos em 24 horas úteis.</p>
+    <p class="bd-note">Enquanto esperas, espreita as <a href="/demos">demos a funcionar</a>.</p>
   </fieldset>
 </form>

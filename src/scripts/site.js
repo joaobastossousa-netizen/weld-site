@@ -1,5 +1,6 @@
 // Movimento e interações do site da Weld (todas as páginas).
 import { gsap } from "gsap";
+import { submitLead, track } from "./weld-data.js";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
@@ -355,13 +356,36 @@ if (form) {
     const lbl = $('label[for="f-msg"]', form); if (lbl) lbl.textContent = "Site ou Instagram do negócio, e o que fazem";
     $$('.opt[data-field="who"]', form).forEach(o => o.addEventListener("click", () => setTimeout(() => go(3), 230)));
   }
-  form.addEventListener("submit", e => {
+  let started = false;
+  form.addEventListener("pointerdown", () => { if (!started) { started = true; track("form_start", "contacto"); } }, { capture: true });
+  form.addEventListener("submit", async e => {
     e.preventDefault();
     const name = $("#f-name").value.trim(), company = $("#f-company").value.trim(), msg = $("#f-msg").value.trim();
-    $("#f-err").hidden = !!name;
-    if (!name) { $("#f-name").focus(); return; }
+    const phone = $("#f-phone").value.trim(), email = $("#f-email").value.trim(), errEl = $("#f-err");
+    const problem = !name ? "Falta o nome." : !phone && !email ? "Deixa um telemóvel ou um email para te respondermos." : "";
+    errEl.textContent = problem; errEl.hidden = !problem;
+    if (problem) { (!name ? $("#f-name") : $("#f-phone")).focus(); return; }
+    const need = data.need || "", who = data.who || "";
+    const svc = { "Assistente de IA": "assistentes", "Automação": "automacoes", "Site": "sites", "Software à medida": "software" }[need];
+    const send = $("#f-send"); send.disabled = true;
+    const ok = await submitLead({
+      source: "contacto", name, company, phone, email, message: msg, website: form.elements.website?.value || "",
+      kind: need === "Demo grátis" ? "demo" : who === "Agência" ? "agencia" : "conversa",
+      audience: who === "Agência" ? "agencia" : who ? "negocio" : null,
+      services: svc ? [svc] : [],
+      details: [["Contacto", [["Somos", who || "não indicado"], ["Precisamos de", need || "ainda não sei"]]]],
+    });
+    send.disabled = false;
+    if (ok) {
+      $("#f-done-text").textContent = need === "Demo grátis"
+        ? `Obrigado, ${name.split(" ")[0]}. Vamos preparar a demo com o vosso negócio e ${phone ? "ligamos-te" : "escrevemos-te"} em 24 horas úteis para marcar os 20 minutos.`
+        : `Obrigado, ${name.split(" ")[0]}. ${phone ? "Ligamos-te" : "Respondemos por email"} em 24 horas úteis.`;
+      go(4);
+      return;
+    }
+    // não deu para guardar: cai para o email pré-escrito
     const subject = `Pedido Weld: ${data.need || "conversa"}${company ? " para " + company : ""}`;
-    const lines = ["Olá João,", "", `Sou ${name}${company ? ", da " + company : ""}.`, `Somos: ${data.who || "não indicado"}.`, `Precisamos de: ${data.need || "ainda não sei"}.`, msg ? `\n${msg}` : "", "", data.need === "Demo grátis" ? "Gostava de ver a demo grátis com o nosso negócio. Quando podemos marcar os 20 minutos?" : "Podemos marcar uma conversa de 20 minutos?"];
+    const lines = ["Olá João,", "", `Sou ${name}${company ? ", da " + company : ""}${phone ? ` (${phone})` : ""}.`, `Somos: ${data.who || "não indicado"}.`, `Precisamos de: ${data.need || "ainda não sei"}.`, msg ? `\n${msg}` : "", "", data.need === "Demo grátis" ? "Gostava de ver a demo grátis com o nosso negócio. Quando podemos marcar os 20 minutos?" : "Podemos marcar uma conversa de 20 minutos?"];
     location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
   });
 }
@@ -418,6 +442,8 @@ if (order) {
   const subject = () => { const s = read(); return `Pedido Weld: ${s.services.map(k => svcLabel[k]).join(" + ") || "projeto"}${one("company") ? " para " + one("company") : ""}`; };
   const copy = async () => { try { await navigator.clipboard.writeText(`${subject()}\n\n${text()}`); return true; } catch { return false; } };
   order.addEventListener("input", refresh); order.addEventListener("change", refresh); refresh();
+  let oStarted = false;
+  order.addEventListener("change", () => { if (!oStarted) { oStarted = true; track("form_start", "pedido"); } });
   order.addEventListener("submit", async e => {
     e.preventDefault();
     const err = $("#o-err"), svc = vals("service").length, name = one("name"), reach = one("reach"), phone = one("phone"), email = one("email");
@@ -429,9 +455,18 @@ if (order) {
     err.textContent = msg; err.hidden = !msg;
     if (msg) { err.closest(".o-block").scrollIntoView({ behavior: "smooth", block: "start" }); return; }
     const btn = $(".os-send"); btn.disabled = true; note.textContent = "A enviar…";
+    const svcKey = { assistente: "assistentes", automacao: "automacoes", site: "sites", software: "software" };
+    const s = read(), whoV = one("who");
+    const saved = await submitLead({
+      source: "pedido", name, email, phone, company: one("company"), sector: one("sector"), link: one("link"), website: one("website"),
+      kind: whoV.startsWith("Agência") ? "agencia" : "proposta", audience: whoV.startsWith("Agência") ? "agencia" : "negocio",
+      services: s.services.map((k) => svcKey[k] || k), message: one("goal") || one("extra"), details: s.sections,
+    });
+    // cópia por email, se o envio por email estiver configurado (não bloqueia)
+    const mail = fetch("/api/pedido", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ subject: subject(), text: text(), name, email, phone, website: one("website") }) }).catch(() => null);
     try {
-      const r = await fetch("/api/pedido", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ subject: subject(), text: text(), name, email, phone, website: one("website") }) });
-      if (r.ok) {
+      const r = saved ? { ok: true } : await mail;
+      if (r && r.ok) {
         const side = $(".order-side"); side.classList.add("sent"); $("#os-done").hidden = false;
         $("#os-done-text").textContent = reach === "Email" ? "Já está connosco. Respondemos por email em 24 horas úteis." : `Já está connosco. ${reach === "WhatsApp" ? "Falamos por WhatsApp" : "Ligamos-te"} para o ${phone} em 24 horas úteis.`;
         side.scrollIntoView({ behavior: "smooth", block: "center" });

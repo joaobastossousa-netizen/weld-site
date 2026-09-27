@@ -389,7 +389,7 @@ export const demoOffer = {
 
 export const contact = {
   title: "Conta-nos o que precisas.",
-  lead: "Três passos e o email fica escrito. Respondemos rápido.",
+  lead: "Três passos e fica connosco. Respondemos em 24 horas úteis.",
   who: ["Agência", "Negócio"],
   needs: ["Demo grátis", "Assistente de IA", "Automação", "Site", "Software à medida", "Ainda não sei"],
 };
