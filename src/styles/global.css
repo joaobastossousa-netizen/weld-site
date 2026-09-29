@@ -1232,3 +1232,40 @@ body{position:relative}
 .co-note{margin:4px 0 0;font:500 11.5px var(--mono);color:var(--faint)}
 @media (max-width:900px){.calc-box{grid-template-columns:minmax(0,1fr)}.calc-in,.calc-out{padding:26px 22px}}
 .sectors{padding-bottom:clamp(50px,6vw,80px)}
+
+/* capa: duas entradas (agência / negócio) */
+.hx-paths{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:22px;max-width:560px}
+.hx-path{display:flex;align-items:center;gap:12px;padding:14px 16px;border:1px solid rgba(244,247,244,.28);border-radius:12px;color:#F4F7F4;text-decoration:none;transition:background .2s,border-color .2s,transform .2s}
+.hx-path>i:first-child{font-size:26px;color:var(--mint-2)}
+.hx-path span{display:flex;flex-direction:column;gap:2px;flex:1}
+.hx-path b{font:600 15px var(--mono)}
+.hx-path small{font:400 12px var(--mono);color:#C9D8CF}
+.hx-path .go{opacity:.6;transition:transform .2s}
+.hx-path:hover{border-color:var(--mint-2);background:rgba(63,164,122,.12)}
+.hx-path:hover .go{transform:translateX(3px);opacity:1}
+.hx-path.hot{background:var(--mint);border-color:var(--mint);color:#06150F}
+.hx-path.hot small{color:#0A2119}.hx-path.hot>i:first-child{color:#06150F}
+.hx-path.hot:hover{background:var(--mint-2)}
+@media (max-width:600px){.hx-paths{grid-template-columns:1fr}}
+/* revenda explicada */
+.ways-wrap .sec-head .lead{max-width:60ch}
+.resale{margin-top:16px;padding:28px;border:1px solid var(--rule,rgba(10,33,25,.18));border-radius:16px;display:grid;gap:18px;background:rgba(63,164,122,.06)}
+.resale h3{margin:0;font:700 clamp(20px,2vw,26px)/1.2 var(--mono);letter-spacing:-.03em}
+.resale-steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:r}
+.resale-steps li{display:flex;flex-direction:column;gap:6px}
+.resale-steps li>i{font-size:28px;color:var(--mint)}
+.resale-steps b{font:600 15px var(--mono)}
+.resale-steps span{font-size:14px;line-height:1.5;opacity:.85}
+.resale-win{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.resale-win p{margin:0;padding:14px 16px;border-radius:12px;background:rgba(10,33,25,.06);font-size:14px;line-height:1.5}
+.resale-win b{display:block;margin-bottom:4px;font:600 13px var(--mono);letter-spacing:.02em;text-transform:uppercase;color:var(--mint)}
+.resale .btn{justify-self:start}
+@media (max-width:900px){.resale{padding:22px 18px}.resale-steps,.resale-win{grid-template-columns:minmax(0,1fr)}}
+/* agências: ganham os dois */
+.win{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.win-col{padding:28px;border:1px solid rgba(10,33,25,.18);border-radius:16px}
+.win-col h3{margin:0 0 14px;font:700 22px var(--mono);letter-spacing:-.03em}
+.win-col ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.win-col li{display:flex;gap:10px;align-items:flex-start;line-height:1.45}
+.win-col li i{color:var(--mint);margin-top:3px}
+@media (max-width:900px){.win{grid-template-columns:minmax(0,1fr)}}

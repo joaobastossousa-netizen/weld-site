@@ -53,10 +53,12 @@ export const chats = {
 };
 
 export const home = {
-  kicker: "Estúdio de automação com IA no Porto",
+  kicker: "Automação e IA no Porto · para negócios e para agências",
   // capa: título grande e direto, em 3 linhas (a última a verde)
   hero: ["Trabalho à mão", "é dinheiro", "a fugir."],
-  heroLead: "Pomos IA e automação a fazer o trabalho repetitivo do teu negócio. Responder, marcar, faturar, registar. Tu ficas com o que dá dinheiro.",
+  heroLead: "Pomos IA e automação a fazer o trabalho repetitivo: responder, marcar, faturar, registar. Trabalhamos diretamente com negócios, e com agências que querem revender isto aos seus clientes, em marca branca.",
+  // duas entradas na capa
+  paths: [["ph-megaphone", "Sou uma agência", "Quero revender", "/agencias"], ["ph-storefront", "Tenho um negócio", "Quero para mim", "/servicos"]],
   // registo ao vivo (exemplo) na capa: [ícone, serviço, o que aconteceu]
   log: [
     ["ph-whatsapp-logo", "Assistente", "Mensagem respondida no WhatsApp"],
@@ -114,6 +116,7 @@ export const sectors = {
 export const ways = {
   idx: "Como trabalhamos",
   title: "Duas formas de trabalhar com a Weld.",
+  lead: "Trabalhamos diretamente com negócios e também por trás de agências, que revendem o nosso trabalho aos seus clientes.",
   items: [
     {
       key: "direto",
@@ -123,19 +126,33 @@ export const ways = {
       text: "Percebemos o que o teu negócio precisa, construímos à medida e ficamos por perto depois da entrega.",
       points: ["Proposta fechada e por escrito", "Feito para o teu negócio, nada genérico", "Acompanhamento mensal, se quiseres"],
       cta: "Pedir proposta",
-      href: "/contacto",
+      href: "/pedido",
     },
     {
       key: "agencia",
-      label: "Através da tua agência",
+      label: "Revenda através da tua agência",
       flow: ["Agência", "Weld", "Cliente da agência"],
-      title: "Vendes com a tua marca. Nós construímos.",
-      text: "Trabalhamos para os clientes da tua agência, por trás e com o nome da agência. Tu ficas com a relação e com a margem.",
-      points: ["Marca branca: o cliente vê a tua agência", "Sem contratar ninguém", "Revenda, projeto fechado ou percentagem"],
+      title: "Revendes com a tua marca. Nós construímos.",
+      text: "Trabalhamos para os clientes da tua agência, por trás e com o nome da agência. Tu vendes ao preço que quiseres e ficas com a margem.",
+      points: ["Revenda: preço fixo por cliente, a margem é tua", "Marca branca: o cliente vê a tua agência", "Sem contratar ninguém: nós construímos e mantemos"],
       cta: "Ser agência parceira",
       href: "/agencias",
     },
   ],
+  // explicação da revenda, por baixo das duas formas (só na página inicial)
+  resale: {
+    title: "Como funciona a revenda.",
+    steps: [
+      ["ph-handshake", "A agência vende", "Vocês falam com o cliente e definem o preço final."],
+      ["ph-tag", "A Weld cobra um preço fixo", "Um valor por cliente. O que a agência cobrar a mais é margem dela."],
+      ["ph-hammer", "A Weld constrói e mantém", "Instalamos, ligamos ao WhatsApp e ficamos a manter. Sem contratar ninguém."],
+    ],
+    win: [
+      ["Para a agência", "Um serviço novo para vender, com margem e mensalidade de manutenção, e clientes mais ligados a vocês."],
+      ["Para a Weld", "Projetos sem andar à procura de clientes. Não fazemos marketing, por isso não competimos convosco."],
+    ],
+    cta: "Ver como funciona com agências",
+  },
 };
 
 export const integrations = {
@@ -306,6 +323,14 @@ export const agencies = {
     ["ph-presentation-chart", "Demo antes da venda", "Fazemos uma demo com o nome e os dados do vosso cliente para levarem à reunião."],
     ["ph-wrench", "Entrega e manutenção", "Construímos, ligamos ao WhatsApp e ficamos a manter, mês a mês."],
   ],
+  win: {
+    title: "Ganham os dois.",
+    lead: "Funciona como externalização: vocês vendem, nós fazemos. Ninguém compete com ninguém.",
+    cols: [
+      ["Para a agência", ["Um serviço novo, com margem e mensalidade de manutenção", "Vocês definem o preço final ao cliente", "Sem contratar nem formar ninguém", "Clientes mais ligados à agência"]],
+      ["Para a Weld", ["Projetos sem andar à procura de clientes", "Um parceiro que conhece o cliente e leva a demo à reunião", "Não fazemos marketing: não vos tiramos clientes", "Trabalhamos por trás, com a vossa marca"]],
+    ],
+  },
   steps: [
     ["Escolhem um cliente", "Mandam-nos o site e o Instagram de um cliente que recebe muitas mensagens."],
     ["Fazemos a demo", "Em poucos dias têm uma demo a funcionar com o nome dele."],

@@ -34,6 +34,18 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
   </section>
 
   <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{agencies.win.title}</h2><p class="lead reveal">{agencies.win.lead}</p></div>
+    <div class="win">
+      {agencies.win.cols.map(([t, items], i) => (
+        <article class="win-col reveal" style={`--i:${i}`}>
+          <h3>{t}</h3>
+          <ul>{items.map((it) => <li><i class="ph-bold ph-check"></i>{it}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap">
     <div class="sec-head"><h2 class="h2 reveal">Como funciona a parceria.</h2></div>
     <ol class="timeline">
       {agencies.steps.map(([t, p], i) => (

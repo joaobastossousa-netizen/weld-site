@@ -21,11 +21,12 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
         <div class="hx-foot">
           <div class="hx-copy">
             <p class="hx-lead load" style="--d:4">{home.heroLead}</p>
-            <div class="hero-ctas load" style="--d:5">
-              <a href="/pedido" class="btn btn-mint magnetic">{site.cta}<i class="ph ph-arrow-right"></i></a>
-              <a href="/contacto?demo" class="btn btn-ghost"><i class="ph ph-gift"></i>Demo grátis</a>
+            <div class="hx-paths load" style="--d:5">
+              {home.paths.map(([ic, t, s2, href], i) => (
+                <a href={href} class={`hx-path${i === 0 ? " hot" : ""}`}><i class={`ph-duotone ${ic}`}></i><span><b>{t}</b><small>{s2}</small></span><i class="ph ph-arrow-right go"></i></a>
+              ))}
             </div>
-            <p class="hx-for load" style="--d:6"><a href="/servicos">Para negócios</a><span>·</span><a href="/agencias">Para agências, em marca branca</a></p>
+            <p class="hx-for load" style="--d:6"><a href="/pedido">{site.cta}</a><span>·</span><a href="/contacto?demo">Demo grátis</a><span>·</span><a href="#como-trabalhamos">Como funciona a revenda</a></p>
           </div>
           <div class="hx-log load" style="--d:5" aria-hidden="true" data-log={JSON.stringify(home.log)}>
             <div class="hx-log-head"><span class="hx-live"><i></i>Ao vivo</span><span>exemplo</span></div>
@@ -37,11 +38,14 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
     </div>
   </section>
 
+  <!-- DUAS FORMAS: logo a seguir à capa -->
+  <Ways idx="01 / Como trabalhamos" resale />
+
   <div class="dark band band-calc">
   <!-- CALCULADORA: quanto tempo estás a perder -->
   <section class="section wrap calc" id="calculadora">
     <div class="sec-head">
-      <p class="idx reveal">01 / Calculadora</p>
+      <p class="idx reveal">02 / Calculadora</p>
       <h2 class="h2 reveal">Quanto tempo estás a perder?</h2>
       <p class="lead reveal">Mexe nos valores do teu negócio. Fazemos as contas ao tempo que hoje vai para trabalho que dá para automatizar.</p>
     </div>
@@ -70,7 +74,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 
   <!-- O QUE MUDA -->
   <section class="section wrap">
-    <div class="sec-head"><p class="idx reveal">02 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
+    <div class="sec-head"><p class="idx reveal">03 / O que muda</p><h2 class="h2 reveal">{compare.title}</h2></div>
     <div class="compare">
       <div class="cmp cmp-no reveal">
         <p class="cmp-h"><i class="ph ph-x-circle"></i>Sem automação</p>
@@ -82,9 +86,6 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       </div>
     </div>
   </section>
-
-  <!-- DUAS FORMAS -->
-  <Ways idx="03 / Como trabalhamos" />
 
   <!-- EXEMPLOS DOS QUATRO SERVIÇOS -->
   <Examples idx="04 / Exemplos" />
