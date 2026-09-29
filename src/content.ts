@@ -43,6 +43,14 @@ export const team = [
     linkedin: "", // colar aqui o link do LinkedIn do Duarte
     email: "",
   },
+  {
+    name: "Francisco Midões",
+    initials: "FM",
+    role: "Redes sociais e conteúdo",
+    text: "Trata do vídeo e do conteúdo da Weld e publica-o nas nossas redes. É quem mostra o que fazemos, semana a semana.",
+    linkedin: "",
+    email: "",
+  },
 ];
 
 /* conversas usadas nos telemóveis animados: [quem, texto]. "me" = cliente, "bot" = assistente, "ok" = resultado */
