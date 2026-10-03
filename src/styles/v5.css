@@ -197,7 +197,7 @@ body[data-chapter="paper"] .mega{background:#fff;box-shadow:var(--shadow-lift),0
    ================================================================= */
 
 /* ---------- capa ---------- */
-.hero5{position:relative;padding-top:clamp(16px,2.4vw,32px)}
+.hero5{position:relative;padding-top:clamp(16px,2.4vw,32px);overflow-x:clip}
 .h5-meta{display:flex;justify-content:space-between;gap:16px;margin:0 0 clamp(26px,4vw,56px);padding-bottom:14px;border-bottom:1px solid var(--line);font:500 12.5px/1 var(--mono);color:var(--muted)}
 .h5-meta-r{display:flex;gap:22px}
 .h5-meta b{font-weight:500;color:var(--text)}

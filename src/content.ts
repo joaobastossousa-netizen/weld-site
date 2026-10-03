@@ -543,3 +543,49 @@ export const landing = {
     text: "Mostra-nos como trabalhas. Em poucos dias vês a Weld a funcionar no teu negócio, de graça.",
   },
 };
+
+/* ------------------------------------------------------------------
+   LABORATÓRIO: três demos interativas na página inicial, uma por serviço.
+   Marcas e números inventados, sempre assinalados como exemplo.
+------------------------------------------------------------------- */
+export const lab = {
+  title: ["Experimenta antes", "de falar connosco."],
+  lead: "Três serviços, três exemplos. Não são vídeos: arrasta, carrega e vê o que acontece.",
+  tabs: [
+    { key: "fat", service: "Automação", title: "Fatura para o Excel", hint: "Arrasta uma fatura para a folha, ou carrega nela." },
+    { key: "site", service: "Site", title: "Antes e depois, com reservas", hint: "Arrasta a barra para comparar. Depois faz uma reserva no site novo." },
+    { key: "kan", service: "Software à medida", title: "Painel de encomendas", hint: "Arrasta as encomendas entre colunas. Quando fica pronta, o cliente é avisado." },
+  ],
+  invoices: [
+    { id: "gr", short: "GR", color: "#E8792B", supplier: "Gráfica Ribeira, Lda", nif: "508 ••• 337", doc: "FT 2026/0412", date: "28/09/2026", category: "Marketing", lines: [["Flyers A5, 2000 un.", "168,00"], ["Cartões de visita", "86,00"]], base: 254.0, vat: 23, total: 312.42 },
+    { id: "fb", short: "FB", color: "#3FA47A", supplier: "Frutaria do Bolhão", nif: "245 ••• 903", doc: "FT A/1187", date: "30/09/2026", category: "Matéria-prima", lines: [["Laranja do Algarve, 12 kg", "21,60"], ["Limão, 6 kg", "13,20"], ["Morango, 10 cx.", "46,50"]], base: 81.27, vat: 6, total: 86.15 },
+    { id: "en", short: "EN", color: "#4F7DF3", supplier: "Eletro Norte, S.A.", nif: "503 ••• 160", doc: "FT 2026/9921", date: "01/10/2026", category: "Equipamento", lines: [["Forno elétrico 60 L", "849,00"], ["Instalação", "130,00"]], base: 978.86, vat: 23, total: 1204.0 },
+  ],
+  sheetRows: [["01/09", "Renda do espaço", "Renda", "0%", "900,00 €", "Pago"], ["15/09", "Luz · setembro", "Energia", "23%", "143,80 €", "Pago"]],
+  site: {
+    brand: "Lareira",
+    url: "weldstudio.pt/exemplos/lareira",
+    people: ["2", "4", "6+"],
+    days: [["Hoje", "hoje"], ["Sex", "sexta"], ["Sáb", "sábado"], ["Dom", "domingo"]],
+    times: [["19:30", true], ["20:00", true], ["20:30", true], ["21:00", false], ["21:30", true]],
+    booked: [["19:30", "Mesa para 2", "Sofia R."], ["20:00", "Mesa para 6", "Aniversário · Tiago"]],
+  },
+  kan: {
+    brand: "Aurora",
+    cols: [["new", "Novas"], ["oven", "No forno"], ["ready", "Prontas"], ["done", "Entregues"]],
+    orders: [
+      { id: 214, col: "new", item: "Bolo de chocolate", size: "1,5 kg", client: "Marta S.", when: "sáb · 11:00", price: 32, use: { choc: 0.45, flour: 0.5, eggs: 6 } },
+      { id: 215, col: "new", item: "Pastéis de nata", size: "24 un.", client: "Rui P.", when: "hoje · 17:30", price: 26.4, use: { choc: 0, flour: 0.8, eggs: 12 } },
+      { id: 212, col: "oven", item: "Bolo de cenoura", size: "1 kg", client: "Inês C.", when: "hoje · 16:00", price: 22, use: { choc: 0.2, flour: 0.4, eggs: 4 } },
+      { id: 218, col: "new", item: "Bolo de bolacha", size: "1,2 kg", client: "Joana F.", when: "amanhã · 18:00", price: 28, use: { choc: 0.1, flour: 0.2, eggs: 2 } },
+      { id: 213, col: "oven", item: "Pão de ló", size: "1 kg", client: "Ana T.", when: "hoje · 15:00", price: 24, use: { choc: 0, flour: 0.3, eggs: 10 } },
+      { id: 210, col: "ready", item: "Tarte de amêndoa", size: "8 fatias", client: "Nuno A.", when: "hoje · 12:30", price: 19.5, use: { choc: 0, flour: 0.3, eggs: 3 } },
+      { id: 209, col: "done", item: "Queques", size: "12 un.", client: "Luís M.", when: "hoje · 10:00", price: 15.6, use: { choc: 0, flour: 0.3, eggs: 4 } },
+    ],
+    incoming: [
+      { id: 216, item: "Bolo de aniversário", size: "2 kg", client: "Carla M.", when: "dom · 10:00", price: 45, use: { choc: 0.6, flour: 0.7, eggs: 8 } },
+      { id: 217, item: "Brownies", size: "12 un.", client: "Pedro L.", when: "amanhã · 9:00", price: 18, use: { choc: 0.5, flour: 0.2, eggs: 4 } },
+    ],
+    stock: { choc: 1.3, flour: 9.5, eggs: 60 },
+  },
+};

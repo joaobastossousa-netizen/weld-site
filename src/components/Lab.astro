@@ -1,0 +1,191 @@
+---
+// Laboratório: três demos interativas, uma por serviço (automação, site, software). Lógica em src/scripts/lab.js.
+import { lab } from "../content";
+import "../styles/lab.css";
+const eur = (n: number) => n.toLocaleString("pt-PT", { minimumFractionDigits: 2, maximumFractionDigits: 2, useGrouping: "always" } as any) + " €";
+const { site, kan } = lab;
+---
+<section class="s5 lab5" id="experimenta" data-chapter="dark">
+  <div class="wrap-wide">
+    <header class="s5-head">
+      <h2 class="s5-h" data-rise>{lab.title.map((l) => <span class="ln"><span>{l}</span></span>)}</h2>
+      <p class="s5-lead reveal">{lab.lead}</p>
+    </header>
+
+    <div class="lab-tabs" role="tablist" aria-label="Exemplos">
+      {lab.tabs.map((t, i) => (
+        <button class={`lab-tab${i === 0 ? " on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} aria-controls={`lab-${t.key}`} data-tab={t.key} data-hint={t.hint}>
+          <span class="lt-n">{String(i + 1).padStart(2, "0")}</span>
+          <span class="lt-t"><small>{t.service}</small><b>{t.title}</b></span>
+        </button>
+      ))}
+    </div>
+
+    <div class="lab">
+      <!-- 01 · AUTOMAÇÃO: fatura para o Excel -->
+      <div class="lab-pane on" id="lab-fat" role="tabpanel" data-pane="fat">
+        <div class="fat" data-inv={JSON.stringify(lab.invoices)}>
+          <div class="fat-inbox">
+            <p class="lab-k"><i class="ph ph-tray"></i>Caixa de entrada · faturas@</p>
+            <div class="inv-list">
+              {lab.invoices.map((v) => (
+                <button class="inv" type="button" data-id={v.id} data-cursor="Arrastar" style={`--c:${v.color}`}>
+                  <span class="inv-logo">{v.short}</span>
+                  <span class="inv-t"><b>{v.supplier}</b><small>{v.doc} · PDF</small></span>
+                  <span class="inv-v">{eur(v.total)}</span>
+                  <i class="ph-bold ph-check inv-ok"></i>
+                </button>
+              ))}
+            </div>
+            <p class="fat-hint"><i class="ph ph-hand-grabbing"></i>Arrasta para a folha, ou carrega.</p>
+          </div>
+
+          <div class="fat-read">
+            <p class="lab-k"><span class="lab-dot"></span><span class="fr-state">À espera de uma fatura</span></p>
+            <div class="doc" aria-hidden="true">
+              <div class="doc-empty"><i class="ph ph-file-text"></i><span>Larga aqui uma fatura</span></div>
+              <div class="doc-paper">
+                <div class="doc-head"><span class="doc-logo"></span><span><b class="d-sup"></b><small class="d-nif"></small></span><em>Fatura</em></div>
+                <div class="doc-meta"><span>N.º <b class="d-doc"></b></span><span>Data <b class="d-date"></b></span></div>
+                <div class="doc-lines"></div>
+                <div class="doc-tot"><span>Base <b class="d-base"></b></span><span>IVA <b class="d-vat"></b></span><span class="d-total-w">Total <b class="d-total"></b></span></div>
+                <i class="doc-scan"></i>
+              </div>
+            </div>
+            <ul class="fields">
+              <li data-f="sup"><small>Fornecedor</small><b>·</b></li>
+              <li data-f="date"><small>Data</small><b>·</b></li>
+              <li data-f="cat"><small>Categoria</small><b>·</b></li>
+              <li data-f="total"><small>Total</small><b>·</b></li>
+            </ul>
+          </div>
+
+          <div class="fat-sheet">
+            <div class="sheet">
+              <div class="sheet-bar"><img src="/logos/googlesheets-color.svg" alt="" width="18" height="18" /><b>contabilidade_2026</b><span>Outubro</span></div>
+              <div class="sheet-grid">
+                <div class="srow srow-h"><span>Data</span><span>Fornecedor</span><span>Categoria</span><span>IVA</span><span>Total</span><span>Estado</span></div>
+                {lab.sheetRows.map((r) => <div class="srow">{r.map((c, k) => <span class={k === 5 ? "st st-ok" : ""}>{c}</span>)}</div>)}
+                <div class="srow-new"></div>
+              </div>
+              <div class="sheet-foot"><span>Total do mês</span><b class="sheet-sum" data-base="1043.80">1 043,80 €</b></div>
+            </div>
+            <div class="fat-time"><span>À mão: ~4 min por fatura</span><span>Aqui: <b class="ft-s">0,0 s</b></span></div>
+            <div class="approve" role="group" aria-label="Aprovação da fatura">
+              <span class="ap-ic"><img src="/logos/whatsapp-color.svg" alt="" width="18" height="18" /></span>
+              <p><b>Precisa da tua aprovação</b><span class="ap-txt"></span></p>
+              <div class="ap-btns"><button type="button" class="ap-yes">Aprovar</button><button type="button" class="ap-no">Recusar</button></div>
+            </div>
+            <button type="button" class="lab-reset fat-reset"><i class="ph ph-arrow-counter-clockwise"></i>Repor</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 02 · SITE: antes e depois, com reservas -->
+      <div class="lab-pane" id="lab-site" role="tabpanel" data-pane="site" hidden>
+        <div class="ba">
+          <div class="ba-frame">
+            <div class="ba-bar"><i></i><i></i><i></i><span>{site.url}</span></div>
+            <div class="ba-view" style="--pos:50%">
+              <!-- o site antigo -->
+              <div class="ba-old" aria-label="Site antigo">
+                <div class="old-mq"><span>*** BEM-VINDOS AO NOSSO SITE!!! *** RESERVAS SÓ POR TELEFONE *** ABERTO TODOS OS DIAS EXCETO QUANDO FECHADO ***</span></div>
+                <div class="old-body">
+                  <p class="old-h">Restaurante {site.brand}</p>
+                  <p class="old-nav"><u>Início</u> | <u>Ementa (PDF 14 MB)</u> | <u>Fotos</u> | <u>Contactos</u></p>
+                  <div class="old-cols">
+                    <div class="old-img"><img src="/img/setor-restaurante.jpg" alt="" /><small>foto_restaurante_final2.jpg</small></div>
+                    <div>
+                      <p><b>HORÁRIO:</b><br />Seg a Sáb 12h-15h e 19h-23h<br />Domingo: ligar antes</p>
+                      <p><b>RESERVAS:</b> por telefone, das 10h às 12h.<br />Se não atendermos, tente mais tarde.</p>
+                      <p class="old-blink">Novo!!! Temos francesinha às sextas</p>
+                    </div>
+                  </div>
+                  <p class="old-foot">Visitante n.º 004213 · Última atualização: 12/03/2014 · Melhor visto em Internet Explorer</p>
+                </div>
+              </div>
+              <!-- o site novo -->
+              <div class="ba-new" aria-label="Site novo">
+                <div class="new-bg" aria-hidden="true"><i class="ember e1"></i><i class="ember e2"></i><i class="grill"></i></div>
+                <div class="new-nav"><b>{site.brand}</b><span>Ementa</span><span>Espaço</span><span>Eventos</span></div>
+                <div class="new-hero">
+                  <p class="new-k">Cozinha de brasa · Porto</p>
+                  <p class="new-h">Brasa, vinho<br />e mesa para quatro.</p>
+                </div>
+                <form class="book" novalidate>
+                  <p class="book-h">Reservar mesa</p>
+                  <div class="book-row" data-k="people"><small>Pessoas</small><div>{site.people.map((p, i) => <button type="button" class={i === 1 ? "on" : ""} data-v={p}>{p}</button>)}</div></div>
+                  <div class="book-row" data-k="day"><small>Dia</small><div>{site.days.map(([d, full], i) => <button type="button" class={i === 2 ? "on" : ""} data-v={full}>{d}</button>)}</div></div>
+                  <div class="book-row" data-k="time"><small>Hora</small><div>{site.times.map(([t, ok], i) => <button type="button" class={i === 2 ? "on" : ""} data-v={t} disabled={!ok}>{t}</button>)}</div></div>
+                  <button type="submit" class="book-go">Reservar <span class="book-sum">4 pessoas · sábado · 20:30</span></button>
+                  <div class="book-done"><i class="ph-bold ph-check"></i><b>Mesa reservada.</b><span class="book-done-t"></span><small>Confirmação enviada por SMS.</small><button type="button" class="book-again">Fazer outra</button></div>
+                </form>
+              </div>
+              <div class="ba-handle" role="slider" tabindex="0" aria-label="Comparar o site antigo com o novo" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" data-cursor="Arrastar"><span><i class="ph-bold ph-caret-left"></i><i class="ph-bold ph-caret-right"></i></span></div>
+              <span class="ba-tag ba-tag-l">Antes</span><span class="ba-tag ba-tag-r">Depois, com a Weld</span>
+            </div>
+          </div>
+          <aside class="ba-panel">
+            <p class="lab-k"><i class="ph ph-calendar-check"></i>Painel do restaurante · sábado</p>
+            <ul class="bp-list">
+              {site.booked.map(([t, what, who]) => <li><b>{t}</b><span>{what}<small>{who}</small></span><em>site</em></li>)}
+            </ul>
+            <p class="bp-note">Cada reserva feita no site aparece aqui, sem ninguém atender o telefone.</p>
+          </aside>
+        </div>
+      </div>
+
+      <!-- 03 · SOFTWARE: painel de encomendas -->
+      <div class="lab-pane" id="lab-kan" role="tabpanel" data-pane="kan" hidden>
+        <div class="kan" data-stock={JSON.stringify(kan.stock)} data-incoming={JSON.stringify(kan.incoming)}>
+          <div class="kan-main">
+            <div class="kan-top">
+              <p class="kan-brand"><span>{kan.brand.charAt(0)}</span><b>{kan.brand}</b><small>Pastelaria · encomendas</small></p>
+              <div class="kpis">
+                <span><small>Hoje</small><b data-kpi="all">0</b></span>
+                <span><small>No forno</small><b data-kpi="oven">0</b></span>
+                <span><small>Prontas</small><b data-kpi="ready">0</b></span>
+                <span><small>Faturado</small><b data-kpi="eur">0 €</b></span>
+              </div>
+            </div>
+            <div class="kan-cols">
+              {kan.cols.map(([key, name]) => (
+                <div class={`kcol kcol-${key}`} data-col={key}>
+                  <p class="kcol-h"><span>{name}</span><b>0</b></p>
+                  <div class="kcol-list">
+                    {kan.orders.filter((o) => o.col === key).map((o) => (
+                      <article class="kcard" data-id={o.id} data-use={JSON.stringify(o.use)} data-price={o.price} data-client={o.client} data-item={o.item} data-cursor="Arrastar">
+                        <p class="kc-top"><b>#{o.id}</b><span>{o.when}</span></p>
+                        <p class="kc-item">{o.item}<small>{o.size}</small></p>
+                        <p class="kc-foot"><span>{o.client}</span><button type="button" class="kc-go" aria-label="Passar à coluna seguinte"><i class="ph-bold ph-arrow-right"></i></button></p>
+                      </article>
+                    ))}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+          <aside class="kan-side">
+            <div class="kan-msgs">
+              <p class="lab-k"><img src="/logos/whatsapp-color.svg" alt="" width="15" height="15" />Mensagens enviadas sozinhas</p>
+              <ul class="km-list"><li class="km-empty">Quando uma encomenda fica pronta, o cliente recebe aqui a mensagem.</li></ul>
+            </div>
+            <div class="kan-stock">
+              <p class="lab-k"><i class="ph ph-package"></i>Stock</p>
+              <div class="ks" data-s="choc"><span>Chocolate</span><b></b><i><em></em></i></div>
+              <div class="ks" data-s="flour"><span>Farinha</span><b></b><i><em></em></i></div>
+              <div class="ks" data-s="eggs"><span>Ovos</span><b></b><i><em></em></i></div>
+              <p class="ks-alert"><i class="ph-bold ph-warning"></i><span>Chocolate abaixo de 1 kg. Pedido ao fornecedor preparado, à espera do teu ok.</span></p>
+            </div>
+          </aside>
+        </div>
+      </div>
+    </div>
+
+    <div class="lab-foot">
+      <p class="lab-hint"><i class="ph ph-cursor-click"></i><span>{lab.tabs[0].hint}</span></p>
+      <p class="lab-ex">Marcas e números de exemplo.</p>
+      <a href="/contacto?demo" class="u-link">Quero isto no meu negócio<i class="ph ph-arrow-right"></i></a>
+    </div>
+  </div>
+</section>
