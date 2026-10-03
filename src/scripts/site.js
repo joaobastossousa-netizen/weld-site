@@ -1,5 +1,6 @@
 // Movimento e interações do site da Weld (todas as páginas).
 import { gsap } from "gsap";
+import "./shell.js";
 import { submitLead, track } from "./weld-data.js";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
@@ -14,6 +15,8 @@ const wait = ms => new Promise(r => setTimeout(r, REDUCED ? 0 : ms));
 (function seam() {
   const svg = $("#seam");
   if (!svg) return;
+  // na página inicial a solda já está no editor, no processo e nas transições: as pistas das margens só atrapalhavam
+  if ($(".hero5")) { svg.remove(); return; }
   const NS = "http://www.w3.org/2000/svg";
   const mk = (tag, attrs, parent = svg) => { const e = document.createElementNS(NS, tag); for (const k in attrs) e.setAttribute(k, attrs[k]); parent.appendChild(e); return e; };
   let tracks = [], H = 0, cur = [], vel = 0, lastY = scrollY;
@@ -109,6 +112,7 @@ menuBtn?.addEventListener("click", () => {
   const open = nav.classList.toggle("open");
   menuBtn.setAttribute("aria-expanded", String(open));
   document.body.style.overflow = open ? "hidden" : "";
+  open ? window.__lenis?.stop() : window.__lenis?.start();
 });
 
 /* ---------- entradas ---------- */

@@ -1,19 +1,23 @@
 ---
-import { site } from "../content";
+// Fecho de todas as páginas: frase enorme, botão redondo e as alternativas.
+import { site, landing } from "../content";
 interface Props { title?: string; text?: string }
-const { title = "Queres ver isto no teu negócio?", text = "Fazemos uma demo personalizada, de graça. Apresentamos em 20 minutos e, se fizer sentido, enviamos a proposta." } = Astro.props;
-const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
+const { text = landing.cta.text } = Astro.props;
 ---
-<section class="wrap cta-wrap">
-  <div class="cta-band dark reveal">
-    <svg class="cta-w" viewBox="0 0 100 100" aria-hidden="true"><path d={W} /></svg>
-    <div>
-      <h2 class="h2">{title}</h2>
-      <p class="lead">{text}</p>
-    </div>
-    <div class="cta-actions">
-      <a href="/contacto?demo" class="btn btn-mint magnetic">Pedir demo grátis<i class="ph ph-arrow-right"></i></a>
-      <a href="/pedido" class="btn btn-ghost">Já sei o que quero</a>
+<section class="cta5" data-chapter="dark">
+  <div class="wrap-wide cta5-in">
+    <h2 class="cta5-h" data-rise>
+      <span class="ln"><span>{landing.cta.title[0]}</span></span>
+      <span class="ln ln-hot"><span>{landing.cta.title[1]}<svg class="cta5-seam" viewBox="0 0 600 40" preserveAspectRatio="none" aria-hidden="true"><path d="M4 26 C 120 8, 220 36, 330 20 S 520 10, 596 22" pathLength="1" data-draw /></svg></span></span>
+    </h2>
+    <div class="cta5-side">
+      <p>{text}</p>
+      <a href="/contacto?demo" class="orb magnetic" data-cursor="Vamos a isso"><span>Pedir demo<br />grátis</span><i class="ph ph-arrow-up-right"></i></a>
+      <div class="cta5-alt">
+        <a href="/pedido" class="u-link">Já sei o que quero<i class="ph ph-arrow-right"></i></a>
+        <a href={`tel:+351${site.phone.replace(/\s/g, "")}`} class="u-link">{site.phone}</a>
+      </div>
+      <p class="cta5-who">Respondes ao João, não a um robô. Normalmente no próprio dia.</p>
     </div>
   </div>
 </section>

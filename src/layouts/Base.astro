@@ -1,16 +1,31 @@
 ---
 import "../styles/global.css";
+import "../styles/v5.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import { site } from "../content";
-interface Props { title: string; description: string }
-const { title, description } = Astro.props;
+interface Props { title: string; description: string; chapter?: "dark" | "paper" }
+const { title, description, chapter = "dark" } = Astro.props;
+const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 ---
 <!doctype html>
 <html lang="pt-PT" class="no-js">
   <head>
     <meta charset="utf-8" />
-    <script is:inline>document.documentElement.classList.remove("no-js")</script>
+    <script is:inline>
+      // Transição entre páginas: se viemos de um clique no site, a página nova abre tapada e destapa-se.
+      // Na primeira visita da sessão mostra o W a soldar-se. Sem JS ou com movimento reduzido, nada disto acontece.
+      (function () {
+        var d = document.documentElement; d.classList.remove("no-js");
+        if (matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+        try {
+          var s = sessionStorage;
+          if (s.getItem("weld-pt")) { d.classList.add("pt-cover", "pt-from"); s.removeItem("weld-pt"); }
+          else if (!s.getItem("weld-seen")) { d.classList.add("pt-cover", "pt-boot"); }
+          s.setItem("weld-seen", "1");
+        } catch (e) {}
+      })();
+    </script>
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <title>{title}</title>
     <meta name="description" content={description} />
@@ -18,20 +33,34 @@ const { title, description } = Astro.props;
     <meta property="og:description" content={description} />
     <meta property="og:type" content="website" />
     <meta property="og:url" content={new URL(Astro.url.pathname, site.url)} />
-    <meta name="theme-color" content="#F4F7F4" />
+    <meta name="theme-color" content="#07130E" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:ital,wdth,wght@0,62..125,100..900;1,62..125,100..900&family=IBM+Plex+Mono:wght@400;500;600&display=swap" />
     <script src="https://unpkg.com/@phosphor-icons/web@2.1.1" defer></script>
   </head>
-  <body>
+  <body data-chapter={chapter}>
+    <a class="skip" href="#conteudo">Saltar para o conteúdo</a>
     <svg id="seam" aria-hidden="true"></svg>
     <Header />
-    <main>
+    <main id="conteudo">
       <slot />
     </main>
     <Footer />
+
+    <!-- transição entre páginas: uma chapa que sobe, com a costura de solda nas arestas -->
+    <div class="pt" aria-hidden="true">
+      <div class="pt-sheet">
+        <div class="pt-mid">
+          <svg viewBox="0 0 100 100" class="pt-w"><path d={W} pathLength="1" /></svg>
+          <span class="pt-label">weld</span>
+          <span class="pt-count">000</span>
+        </div>
+      </div>
+    </div>
+    <div class="grain" aria-hidden="true"></div>
+    <div class="cursor" aria-hidden="true"><span></span></div>
     <script>import "../scripts/site.js";</script>
   </body>
 </html>

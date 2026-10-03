@@ -500,3 +500,47 @@ export const order = {
   ],
   when: ["Manhã", "Almoço", "Tarde", "Fim do dia"],
 };
+
+/* ------------------------------------------------------------------
+   PÁGINA INICIAL (v5): posicionamento e textos novos.
+------------------------------------------------------------------- */
+export const landing = {
+  meta: ["Estúdio de automação com IA", "Porto, PT"],
+  hero: ["Soldamos IA", "ao teu negócio."],
+  heroLead: "Assistentes que respondem, automações que fazem o trabalho repetido, sites e software à medida. Para negócios, e para agências que revendem com a sua marca.",
+  entries: [
+    ["Tenho um negócio", "Quero isto para mim", "/servicos"],
+    ["Sou uma agência", "Quero revender", "/agencias"],
+  ],
+  heroNote: "Primeiro mostramos, depois falamos de preço.",
+  // o editor de fluxos da capa: entradas, a Weld no meio, saídas
+  canvas: {
+    inputs: [
+      { id: "wa", logo: "whatsapp-color", app: "WhatsApp", title: "Mensagem recebida", detail: "Têm vaga sábado de manhã?", to: "cal" },
+      { id: "ig", logo: "instagram-color", app: "Instagram", title: "Mensagem direta", detail: "Quanto custa um site?", to: "crm" },
+      { id: "gm", logo: "gmail-color", app: "Gmail", title: "Fatura recebida", detail: "fornecedor_0912.pdf", to: "sh" },
+    ],
+    outputs: [
+      { id: "cal", logo: "googlecalendar-color", app: "Google Calendar", title: "Marcação criada", detail: "Sáb · 10:00 · Rita M." },
+      { id: "crm", logo: "hubspot-color", app: "HubSpot", title: "Lead qualificado", detail: "Restaurante · 4 páginas" },
+      { id: "sh", logo: "googlesheets-color", app: "Google Sheets", title: "Linha adicionada", detail: "Fatura · 312,40 €" },
+    ],
+  },
+  manifesto: {
+    pieces: [["mensagens", "setor-clinica.jpg"], ["agenda", "setor-restaurante.jpg"], ["faturas", "capa.jpg"], ["clientes", "setor-oficina.jpg"]],
+    text: "Não vendemos uma ferramenta nem um chatbot genérico. Sentamo-nos contigo, vemos o que se faz à mão e ligamos o que já usas. Entregamos a funcionar e ficamos por perto.",
+    proofs: [["Demo grátis", "antes de pagares nada"], ["Só APIs oficiais", "WhatsApp, Instagram, Google"], ["Um ponto de contacto", "falas sempre com o João"]],
+  },
+  process: [
+    ["Hoje", "Conversa de 20 minutos", "Contas-nos o que te come tempo. Café no Porto ou chamada."],
+    ["Em poucos dias", "Demo grátis", "Construímos um exemplo com o teu negócio: serviços, preços e marca."],
+    ["Antes de começar", "Proposta por escrito", "Âmbito, prazo e valor fechados. Sem surpresas."],
+    ["Dias, não meses", "Construção", "Vês o progresso pelo caminho e dizes o que mudar."],
+    ["Todos os meses", "Ligado e acompanhado", "Testamos com a tua equipa, ligamos tudo e ficamos por perto."],
+  ],
+  sectors: [["Clínicas", "setor-clinica.jpg"], ["Oficinas", "setor-oficina.jpg"], ["Ginásios", "setor-ginasio.jpg"], ["Restaurantes", "setor-restaurante.jpg"], ["Imobiliárias", "setor-imobiliaria.jpg"], ["Agências", "agencias.jpg"]],
+  cta: {
+    title: ["Vamos", "soldar?"],
+    text: "Mostra-nos como trabalhas. Em poucos dias vês a Weld a funcionar no teu negócio, de graça.",
+  },
+};
