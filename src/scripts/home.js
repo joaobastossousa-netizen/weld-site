@@ -1,4 +1,4 @@
-// Movimento da página inicial: título, editor de fluxos, frase com fotos, cartões empilhados, ecrã das demos e processo.
+// Movimento da página inicial: título, editor de fluxos, frase com fotos, cartões empilhados e processo.
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { ready, REDUCED, FINE } from "./shell.js";
@@ -222,9 +222,6 @@ if (!REDUCED) mm.add("(min-width: 901px)", () => {
     });
   });
 });
-
-/* ---------- demos: o ecrã endireita-se ---------- */
-if (!REDUCED) gsap.fromTo(".mon", { rotateX: 28, scale: 0.8, y: 60 }, { rotateX: 0, scale: 1, y: 0, ease: "none", scrollTrigger: { trigger: ".mon-wrap", start: "top 98%", end: "top 18%", scrub: true } });
 
 /* ---------- processo: a linha de solda corre na horizontal ---------- */
 const proc = $(".proc5");

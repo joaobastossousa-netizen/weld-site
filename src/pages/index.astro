@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import Stage from "../components/Stage.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
-import { landing, ways, examples, demos, integrations, faq, home, site } from "../content";
+import { landing, ways, examples, integrations, faq, home } from "../content";
 const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 const HOT = "IA";
 // o título parte-se em letras para entrarem uma a uma e reagirem ao rato
@@ -170,44 +170,6 @@ const tone = ["dark", "paper", "deep", "paper"];
           </article>
         ))}
       </div>
-    </div>
-  </section>
-
-  <!-- DEMOS: um ecrã que se endireita com o scroll -->
-  <section class="s5 demo5" id="demos" data-chapter="dark">
-    <div class="wrap-wide">
-      <header class="s5-head">
-        <h2 class="s5-h" data-rise><span class="ln"><span>Experimenta antes</span></span><span class="ln"><span>de falar connosco.</span></span></h2>
-        <p class="s5-lead reveal">{demos.lead}</p>
-      </header>
-    </div>
-    <div class="mon-wrap showcase">
-      <div class="mon">
-        <div class="browser-bar"><i></i><i></i><i></i><span class="demo-url">weldstudio.pt/demos/{demos.items[0].slug}</span></div>
-        <div class="browser-view">
-          {demos.items.map((d, i) => <video class={`demo-video${i === 0 ? " on" : ""}`} src={`/videos/${d.slug}.mp4`} poster={`/videos/${d.slug}.jpg`} muted playsinline preload={i === 0 ? "auto" : "none"} aria-label={`Vídeo da demo ${d.brand}`}></video>)}
-        </div>
-      </div>
-      <div class="mon-ui">
-        <div class="demo-list" role="tablist" aria-label="Demos">
-          {demos.items.map((d, i) => (
-            <button class={`demo-item${i === 0 ? " on" : ""}`} role="tab" aria-selected={i === 0 ? "true" : "false"} style={`--c:${d.color};--ink:${d.ink}`}>
-              <span class="demo-mark">{d.brand.charAt(0)}</span>
-              <span class="demo-txt"><b>{d.brand}</b><small>{d.sector}</small></span>
-              <span class="demo-bar"><i></i></span>
-            </button>
-          ))}
-        </div>
-        <div class="demo-info">
-          {demos.items.map((d, i) => (
-            <div class={`demo-desc${i === 0 ? " on" : ""}`} data-slug={d.slug}>
-              <p>{d.what}</p>
-              <a class="btn btn-mint" href={`/demos/${d.slug}/index.html`} target="_blank" rel="noopener">Experimentar<i class="ph ph-arrow-up-right"></i></a>
-            </div>
-          ))}
-        </div>
-      </div>
-      <p class="demo-note wrap-wide">{demos.note}</p>
     </div>
   </section>
 

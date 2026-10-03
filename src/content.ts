@@ -21,7 +21,6 @@ export const site = {
 export const nav = [
   { label: "Serviços", href: "/servicos", children: true },
   { label: "Para agências", href: "/agencias" },
-  { label: "Demos", href: "/demos" },
   { label: "Sobre", href: "/sobre" },
   { label: "Contacto", href: "/contacto" },
 ];

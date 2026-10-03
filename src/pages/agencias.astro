@@ -3,7 +3,7 @@ import Base from "../layouts/Base.astro";
 import Faq from "../components/Faq.astro";
 import CtaBand from "../components/CtaBand.astro";
 import DemoOffer from "../components/DemoOffer.astro";
-import { agencies, deals, demos, faq } from "../content";
+import { agencies, deals, faq } from "../content";
 const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
 ---
 <Base title="Para agências · Weld" description={agencies.lead}>
@@ -64,19 +64,6 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
           <h3>{d.name}</h3>
           <p>{d.text}</p>
         </article>
-      ))}
-    </div>
-  </section>
-
-  <section class="section wrap">
-    <div class="sec-head"><h2 class="h2 reveal">Demos que já levámos a agências.</h2><p class="lead reveal">Versões com marcas de exemplo. Para a vossa agência, fazemos com o nome do vosso cliente.</p></div>
-    <div class="demo-cards">
-      {demos.items.map((d, i) => (
-        <a href={`/demos/${d.slug}/index.html`} target="_blank" rel="noopener" class="demo-card reveal" style={`--i:${i};--c:${d.color}`}>
-          <img src={`/videos/${d.slug}.jpg`} alt={`Ecrã da demo ${d.brand}`} loading="lazy" />
-          <span class="demo-card-txt"><b>{d.brand}</b><small>{d.sector}</small></span>
-          <i class="ph ph-arrow-up-right"></i>
-        </a>
       ))}
     </div>
   </section>
