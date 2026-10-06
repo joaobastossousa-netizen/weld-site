@@ -3,6 +3,7 @@ import "../styles/global.css";
 import "../styles/v5.css";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import Mascote from "../components/Mascote.astro";
 import { site } from "../content";
 interface Props { title: string; description: string; chapter?: "dark" | "paper" }
 const { title, description, chapter = "dark" } = Astro.props;
@@ -48,6 +49,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       <slot />
     </main>
     <Footer />
+    <Mascote />
 
     <!-- transição entre páginas: uma chapa que sobe, com a costura de solda nas arestas -->
     <div class="pt" aria-hidden="true">
