@@ -589,18 +589,3 @@ export const lab = {
     stock: { choc: 1.3, flour: 9.5, eggs: 60 },
   },
 };
-
-// Soldi, o gatinho que está sempre a pensar no canto do site. O balão vai passando por estas frases.
-export const mascote = {
-  nome: "Soldi",
-  alt: "Soldi, o gatinho da Weld, a pensar",
-  frases: [
-    "a ler a mensagem do cliente",
-    "a ver se há vaga na quinta",
-    "a marcar a visita",
-    "a avisar o dono no WhatsApp",
-    "a preparar o orçamento",
-    "a responder em 3 segundos",
-    "a passar o pedido para o CRM",
-  ],
-};
