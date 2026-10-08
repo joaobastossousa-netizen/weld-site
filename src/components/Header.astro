@@ -31,6 +31,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       </ul>
     </nav>
     <div class="nav-right">
+      <button type="button" class="lang-btn" data-lang-toggle aria-label="View the site in English" lang="en">EN</button>
       <span class="nav-clock" aria-label="Hora no Porto">Porto <b data-clock>--:--</b></span>
       <a href="/pedido" class="btn btn-mint btn-sm">{site.cta}<i class="ph ph-arrow-right"></i></a>
       <button class="menu-btn" type="button" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobile-menu"><span></span><span></span></button>
@@ -43,6 +44,7 @@ const W = "M12 20 L32 78 L50 40 L68 78 L88 20";
       <p class="mm-label">Serviços</p>
       {services.map((s) => <a href={`/servicos/${s.slug}`} class="mm-sub">{s.name}<i class="ph ph-arrow-up-right"></i></a>)}
       <a href="/contacto?demo" class="btn btn-mint">Pedir demo grátis<i class="ph ph-arrow-right"></i></a>
+      <button type="button" class="lang-btn mm-lang" data-lang-toggle lang="en">EN</button>
       <p class="mm-foot"><a href={`tel:+351${site.phone.replace(/\s/g, "")}`}>{site.phone}</a><a href={site.instagram} target="_blank" rel="noopener">{site.instagramHandle}</a></p>
     </div>
   </div>
