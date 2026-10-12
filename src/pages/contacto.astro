@@ -22,7 +22,7 @@ import { contact, site } from "../content";
           <a href={`tel:+351${site.phone.replace(/\s/g, "")}`} class="direct-link"><i class="ph ph-phone-call"></i>{site.phone}</a>
           <a href={`https://wa.me/351${site.phone.replace(/\s/g, "")}`} target="_blank" rel="noopener" class="direct-link"><i class="ph ph-whatsapp-logo"></i>WhatsApp</a>
           <a href={site.linkedin} target="_blank" rel="noopener" class="direct-link"><i class="ph-fill ph-linkedin-logo"></i>LinkedIn</a>
-          <a href={site.instagram} target="_blank" rel="noopener" class="direct-link"><i class="ph ph-instagram-logo"></i>Instagram</a>
+          {false && <a href={site.instagram} target="_blank" rel="noopener" class="direct-link"><i class="ph ph-instagram-logo"></i>Instagram</a>}
         </div>
       </div>
       <ol class="next load" style="--d:5">
