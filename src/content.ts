@@ -35,8 +35,8 @@ export const team = [
     email: "joaobastossousa@gmail.com",
   },
   {
-    name: "Duarte",
-    initials: "D",
+    name: "Duarte Leite",
+    initials: "DL",
     role: "Sócio e builder",
     text: "Constrói connosco quando o projeto pede duas cabeças, e divide o trabalho quando é mais rápido assim.",
     linkedin: "", // colar aqui o link do LinkedIn do Duarte
