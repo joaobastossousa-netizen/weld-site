@@ -63,7 +63,7 @@ export const home = {
   kicker: "Automação e IA no Porto · para negócios e para agências",
   // capa: título grande e direto, em 3 linhas (a última a verde)
   hero: ["Trabalho à mão", "é dinheiro", "a fugir."],
-  heroLead: "Pomos IA e automação a fazer o trabalho repetitivo: responder, marcar, faturar, registar. Trabalhamos diretamente com negócios, e com agências que querem revender isto aos seus clientes, em marca branca.",
+  heroLead: "Pomos IA e automação a fazer o trabalho repetitivo: responder, marcar, faturar, registar. Trabalhamos diretamente com negócios, e com agências que querem oferecer isto aos seus clientes, em parceria.",
   // duas entradas na capa
   paths: [["ph-megaphone", "Sou uma agência", "Quero revender", "/agencias"], ["ph-storefront", "Tenho um negócio", "Quero para mim", "/servicos"]],
   // registo ao vivo (exemplo) na capa: [ícone, serviço, o que aconteceu]
@@ -80,7 +80,7 @@ export const home = {
   line1: "Menos trabalho à mão.",
   line2: "Mais",
   rotate: ["clientes.", "tempo.", "vendas."],
-  lead: "Assistentes de IA, automações e sites feitos à medida. Trabalhamos diretamente com empresas e, por trás, para os clientes de agências de marketing.",
+  lead: "Assistentes de IA, automações e sites feitos à medida. Trabalhamos diretamente com empresas e, ao lado de agências de marketing, para os clientes delas.",
   floats: [
     { icon: "ph-lightning", title: "Responde em segundos", text: "A qualquer hora, fins de semana incluídos" },
     { icon: "ph-user-switch", title: "Passa a uma pessoa", text: "Quando o pedido foge ao normal" },
@@ -123,7 +123,7 @@ export const sectors = {
 export const ways = {
   idx: "Como trabalhamos",
   title: "Duas formas de trabalhar com a Weld.",
-  lead: "Trabalhamos diretamente com negócios e também por trás de agências, que revendem o nosso trabalho aos seus clientes.",
+  lead: "Trabalhamos diretamente com negócios e também ao lado de agências, que oferecem o nosso trabalho aos seus clientes.",
   items: [
     {
       key: "direto",
@@ -140,8 +140,8 @@ export const ways = {
       label: "Revenda através da tua agência",
       flow: ["Agência", "Weld", "Cliente da agência"],
       title: "Revendes com a tua marca. Nós construímos.",
-      text: "Trabalhamos para os clientes da tua agência, por trás e com o nome da agência. Tu vendes ao preço que quiseres e ficas com a margem.",
-      points: ["Revenda: preço fixo por cliente, a margem é tua", "Marca branca: o cliente vê a tua agência", "Sem contratar ninguém: nós construímos e mantemos"],
+      text: "Trabalhamos ao lado da tua agência, para os clientes dela. Tu vendes ao preço que quiseres e ficas com a margem.",
+      points: ["Revenda: arranque e mensalidade por cliente, a margem é tua", "Parceria: a relação com o cliente é tua", "Sem contratar ninguém: nós construímos e mantemos"],
       cta: "Ser agência parceira",
       href: "/agencias",
     },
@@ -151,7 +151,7 @@ export const ways = {
     title: "Como funciona a revenda.",
     steps: [
       ["ph-handshake", "A agência vende", "Vocês falam com o cliente e definem o preço final."],
-      ["ph-tag", "A Weld cobra um preço fixo", "Um valor por cliente. O que a agência cobrar a mais é margem dela."],
+      ["ph-tag", "A Weld cobra dois valores", "Um arranque e uma mensalidade por cliente. O que a agência cobrar a mais é margem dela."],
       ["ph-hammer", "A Weld constrói e mantém", "Instalamos, ligamos ao WhatsApp e ficamos a manter. Sem contratar ninguém."],
     ],
     win: [
@@ -190,7 +190,7 @@ export const services = [
     chat: "clinica",
     what: [
       ["ph-calendar-check", "Marca e lembra", "Vê as vagas reais da agenda, marca e envia lembrete na véspera."],
-      ["ph-currency-eur", "Dá preços certos", "Só os valores que nos derem. Nunca inventa."],
+      ["ph-currency-eur", "Dá preços certos", "Só os valores que nos derem. Se não souber, passa a uma pessoa."],
       ["ph-funnel", "Qualifica pedidos", "Pergunta o que falta antes de passar à equipa."],
       ["ph-user-switch", "Sabe parar", "Reclamações, urgências e casos estranhos vão logo para uma pessoa."],
     ],
@@ -285,7 +285,7 @@ export const services = [
       ["ph-squares-four", "Painéis internos", "Tudo o que a equipa precisa de ver num só ecrã."],
       ["ph-plugs-connected", "Integrações", "Sistemas que não falavam passam a falar."],
       ["ph-rocket-launch", "Produtos e MVPs", "Da ideia a uma primeira versão que se pode mostrar."],
-      ["ph-shield-check", "Feito para durar", "Código limpo, documentado e vosso."],
+      ["ph-shield-check", "Feito para durar", "Código limpo e documentado, entregue com instruções."],
     ],
     for: ["Empresas com processos próprios", "Startups", "Agências", "Equipas de operações", "Lojas com stock", "Serviços"],
     integrate: {
@@ -294,14 +294,14 @@ export const services = [
         ["ph-cursor-click", "Protótipo clicável", "Vês e experimentas antes de escrevermos código."],
         ["ph-stack", "Construção por etapas", "Entregas frequentes, sempre com algo a funcionar."],
         ["ph-plugs-connected", "Ligação aos sistemas", "Faturação, loja online, stock e CRM sincronizados."],
-        ["ph-shield-check", "Entrega e manutenção", "Código e documentação vossos. Manutenção opcional."],
+        ["ph-shield-check", "Entrega e manutenção", "Código e documentação entregues. Manutenção opcional."],
       ],
       tools: [["shopify", "Shopify"], ["stripe", "Stripe"], ["googlesheets", "Google Sheets"], ["hubspot", "HubSpot"], ["notion", "Notion"]],
       before: ["Excel partilhado com versões trocadas", "Três programas que não falam entre si", "Processos que dependem de uma só pessoa"],
       after: ["Um só ecrã com o que a equipa precisa", "Sistemas sincronizados sozinhos", "Um processo claro, que não depende de ninguém"],
     },
     faq: [
-      ["O código fica nosso?", "Sim. Entregamos tudo, com instruções para continuar."],
+      ["O código fica nosso?", "Entregamos o código e a documentação, com instruções para continuar. Quem fica com o quê fica escrito no contrato."],
       ["Como se define o preço?", "Depois de uma conversa de descoberta, com âmbito e prazo por escrito."],
       ["Dão manutenção?", "Sim, numa mensalidade opcional."],
     ],
@@ -325,7 +325,7 @@ export const agencies = {
   lead: "Já têm os clientes e a confiança. Juntamos a parte técnica para venderem assistentes de IA e automações com o vosso nome, sem contratar ninguém.",
   flow: ["Agência", "Weld", "Cliente da agência"],
   points: [
-    ["ph-mask-happy", "White label", "O cliente vê a vossa marca. Nós ficamos nos bastidores, a não ser que queiram outra coisa."],
+    ["ph-mask-happy", "Parceria", "Trabalhamos com o vosso nome, se quiserem, ou à vista, se preferirem. Combinamos convosco."],
     ["ph-handshake", "A relação é vossa", "Vocês falam com o cliente e ficam com a margem. Nós respondemos a vocês."],
     ["ph-presentation-chart", "Demo antes da venda", "Fazemos uma demo com o nome e os dados do vosso cliente para levarem à reunião."],
     ["ph-wrench", "Entrega e manutenção", "Construímos, ligamos ao WhatsApp e ficamos a manter, mês a mês."],
@@ -335,7 +335,7 @@ export const agencies = {
     lead: "Funciona como externalização: vocês vendem, nós fazemos. Ninguém compete com ninguém.",
     cols: [
       ["Para a agência", ["Um serviço novo, com margem e mensalidade de manutenção", "Vocês definem o preço final ao cliente", "Sem contratar nem formar ninguém", "Clientes mais ligados à agência"]],
-      ["Para a Weld", ["Projetos sem andar à procura de clientes", "Um parceiro que conhece o cliente e leva a demo à reunião", "Não fazemos marketing: não vos tiramos clientes", "Trabalhamos por trás, com a vossa marca"]],
+      ["Para a Weld", ["Projetos sem andar à procura de clientes", "Um parceiro que conhece o cliente e leva a demo à reunião", "Não fazemos marketing: não vos tiramos clientes", "Trabalhamos ao vosso lado, com o vosso nome se quiserem"]],
     ],
   },
   steps: [
@@ -373,9 +373,9 @@ export const deals = {
   title: "Como fechamos negócio.",
   lead: "Cada projeto tem o modelo que faz mais sentido. Tudo fica num contrato simples, com âmbito, prazos e valores.",
   items: [
-    { icon: "ph-seal-check", name: "Projeto fechado", text: "Um valor fixo por um âmbito definido. Sinal de 50% para arrancar, o resto na entrega.", for: "Negócios e agências" },
-    { icon: "ph-arrows-clockwise", name: "Mensalidade", text: "Manutenção, melhorias e acompanhamento, mês a mês, sem fidelização longa.", for: "Negócios e agências" },
-    { icon: "ph-storefront", name: "Revenda para agências", text: "Um preço fixo por cliente. A agência define o preço final e fica com a margem.", for: "Agências" },
+    { icon: "ph-seal-check", name: "Projeto fechado", text: "Um valor fixo por um âmbito definido. 50% para arrancar, o resto na entrega (com agências, a pagar em 30 dias).", for: "Negócios e agências" },
+    { icon: "ph-arrows-clockwise", name: "Mensalidade", text: "Manutenção, melhorias e acompanhamento, mês a mês. Opcional para clientes diretos; com agências, tem um mínimo de 6 meses.", for: "Negócios e agências" },
+    { icon: "ph-storefront", name: "Revenda para agências", text: "Um arranque e uma mensalidade por cliente. A agência define o preço final e fica com a margem.", for: "Agências" },
     { icon: "ph-percent", name: "Percentagem", text: "Em vez de preço fixo, uma percentagem do que o projeto gera ou do contrato da agência. Risco partilhado.", for: "Parcerias" },
   ],
 };
@@ -395,10 +395,10 @@ export const about = {
 export const faq = {
   title: "Perguntas frequentes.",
   items: [
-    ["Os clientes da agência sabem que somos nós?", "Só se a agência quiser. Em white label trabalhamos com a marca dela e falamos com o cliente final apenas quando nos pedem."],
+    ["Os clientes da agência sabem que somos nós?", "Combinamos com a agência. Podemos trabalhar com o nome dela e falamos com o cliente final apenas quando nos pedem."],
     ["Quanto tempo demora?", "Um assistente simples fica pronto em poucos dias. Projetos maiores têm o prazo escrito na proposta."],
     ["Que ferramentas usam?", "As oficiais: a API do WhatsApp Business e do Instagram, a vossa agenda e o vosso CRM. Nada de contas falsas nem truques."],
-    ["E se o assistente não souber responder?", "Passa a conversa a uma pessoa da equipa. Nunca inventa preços, stock ou diagnósticos."],
+    ["E se o assistente não souber responder?", "Passa a conversa a uma pessoa da equipa. Só responde com o que lhe dermos: preços, stock e horários."],
     ["Trabalham fora do Porto?", "Sim. Estamos no Porto, mas quase tudo se faz à distância."],
   ],
 };
@@ -421,7 +421,7 @@ export const demoOffer = {
 
 export const contact = {
   title: "Conta-nos o que precisas.",
-  lead: "Três passos e fica connosco. Respondemos em 24 horas úteis.",
+  lead: "Três passos e fica connosco. Respondemos em 2 dias úteis.",
   who: ["Agência", "Negócio"],
   needs: ["Demo grátis", "Assistente de IA", "Automação", "Site", "Software à medida", "Ainda não sei"],
 };
@@ -588,4 +588,88 @@ export const lab = {
     ],
     stock: { choc: 1.3, flour: 9.5, eggs: 60 },
   },
+};
+
+/* ------------------------------------------------------------------
+   PRIVACIDADE (/privacidade). Texto a rever por um jurista antes de publicar:
+   falta a identificação legal da Weld (entidade e NIF) quando a atividade abrir,
+   e confirmar os prazos de conservação e se as estatísticas precisam de consentimento.
+------------------------------------------------------------------- */
+export const legal = {
+  "kicker": "Privacidade",
+  "title": "Como tratamos os teus dados.",
+  "lead": "Pedimos pouco, guardamos o necessário e dizemos-te onde fica. Aqui explicamos o que recolhemos neste site, porquê, com quem partilhamos e como podes pedir para ver ou apagar.",
+  "updated": "Atualizado em novembro de 2026.",
+  "formNote": "Ao enviares, aceitas que usemos estes dados para te responder.",
+  "formLink": "Política de privacidade",
+  "sections": [
+    {
+      "h": "Quem somos",
+      "p": [
+        "A Weld é um estúdio de automação e IA no Porto. É a Weld que decide porque e como se tratam os dados recolhidos neste site."
+      ],
+      "contact": true
+    },
+    {
+      "h": "O que recolhemos",
+      "ul": [
+        "Quando fazes um pedido ou pedes uma demo: o teu nome, telefone ou email, o tipo de negócio, o que queres resolver e o que escreveres no formulário.",
+        "Quando navegas: a página que viste, o site de onde vieste, o tipo de aparelho (telemóvel, tablet ou computador), a língua, o fuso horário, a largura do ecrã e os botões em que carregaste. Cada visita recebe um identificador aleatório, que vale só para esse separador do browser.",
+        "O que não fazemos: não usamos cookies, não guardamos o teu endereço IP nos nossos registos e não criamos perfis."
+      ]
+    },
+    {
+      "h": "Para que usamos",
+      "ul": [
+        "Responder ao teu pedido e preparar a demo ou a proposta. Fundamento: diligências a pedido do titular antes de um contrato (RGPD, art. 6.º, n.º 1, al. b).",
+        "Perceber, de forma agregada, quantas pessoas visitam o site e que páginas funcionam, para o melhorar. Fundamento: interesse legítimo (RGPD, art. 6.º, n.º 1, al. f).",
+        "Não vendemos dados a ninguém."
+      ]
+    },
+    {
+      "h": "Onde ficam e com quem partilhamos",
+      "ul": [
+        "Alojamento do site: Vercel.",
+        "Base de dados dos pedidos e das visitas: Supabase, num servidor na União Europeia (Paris).",
+        "Envio dos pedidos para o nosso email, quando o formulário o permite: Resend.",
+        "Tipos de letra (Google Fonts) e ícones (unpkg): ao abrir a página, estes serviços recebem o teu endereço IP e dados do browser, como acontece em qualquer pedido na internet.",
+        "Se carregares no botão de WhatsApp, de email ou de telefone, passas a falar com esses serviços, que têm as suas próprias regras."
+      ],
+      "p": [
+        "Alguns destes serviços podem tratar dados fora da União Europeia. Nesses casos, aplicam-se as garantias previstas no RGPD."
+      ]
+    },
+    {
+      "h": "Quanto tempo guardamos",
+      "ul": [
+        "Pedidos e conversas: enquanto houver conversa ou projeto. Se não avançarmos, apagamos até 12 meses depois do último contacto.",
+        "Estatísticas de visitas: até 12 meses."
+      ]
+    },
+    {
+      "h": "O que fica no teu aparelho",
+      "p": [
+        "Não usamos cookies. Guardamos no teu browser a língua que escolheres e um identificador temporário da visita, que desaparece quando fechas o separador. Servem para o site funcionar e para as estatísticas acima."
+      ]
+    },
+    {
+      "h": "Os teus direitos",
+      "p": [
+        "Podes pedir para ver, corrigir, apagar ou levar os teus dados, limitar o tratamento ou opor-te a ele. Basta escreveres-nos pelo contacto acima. Respondemos no prazo de 30 dias.",
+        "Se achares que não tratámos bem os teus dados, podes queixar-te à Comissão Nacional de Proteção de Dados (cnpd.pt)."
+      ]
+    },
+    {
+      "h": "Quando tratamos dados por conta de um cliente",
+      "p": [
+        "Se montamos um assistente ou uma automação para uma empresa, os dados das pessoas que o usam são dessa empresa. Tratamo-los só para a servir, ao abrigo de um contrato, e os assistentes avisam que são IA."
+      ]
+    },
+    {
+      "h": "Alterações",
+      "p": [
+        "Se mudarmos algo importante, atualizamos esta página e a data no topo."
+      ]
+    }
+  ]
 };

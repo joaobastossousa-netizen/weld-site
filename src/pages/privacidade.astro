@@ -1,0 +1,35 @@
+---
+import Base from "../layouts/Base.astro";
+import { legal, site } from "../content";
+const tel = site.phone ? `+351${site.phone.replace(/\s/g, "")}` : "";
+---
+<Base title="Privacidade · Weld" description={legal.lead}>
+  <section class="page-hero wrap">
+    <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><span>{legal.kicker}</span></nav>
+    <p class="kicker load" style="--d:1"><span class="dot"></span>{legal.kicker}</p>
+    <h1 class="h1 load" style="--d:2">{legal.title}</h1>
+    <p class="lead load" style="--d:3">{legal.lead}</p>
+  </section>
+
+  <section class="legal-sec" data-chapter="paper">
+    <div class="wrap">
+      <article class="legal">
+        <p class="upd">{legal.updated}</p>
+        {legal.sections.map((s) => (
+          <>
+            <h2>{s.h}</h2>
+            {s.p && s.p.map((t) => <p>{t}</p>)}
+            {s.ul && <ul>{s.ul.map((t) => <li>{t}</li>)}</ul>}
+            {s.contact && (
+              <p class="legal-contact">
+                <b>Contacto</b>
+                <a href={`mailto:${site.email}`}>{site.email}</a>
+                {tel && <a href={`tel:${tel}`}>{site.phone}</a>}
+              </p>
+            )}
+          </>
+        ))}
+      </article>
+    </div>
+  </section>
+</Base>

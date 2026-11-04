@@ -1,5 +1,5 @@
 ---
-import { contact, site } from "../content";
+import { contact, site, legal } from "../content";
 ---
 <form class="brief" id="brief" data-email={site.email} novalidate>
   <ol class="brief-steps" aria-hidden="true"><li class="on">1</li><li>2</li><li>3</li></ol>
@@ -29,12 +29,13 @@ import { contact, site } from "../content";
     <div class="brief-actions">
       <button type="button" class="back" data-back>Voltar</button>
       <button type="submit" class="btn btn-mint" id="f-send">Enviar pedido<i class="ph ph-arrow-right"></i></button>
+      <p class="legal-note"><span>{legal.formNote}</span> <a href="/privacidade">{legal.formLink}</a></p>
     </div>
   </fieldset>
   <fieldset class="brief-step brief-done" data-step="4">
     <span class="bd-ic" aria-hidden="true"><i class="ph-bold ph-check"></i></span>
     <legend>Recebido.</legend>
-    <p id="f-done-text">Já está connosco. Respondemos em 24 horas úteis.</p>
+    <p id="f-done-text">Já está connosco. Respondemos em 2 dias úteis.</p>
     <p class="bd-note">Enquanto esperas, experimenta o <a href="/#topo">fluxo da página inicial</a>.</p>
   </fieldset>
 </form>

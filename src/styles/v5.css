@@ -558,3 +558,20 @@ section:has(> .faq) .sec-head .h2{font-size:clamp(34px,4vw,60px)}
 .lang-btn:active{transform:scale(.96)}
 @media (hover:hover) and (pointer:fine){.lang-btn:hover{opacity:1;background:var(--mint,#3FA47A);color:#07130E;box-shadow:none}}
 .mm-lang{align-self:flex-start;margin-top:8px}
+
+/* Privacidade (/privacidade) e nota de privacidade nos formulários */
+.legal-sec{padding-block:clamp(48px,6vw,96px)}
+.legal{max-width:760px}
+.legal .upd{font-size:13px;opacity:.6;margin:0 0 8px}
+.legal h2{font-size:clamp(22px,2.2vw,30px);line-height:1.15;letter-spacing:-.02em;margin:44px 0 12px}
+.legal .upd + h2{margin-top:20px}
+.legal p,.legal li{font-size:17px;line-height:1.65}
+.legal p{margin:0 0 12px}
+.legal ul{margin:8px 0 12px;padding-left:1.15em}
+.legal li{margin:8px 0}
+.legal a{text-decoration:underline;text-underline-offset:3px}
+.legal-contact{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:baseline}
+.legal-contact b{font-family:"IBM Plex Mono",monospace;font-size:12px;letter-spacing:.08em;text-transform:uppercase;opacity:.7}
+.legal-note{margin:10px 0 0;font-size:12.5px;line-height:1.5;opacity:.72}
+.legal-note a{text-decoration:underline;text-underline-offset:2px}
+@media (max-width:700px){.legal{padding-left:18px}}

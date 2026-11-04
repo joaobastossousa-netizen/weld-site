@@ -382,8 +382,8 @@ if (form) {
     send.disabled = false;
     if (ok) {
       $("#f-done-text").textContent = need === "Demo grátis"
-        ? `Obrigado, ${name.split(" ")[0]}. Vamos preparar a demo com o vosso negócio e ${phone ? "ligamos-te" : "escrevemos-te"} em 24 horas úteis para marcar os 20 minutos.`
-        : `Obrigado, ${name.split(" ")[0]}. ${phone ? "Ligamos-te" : "Respondemos por email"} em 24 horas úteis.`;
+        ? `Obrigado, ${name.split(" ")[0]}. Vamos preparar a demo com o vosso negócio e ${phone ? "ligamos-te" : "escrevemos-te"} em 2 dias úteis para marcar os 20 minutos.`
+        : `Obrigado, ${name.split(" ")[0]}. ${phone ? "Ligamos-te" : "Respondemos por email"} em 2 dias úteis.`;
       go(4);
       return;
     }
@@ -472,7 +472,7 @@ if (order) {
       const r = saved ? { ok: true } : await mail;
       if (r && r.ok) {
         const side = $(".order-side"); side.classList.add("sent"); $("#os-done").hidden = false;
-        $("#os-done-text").textContent = reach === "Email" ? "Já está connosco. Respondemos por email em 24 horas úteis." : `Já está connosco. ${reach === "WhatsApp" ? "Falamos por WhatsApp" : "Ligamos-te"} para o ${phone} em 24 horas úteis.`;
+        $("#os-done-text").textContent = reach === "Email" ? "Já está connosco. Respondemos por email em 2 dias úteis." : `Já está connosco. ${reach === "WhatsApp" ? "Falamos por WhatsApp" : "Ligamos-te"} para o ${phone} em 2 dias úteis.`;
         side.scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
