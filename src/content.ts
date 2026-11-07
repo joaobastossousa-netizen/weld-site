@@ -340,9 +340,10 @@ export const agencies = {
   },
   steps: [
     ["Escolhem um cliente", "Mandam-nos o site e o Instagram de um cliente que recebe muitas mensagens."],
-    ["Fazemos a demo", "Em poucos dias têm uma demo a funcionar com o nome dele."],
+    ["Fazemos a demo", "Em 1 a 2 semanas têm uma demo a funcionar com o nome dele."],
     ["Vocês vendem", "Mostram a demo na reunião e fecham, com o vosso preço."],
     ["Nós entregamos", "Configuramos, testamos com a equipa do cliente e ligamos tudo."],
+    ["Fica em contrato", "Um contrato-quadro define a parceria. Cada cliente entra por uma ordem de encomenda simples, que diz o que cada lado paga."],
   ],
 };
 
@@ -532,7 +533,7 @@ export const landing = {
   },
   process: [
     ["Hoje", "Conversa de 20 minutos", "Contas-nos o que te come tempo. Café no Porto ou chamada."],
-    ["Em poucos dias", "Demo grátis", "Construímos um exemplo com o teu negócio: serviços, preços e marca."],
+    ["Em 1 a 2 semanas", "Demo grátis", "Construímos um exemplo com o teu negócio: serviços, preços e marca."],
     ["Antes de começar", "Proposta por escrito", "Âmbito, prazo e valor fechados. Sem surpresas."],
     ["Dias, não meses", "Construção", "Vês o progresso pelo caminho e dizes o que mudar."],
     ["Todos os meses", "Ligado e acompanhado", "Testamos com a tua equipa, ligamos tudo e ficamos por perto."],
@@ -540,7 +541,7 @@ export const landing = {
   sectors: [["Clínicas", "setor-clinica.jpg"], ["Oficinas", "setor-oficina.jpg"], ["Ginásios", "setor-ginasio.jpg"], ["Restaurantes", "setor-restaurante.jpg"], ["Imobiliárias", "setor-imobiliaria.jpg"], ["Agências", "agencias.jpg"]],
   cta: {
     title: ["Vamos", "soldar?"],
-    text: "Mostra-nos como trabalhas. Em poucos dias vês a Weld a funcionar no teu negócio, de graça.",
+    text: "Mostra-nos como trabalhas. Em 1 a 2 semanas vês a Weld a funcionar no teu negócio, de graça.",
   },
 };
 
