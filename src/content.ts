@@ -8,7 +8,7 @@
 export const site = {
   name: "Weld",
   url: "https://weldstudio.pt",
-  email: "joaobastossousa@gmail.com",
+  email: "team@weldstudio.pt",
   instagram: "https://www.instagram.com/weld.studio/",
   instagramHandle: "@weld.studio",
   linkedin: "https://www.linkedin.com/in/jo%C3%A3o-bastos-de-sousa-8188723b6/",
@@ -210,7 +210,7 @@ export const services = [
     faq: [
       ["Usa a API oficial do WhatsApp?", "Sim. Ligamos pela WhatsApp Business Platform da Meta, com o número do negócio."],
       ["A equipa continua a ver as conversas?", "Sim. Pode entrar em qualquer conversa a meio, e o assistente para de responder."],
-      ["Quanto tempo leva a pôr a funcionar?", "Um assistente simples fica pronto em poucos dias."],
+      ["Quanto tempo leva a pôr a funcionar?", "Um assistente simples fica pronto em 3 a 7 dias. Depois há uma semana de teste, com a nossa vigilância."],
     ],
   },
   {
@@ -242,6 +242,7 @@ export const services = [
       ["Que ferramentas usam?", "As que já têm, sempre que possível. Quando falta alguma peça, usamos n8n ou Make."],
       ["E se uma automação falhar?", "Fica registado e avisamos. Na mensalidade, tratamos nós disso."],
       ["Precisamos de mudar de programas?", "Normalmente não. A ideia é ligar o que já existe."],
+      ["Quanto tempo leva?", "Uma automação simples, de 1 a 2 semanas. Várias ligadas entre si têm o prazo escrito na proposta."],
     ],
   },
   {
@@ -273,6 +274,7 @@ export const services = [
       ["Podemos editar os textos?", "Sim. Fica tudo organizado para mudar textos sem mexer no resto."],
       ["Tratam do domínio e do alojamento?", "Tratamos, e explicamos cada passo."],
       ["Fazem só landing pages?", "Fazemos as duas coisas: páginas únicas para campanhas e sites completos."],
+      ["Quanto tempo leva?", "Uma landing page, de 1 a 2 semanas. Um site completo, de 2 a 4 semanas, com o conteúdo pronto."],
     ],
   },
   {
@@ -304,6 +306,7 @@ export const services = [
       ["O código fica nosso?", "Entregamos o código e a documentação, com instruções para continuar. Quem fica com o quê fica escrito no contrato."],
       ["Como se define o preço?", "Depois de uma conversa de descoberta, com âmbito e prazo por escrito."],
       ["Dão manutenção?", "Sim, numa mensalidade opcional."],
+      ["Quanto tempo leva?", "Depende do âmbito. Uma primeira versão a funcionar chega em poucas semanas, e o prazo final vai escrito na proposta."],
     ],
   },
 ];
@@ -397,7 +400,8 @@ export const faq = {
   title: "Perguntas frequentes.",
   items: [
     ["Os clientes da agência sabem que somos nós?", "Combinamos com a agência. Podemos trabalhar com o nome dela e falamos com o cliente final apenas quando nos pedem."],
-    ["Quanto tempo demora?", "Um assistente simples fica pronto em poucos dias. Projetos maiores têm o prazo escrito na proposta."],
+    ["Quanto tempo demora?", "Um assistente simples, de 3 a 7 dias. Uma automação, de 1 a 2 semanas. Um site, de 2 a 4 semanas. Software à medida e projetos maiores têm o prazo escrito na proposta, antes de começar."],
+    ["Já têm casos para mostrar?", "Estamos a fechar os primeiros projetos, por isso ainda não há casos publicados. É por isso que fazemos a demo antes: vês o resultado com o teu negócio antes de pagares, e falas sempre com quem constrói."],
     ["Que ferramentas usam?", "As oficiais: a API do WhatsApp Business e do Instagram, a vossa agenda e o vosso CRM. Nada de contas falsas nem truques."],
     ["E se o assistente não souber responder?", "Passa a conversa a uma pessoa da equipa. Só responde com o que lhe dermos: preços, stock e horários."],
     ["Trabalham fora do Porto?", "Sim. Estamos no Porto, mas quase tudo se faz à distância."],
@@ -422,7 +426,7 @@ export const demoOffer = {
 
 export const contact = {
   title: "Conta-nos o que precisas.",
-  lead: "Três passos e fica connosco. Respondemos em 2 dias úteis.",
+  lead: "Três passos e fica connosco. Respondemos em 1 dia útil.",
   who: ["Agência", "Negócio"],
   needs: ["Demo grátis", "Assistente de IA", "Automação", "Site", "Software à medida", "Ainda não sei"],
 };
@@ -541,9 +545,97 @@ export const landing = {
   sectors: [["Clínicas", "setor-clinica.jpg"], ["Oficinas", "setor-oficina.jpg"], ["Ginásios", "setor-ginasio.jpg"], ["Restaurantes", "setor-restaurante.jpg"], ["Imobiliárias", "setor-imobiliaria.jpg"], ["Agências", "agencias.jpg"]],
   cta: {
     title: ["Vamos", "soldar?"],
-    text: "Mostra-nos como trabalhas. Em 1 a 2 semanas vês a Weld a funcionar no teu negócio, de graça.",
+    text: "Estamos a abrir vagas para os primeiros clientes. Mostra-nos como trabalhas e, em 1 a 2 semanas, vês a Weld a funcionar no teu negócio, de graça.",
   },
 };
+
+/* ------------------------------------------------------------------
+   PÁGINAS POR SETOR (/setores/...). Servem para quem pesquisa
+   "assistente de IA para clínicas no Porto" e para mostrar que
+   conhecemos o dia a dia de cada negócio. Sem casos nem números inventados.
+------------------------------------------------------------------- */
+export const sectorPages = [
+  {
+    slug: "clinicas", name: "Clínicas e consultórios", icon: "ph-first-aid-kit",
+    title: "Clínicas que respondem e marcam, mesmo depois das 18h.",
+    lead: "Um assistente de IA no WhatsApp e no Instagram responde a quem pergunta por vagas, preços e especialidades, marca na agenda e avisa na véspera. A receção só trata do que precisa de uma pessoa.",
+    pains: ["Telefone a tocar enquanto há doentes na sala", "Pedidos de marcação fora de horas que ficam sem resposta", "Faltas por falta de lembrete", "Perguntas repetidas sobre preços, seguros e horários"],
+    builds: [
+      ["ph-calendar-check", "Marcação pelo WhatsApp", "Mostra as vagas reais da agenda, marca e confirma com o nome do paciente."],
+      ["ph-bell-ringing", "Lembrete na véspera", "Menos faltas, sem ninguém a ligar um a um."],
+      ["ph-currency-eur", "Respostas certas", "Só diz o que a clínica nos der: preços, especialidades, horários. O resto passa à receção."],
+      ["ph-browser", "Pedido de marcação no site", "Formulário que cai direto na agenda ou no email da receção."],
+    ],
+    faq: [
+      ["Mexe em dados de pacientes?", "Só o essencial para marcar: nome e contacto. Combinamos contigo o que fica guardado e onde, e tratamos tudo dentro do RGPD. Nada clínico passa pelo assistente."],
+      ["Funciona com a nossa agenda?", "Ligamos ao Google Calendar e a ferramentas de agenda com ligação disponível. Se a vossa não tiver, vemos a melhor alternativa na conversa de 20 minutos."],
+    ],
+  },
+  {
+    slug: "oficinas", name: "Oficinas e lojas de peças", icon: "ph-wrench",
+    title: "Oficinas e lojas de peças com pedidos já arrumados.",
+    lead: "O assistente recebe pedidos de peças e de orçamento pelo WhatsApp, pergunta matrícula e modelo, e passa ao balcão tudo organizado. Automações tratam de stock, avisos de viatura pronta e relatórios.",
+    pains: ["Pedidos de peças a chegar de todos os lados", "Clientes a perguntar se a viatura já está pronta", "Stock e encomendas em folhas soltas", "Orçamentos que ficam esquecidos"],
+    builds: [
+      ["ph-chats-circle", "Pedidos qualificados", "Pergunta marca, modelo, ano e peça antes de chegar ao balcão."],
+      ["ph-bell-ringing", "Aviso de viatura pronta", "O cliente recebe mensagem quando o estado muda, sem ninguém ligar."],
+      ["ph-package", "Painel de encomendas e stock", "Software à medida para ver o que entrou, o que falta e o que está por entregar."],
+      ["ph-file-text", "Orçamentos com seguimento", "Lembrete automático a quem ainda não respondeu."],
+    ],
+    faq: [
+      ["O assistente dá preços de peças?", "Só os que nos derem. Para o resto, passa o pedido ao balcão para confirmar."],
+      ["Ligam ao nosso programa de gestão?", "Vemos na conversa. Quando não há ligação direta, usamos folhas partilhadas ou um painel feito à medida."],
+    ],
+  },
+  {
+    slug: "ginasios", name: "Ginásios e estúdios", icon: "ph-barbell",
+    title: "Ginásios com menos cobranças à mão e mais inscrições.",
+    lead: "Respondemos a quem chega pelos reels e pelo Instagram, explicamos as aulas, marcamos a aula experimental e avisamos quem tem a mensalidade em atraso.",
+    pains: ["DMs do Instagram sem resposta durante horas", "Mensalidades em atraso e cobranças desconfortáveis", "Aulas experimentais marcadas por mensagem solta", "Leads que não voltam a ser contactados"],
+    builds: [
+      ["ph-instagram-logo", "Resposta no Instagram", "Horários, aulas e preços explicados na hora, e aula experimental marcada."],
+      ["ph-credit-card", "Mensalidades em atraso", "Deteta e envia um lembrete simpático, sem ninguém a perseguir."],
+      ["ph-user-plus", "Seguimento de quem não se inscreveu", "Mensagem de acompanhamento para quem experimentou e não avançou."],
+      ["ph-chart-line-up", "Relatório semanal", "Inscrições, experimentais e atrasos no email, todas as segundas."],
+    ],
+    faq: [
+      ["Funciona com o Instagram do ginásio?", "Sim, pela API oficial da Meta, com a conta profissional do ginásio. Nada de contas falsas nem truques."],
+      ["Enviam mensagens de cobrança sozinhos?", "Só com as regras que definirmos contigo: quando, a quem e com que tom. Podes rever tudo antes de ligar."],
+    ],
+  },
+  {
+    slug: "restaurantes", name: "Restaurantes", icon: "ph-fork-knife",
+    title: "Restaurantes com reservas sem ninguém ao telefone.",
+    lead: "Um site rápido com reservas online e um assistente que responde no WhatsApp e no Instagram a perguntas de horário, ementa e disponibilidade. A sala fica a cuidar de quem está lá.",
+    pains: ["Telefone a tocar na hora de maior movimento", "Reservas anotadas em papel e mensagens soltas", "Perguntas repetidas sobre ementa, alergénios e horários", "Mesas vazias por falta de lembrete"],
+    builds: [
+      ["ph-browser", "Site com reservas", "Página rápida em telemóvel, com pedido de reserva e ementa."],
+      ["ph-calendar-check", "Reservas pelo WhatsApp", "Vê a disponibilidade, marca e confirma a mesa."],
+      ["ph-bell-ringing", "Lembrete de reserva", "Menos mesas vazias, com confirmação do cliente."],
+      ["ph-chats-circle", "Respostas sobre a ementa", "Horários, opções e alergénios, só com o que nos derem."],
+    ],
+    faq: [
+      ["Substitui o nosso sistema de reservas?", "Não é preciso. Ligamos ao que já usam sempre que possível; se não houver sistema, montamos um simples."],
+      ["E grupos e eventos?", "Passam logo à equipa, com os dados já recolhidos: data, número de pessoas e contacto."],
+    ],
+  },
+  {
+    slug: "imobiliarias", name: "Imobiliárias", icon: "ph-house-line",
+    title: "Imobiliárias que respondem aos leads antes da concorrência.",
+    lead: "O assistente responde na hora a quem vem dos portais e das redes, qualifica o interesse, marca a visita e avisa o agente. Para empreendimentos, temos também experiências digitais interativas.",
+    pains: ["Leads dos portais a esfriar à espera de resposta", "Agentes a perder tempo com contactos sem perfil", "Visitas marcadas à mão e esquecidas", "Dados dos leads espalhados por vários sítios"],
+    builds: [
+      ["ph-user-plus", "Resposta imediata a leads", "Responde, pergunta orçamento e zona, e passa ao agente só os que interessam."],
+      ["ph-calendar-check", "Visitas marcadas", "Agenda a visita e avisa o agente e o cliente."],
+      ["ph-flow-arrow", "Leads no CRM", "Cada contacto chega registado, sem copiar à mão."],
+      ["ph-buildings", "Experiências para empreendimentos", "Vistas interativas para mostrar o empreendimento antes de estar construído.", "/real-estate"],
+    ],
+    faq: [
+      ["Ligam aos portais?", "Vemos quais permitem ligação oficial. Quando não, usamos o email de notificação como entrada."],
+      ["O que é a Weld Real Estate?", "Uma vertical nossa para empreendimentos, com experiências digitais interativas. Está explicada na página própria."],
+    ],
+  },
+];
 
 /* ------------------------------------------------------------------
    PRIVACIDADE (/privacidade). Texto a rever por um jurista antes de publicar:
@@ -627,4 +719,87 @@ export const legal = {
       ]
     }
   ]
+};
+
+// Weld Real Estate: secção nova para promotores, construtoras e agências que vendem empreendimentos.
+// Sem preços aqui, igual ao resto do site: só os modelos de parceria (ver "deals").
+export const realEstate = {
+  kicker: "Weld para imobiliário",
+  heroTitle: "O imobiliário merece mais do que um site.",
+  heroLead: "Construímos experiências digitais interativas para quem vende empreendimentos: o comprador explora o edifício, escolhe o piso e o apartamento, e vê tudo antes de a obra estar pronta.",
+  cta: "Falar sobre o vosso empreendimento",
+
+  problem: {
+    title: "Plantas em PDF não vendem um edifício.",
+    lead: "A forma habitual de apresentar um empreendimento em pré-venda trava a decisão de compra, em vez de a ajudar.",
+    items: [
+      ["ph-file-pdf", "Imagens e PDFs estáticos", "O comprador vê renders soltos e tem de imaginar o resto."],
+      ["ph-question", "Difícil comparar apartamentos", "Sem forma fácil de comparar piso, orientação e preço lado a lado."],
+      ["ph-map-pin-line", "Sem noção do lugar", "Falta mostrar a envolvente, a luz e a vista reais de cada fração."],
+      ["ph-phone-disconnect", "Site genérico", "Um site institucional não ajuda ninguém a decidir qual apartamento comprar."],
+    ],
+  },
+
+  capabilities: {
+    title: "O que construímos.",
+    lead: "Três níveis, do catálogo digital ao showroom de vendas completo. Começam por um e sobem quando fizer sentido.",
+    items: [
+      {
+        icon: "ph-browser", name: "Presença Digital",
+        text: "Página do empreendimento com catálogo de tipologias, plantas e galeria, pronta para gerar contactos.",
+        what: ["Página dedicada ao empreendimento", "Catálogo de tipologias e plantas", "Formulário de contacto qualificado"],
+      },
+      {
+        icon: "ph-cube", name: "Experiência Interativa",
+        text: "O edifício em 3D, navegável no browser: escolher o piso, depois o apartamento, e ver a ficha de cada unidade.",
+        what: ["Edifício 3D com rotação e zoom", "Seleção de piso e apartamento", "Estado de cada unidade (disponível, reservado, vendido)"],
+      },
+      {
+        icon: "ph-presentation-chart", name: "Showroom Digital de Vendas",
+        text: "Tudo o que precisam para vender à distância: interiores, comparação entre apartamentos e ligação ao vosso CRM.",
+        what: ["Exploração de interiores", "Comparação entre apartamentos", "Ligação ao CRM e disponibilidade em tempo real"],
+      },
+    ],
+  },
+
+  demo: {
+    kicker: "Demonstração",
+    title: "CASA 27, o nosso edifício de demonstração.",
+    lead: "Um empreendimento fictício no Porto, construído para mostrar a experiência a funcionar antes de falarmos do vosso projeto. Em construção.",
+    note: "Nome e edifício inventados, só para demonstração. Nenhuma semelhança com um empreendimento real é intencional.",
+  },
+
+  how: {
+    title: "Como chegamos lá.",
+    steps: [
+      ["ph-coffee", "Conversa inicial", "Percebemos o empreendimento, as unidades e o que já têm (modelo 3D, plantas ou só o projeto aprovado)."],
+      ["ph-cube-transparent", "Modelo 3D", "Produzimos ou adaptamos o modelo do edifício. Aprovam-no por escrito antes de seguirmos para o site."],
+      ["ph-code", "Construção", "Juntamos o 3D à seleção de apartamentos, plantas e disponibilidade."],
+      ["ph-rocket-launch", "Lançamento e acompanhamento", "Testamos convosco, publicamos, e mantemos a disponibilidade e os preços atualizados."],
+    ],
+  },
+
+  who: {
+    title: "Para quem é.",
+    items: [
+      ["ph-buildings", "Promotores imobiliários", "Sobretudo com um empreendimento em pré-venda ou venda em planta."],
+      ["ph-hard-hat", "Construtoras", "As que vendem diretamente a unidade final, não só executam para terceiros."],
+      ["ph-key", "Agências de imobiliário de luxo", "Para empreendimentos exclusivos ou em planta que representam."],
+      ["ph-ruler", "Estúdios de arquitetura", "Parceria: fornecem o projeto, nós construímos a experiência, com a vossa marca se preferirem."],
+    ],
+  },
+
+  // formulário de qualificação rápida (independente do /pedido geral)
+  form: {
+    title: "Conta-nos o empreendimento.",
+    lead: "Perguntas rápidas. Respondemos em 1 dia útil.",
+    who: ["Promotor imobiliário", "Construtora", "Agência imobiliária", "Estúdio de arquitetura", "Outro"],
+    stage: ["Projeto aprovado, obra por começar", "Obra em construção", "Já construído", "Ainda em estudo"],
+    units: ["1 a 10 unidades", "11 a 30 unidades", "31 a 60 unidades", "Mais de 60 unidades"],
+  },
+
+  ctaBand: {
+    title: "Vamos construir uma forma melhor de viver o imóvel?",
+    lead: "Conta-nos o empreendimento e vemos juntos o que faz sentido construir primeiro.",
+  },
 };

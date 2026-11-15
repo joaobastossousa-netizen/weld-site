@@ -13,7 +13,7 @@ export function getStaticPaths() {
 const { s } = Astro.props;
 const others = services.filter((o) => o.slug !== s.slug);
 ---
-<Base title={`${s.name} · Weld`} description={s.lead}>
+<Base title={`${s.name} no Porto · Weld`} description={s.lead}>
   <section class="page-hero split wrap">
     <div>
       <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><a href="/servicos">Serviços</a><i class="ph ph-caret-right"></i><span>{s.name}</span></nav>

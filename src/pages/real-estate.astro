@@ -1,0 +1,169 @@
+---
+// Weld Real Estate: secção nova do site, para promotores, construtoras e agências que vendem empreendimentos.
+// Fase 2 do plano (~/weld/real-estate/). Ainda sem link na navegação principal: só acessível por link direto
+// e pelo rodapé, até haver validação comercial (ver ~/weld/real-estate/tracker.md).
+import Base from "../layouts/Base.astro";
+import CtaBand from "../components/CtaBand.astro";
+import { realEstate, site, legal } from "../content";
+---
+<Base title="Weld para imobiliário · Weld" description={realEstate.heroLead}>
+  <section class="page-hero wrap">
+    <nav class="crumbs load" aria-label="Caminho"><a href="/">Início</a><i class="ph ph-caret-right"></i><span>Imobiliário</span></nav>
+    <p class="kicker load" style="--d:1"><span class="dot"></span>{realEstate.kicker}</p>
+    <h1 class="h1 load" style="--d:2">{realEstate.heroTitle}</h1>
+    <p class="lead load" style="--d:3">{realEstate.heroLead}</p>
+    <div class="hero-ctas load" style="--d:4">
+      <a href="#pedido" class="btn btn-mint magnetic">{realEstate.cta}<i class="ph ph-arrow-right"></i></a>
+      <a href="/contacto" class="btn btn-ghost"><i class="ph ph-chat-circle-text"></i>Falar primeiro com o João</a>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{realEstate.problem.title}</h2><p class="lead reveal">{realEstate.problem.lead}</p></div>
+    <div class="features">
+      {realEstate.problem.items.map(([icon, t, p], i) => (
+        <article class="feature card-fx reveal" style={`--i:${i}`}>
+          <span class="svc-icon"><i class={`ph-duotone ${icon}`}></i></span>
+          <h3>{t}</h3>
+          <p>{p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{realEstate.capabilities.title}</h2><p class="lead reveal">{realEstate.capabilities.lead}</p></div>
+    <div class="deals re-caps">
+      {realEstate.capabilities.items.map((c, i) => (
+        <article class="deal card-fx reveal" style={`--i:${i}`}>
+          <span class="deal-icon"><i class={`ph-duotone ${c.icon}`}></i></span>
+          <span class="deal-for">Nível {i + 1}</span>
+          <h3>{c.name}</h3>
+          <p>{c.text}</p>
+          <ul class="re-list">{c.what.map((w) => <li>{w}</li>)}</ul>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="re-demo reveal">
+      <p class="kicker"><span class="dot"></span>{realEstate.demo.kicker}</p>
+      <h2 class="h2">{realEstate.demo.title}</h2>
+      <p class="lead">{realEstate.demo.lead}</p>
+      <span class="chip-lg re-soon"><i class="ph ph-hammer"></i>Em construção</span>
+      <p class="re-demo-note">{realEstate.demo.note}</p>
+    </div>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{realEstate.how.title}</h2></div>
+    <ol class="steps">
+      <span class="steps-line" aria-hidden="true"><span class="steps-fill"></span></span>
+      {realEstate.how.steps.map(([icon, t, p], i) => (
+        <li class="step reveal" style={`--i:${i}`}><span class="step-n"><i class={`ph-bold ${icon}`}></i></span><span class="step-k">{String(i + 1).padStart(2, "0")}</span><h3>{t}</h3><p>{p}</p></li>
+      ))}
+    </ol>
+  </section>
+
+  <section class="section wrap">
+    <div class="sec-head"><h2 class="h2 reveal">{realEstate.who.title}</h2></div>
+    <div class="features">
+      {realEstate.who.items.map(([icon, t, p], i) => (
+        <article class="feature card-fx reveal" style={`--i:${i}`}>
+          <span class="svc-icon"><i class={`ph-duotone ${icon}`}></i></span>
+          <h3>{t}</h3>
+          <p>{p}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section wrap" id="pedido">
+    <div class="sec-head"><h2 class="h2 reveal">{realEstate.form.title}</h2><p class="lead reveal">{realEstate.form.lead}</p></div>
+    <form class="order-form re-form reveal" id="re-form" data-email={site.email} novalidate>
+      <input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" />
+      <fieldset class="o-block">
+        <p class="o-q">São</p>
+        <div class="chips">{realEstate.form.who.map((v) => <label class="chip"><input type="radio" name="who" value={v} /><span>{v}</span></label>)}</div>
+        <p class="o-q">Fase do empreendimento</p>
+        <div class="chips">{realEstate.form.stage.map((v) => <label class="chip"><input type="radio" name="stage" value={v} /><span>{v}</span></label>)}</div>
+        <p class="o-q">Nº de unidades</p>
+        <div class="chips">{realEstate.form.units.map((v) => <label class="chip"><input type="radio" name="units" value={v} /><span>{v}</span></label>)}</div>
+      </fieldset>
+      <fieldset class="o-block">
+        <div class="o-row">
+          <label class="o-field"><span>Nome *</span><input id="re-name" name="name" autocomplete="name" required /></label>
+          <label class="o-field"><span>Empresa</span><input name="company" autocomplete="organization" /></label>
+          <label class="o-field"><span>Email</span><input id="re-email" name="email" type="email" autocomplete="email" /></label>
+          <label class="o-field"><span>Telemóvel</span><input id="re-phone" name="phone" type="tel" autocomplete="tel" /></label>
+          <label class="o-field full"><span>Nome e localização do empreendimento</span><textarea name="msg" rows="3" placeholder="ex.: Edifício Rio, Vila Nova de Gaia, 24 apartamentos"></textarea></label>
+        </div>
+        <p class="err" id="re-err" hidden></p>
+        <div class="brief-actions">
+          <button type="submit" class="btn btn-mint magnetic" id="re-send">Enviar<i class="ph ph-arrow-right"></i></button>
+          <p class="legal-note"><span>{legal.formNote}</span> <a href="/privacidade">{legal.formLink}</a></p>
+        </div>
+      </fieldset>
+      <div class="re-done" id="re-done" hidden>
+        <span class="bd-ic" aria-hidden="true"><i class="ph-bold ph-check"></i></span>
+        <p id="re-done-text">Recebido. Respondemos em 1 dia útil.</p>
+      </div>
+    </form>
+  </section>
+
+  <CtaBand text={realEstate.ctaBand.lead} />
+</Base>
+
+<script>
+  import { submitLead, track } from "../scripts/weld-data.js";
+  const form = document.getElementById("re-form");
+  if (form instanceof HTMLFormElement) {
+    let started = false;
+    form.addEventListener("pointerdown", () => { if (!started) { started = true; track("form_start", "real-estate"); } }, { capture: true });
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      const fd = new FormData(form);
+      const get = (k) => (fd.get(k) || "").toString().trim();
+      const name = get("name"), email = get("email"), phone = get("phone"), company = get("company"), msg = get("msg");
+      const who = get("who"), stage = get("stage"), units = get("units");
+      const errEl = document.getElementById("re-err");
+      const problem = !name ? "Falta o nome." : (!phone && !email) ? "Deixa um telemóvel ou um email para te respondermos." : "";
+      if (errEl) { errEl.textContent = problem; errEl.hidden = !problem; }
+      if (problem) { document.getElementById(!name ? "re-name" : "re-phone")?.focus(); return; }
+      const send = document.getElementById("re-send");
+      if (send instanceof HTMLButtonElement) send.disabled = true;
+      const ok = await submitLead({
+        source: "real-estate", name, company, phone, email, message: msg, website: get("website"),
+        kind: "imobiliario", audience: "negocio", services: ["real-estate"],
+        details: [["Imobiliário", [["São", who || "não indicado"], ["Fase", stage || "não indicado"], ["Unidades", units || "não indicado"], ["Empreendimento", msg || "não indicado"]]]],
+      });
+      if (send instanceof HTMLButtonElement) send.disabled = false;
+      if (ok) {
+        form.querySelectorAll(".o-block").forEach((b) => { if (b instanceof HTMLElement) b.hidden = true; });
+        document.getElementById("re-done")?.removeAttribute("hidden");
+        return;
+      }
+      const subject = `Weld Real Estate: pedido${company ? " de " + company : ""}`;
+      const lines = ["Olá João,", "", `Sou ${name}${company ? ", da " + company : ""}${phone ? ` (${phone})` : ""}.`, `Somos: ${who || "não indicado"}.`, `Fase do empreendimento: ${stage || "não indicado"}.`, `Unidades: ${units || "não indicado"}.`, msg ? `\n${msg}` : "", "", "Podemos falar sobre o nosso empreendimento?"];
+      location.href = `mailto:${form.dataset.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+    });
+  }
+</script>
+
+<style>
+  .re-caps{grid-template-columns:repeat(3,minmax(0,1fr))}
+  @media (max-width:1080px){.re-caps{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  @media (max-width:560px){.re-caps{grid-template-columns:minmax(0,1fr)}}
+  .re-list{list-style:none;margin:14px 0 0;padding:14px 0 0;display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line-2)}
+  .re-list li{position:relative;padding-left:20px;font-size:14px;color:var(--muted)}
+  .re-list li::before{content:"";position:absolute;left:0;top:7px;width:8px;height:8px;border-radius:2px;background:var(--acc)}
+  .re-demo{padding:48px;border-radius:var(--r);background:radial-gradient(80% 120% at 100% 0%,rgba(63,164,122,.14),transparent 60%),#0C2018;box-shadow:inset 0 0 0 1px var(--line);display:flex;flex-direction:column;gap:14px;align-items:flex-start;color:#fff}
+  .re-demo .lead{color:rgba(255,255,255,.72)}
+  .re-soon{margin-top:6px;display:inline-flex;align-items:center;gap:8px}
+  .re-demo-note{font-size:13px;color:rgba(255,255,255,.5);margin:0}
+  @media (max-width:640px){.re-demo{padding:28px 20px}}
+  .re-done{display:flex;align-items:center;gap:14px;padding:28px 0}
+  .re-done .bd-ic{width:44px;height:44px;flex:none;border-radius:12px;background:var(--mint);color:var(--forest);display:grid;place-items:center;font-size:20px}
+  .re-done p{margin:0;font-size:16px}
+</style>
