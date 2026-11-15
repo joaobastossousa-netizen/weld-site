@@ -1,7 +1,7 @@
 ---
 import Base from "../../layouts/Base.astro";
 import CtaBand from "../../components/CtaBand.astro";
-import { services, deals, sectorPages } from "../../content";
+import { services, deals } from "../../content";
 ---
 <Base title="Serviços · Weld" description="Assistentes de IA, automações, sites e software à medida para agências e negócios.">
   <section class="page-hero wrap">
@@ -21,13 +21,6 @@ import { services, deals, sectorPages } from "../../content";
       </a>
     ))}
   </div><div class="svc-preview" aria-hidden="true"><img alt="" /></div></section>
-
-  <section class="section wrap">
-    <div class="sec-head"><h2 class="h2 reveal">Ver por setor.</h2></div>
-    <div class="chips">
-      {sectorPages.map((o, i) => <a href={`/setores/${o.slug}`} class="chip-lg" style={`--i:${i}`}>{o.name}</a>)}
-    </div>
-  </section>
 
   <section class="section wrap">
     <div class="sec-head"><h2 class="h2 reveal">{deals.title}</h2><p class="lead reveal">{deals.lead}</p></div>
