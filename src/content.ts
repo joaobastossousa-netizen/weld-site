@@ -8,7 +8,7 @@
 export const site = {
   name: "Weld",
   url: "https://weldstudio.pt",
-  email: "team@weldstudio.pt",
+  email: "joaobastossousa@gmail.com",
   instagram: "https://www.instagram.com/weld.studio/",
   instagramHandle: "@weld.studio",
   linkedin: "https://www.linkedin.com/in/jo%C3%A3o-bastos-de-sousa-8188723b6/",
